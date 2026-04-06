@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>KBBD Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Welcome to Kontoor Brands!</h2>
+  <p>Select items and confirm your order.</p>
+
+  <h3>Menu</h3>
+
+  <div class="controls">
+    <select id="category"></select>
+  </div>
+
+  <div id="menu"></div>
+
+  <h3>Your Order</h3>
+  <div id="cart"></div>
+
+  <div class="summary">
+    <div class="total-row">
+      <span>Total</span>
+      <strong><span id="total">0</span> BDT</strong>
+    </div>
+  </div>
+
+  <input id="phone" placeholder="Phone (optional)">
+  <input id="comments" placeholder="Comments (optional)">
+
+  <div class="actions">
+    <button class="secondary" id="clearBtn">Clear Cart</button>
+    <button id="confirmBtn">Confirm Order</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
