@@ -1,119 +1,123 @@
-// MENU DATA
 const menuItems = [
-  { id: 1, name: "Burger", price: 180, category: "Food" },
-  { id: 2, name: "Sandwich", price: 220, category: "Food" },
-  { id: 3, name: "Coffee", price: 80, category: "Drinks" },
-  { id: 4, name: "Tea", price: 40, category: "Drinks" }
+  { id: 1, name: "Burger", price: 180, category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
+  { id: 2, name: "Sandwich", price: 220, category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
+  { id: 3, name: "Pizza", price: 350, category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
+  { id: 4, name: "Pasta", price: 300, category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
+  { id: 5, name: "Fries", price: 120, category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
+  { id: 6, name: "Coffee", price: 80, category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
+  { id: 7, name: "Tea", price: 40, category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
+  { id: 8, name: "Cold Drink", price: 60, category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
+  { id: 9, name: "Ice Cream", price: 90, category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
+  { id: 10, name: "Momos", price: 150, category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
+  { id: 11, name: "Fried Rice", price: 200, category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
+  { id: 12, name: "Milkshake", price: 140, category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
 ];
 
 let cart = [];
+let currentCategory = "All";
 
-// ELEMENTS
-const categorySelect = document.getElementById("category");
 const menuDiv = document.getElementById("menu");
 const cartDiv = document.getElementById("cart");
 const totalSpan = document.getElementById("total");
-const clearBtn = document.getElementById("clearBtn");
-const confirmBtn = document.getElementById("confirmBtn");
+const tabsDiv = document.getElementById("tabs");
+const summary = document.getElementById("cartSummary");
 
 // INIT
-initCategories();
+initTabs();
 renderMenu();
 renderCart();
 
-// CATEGORY DROPDOWN
-function initCategories() {
+function initTabs() {
   const cats = ["All", ...new Set(menuItems.map(i => i.category))];
-  categorySelect.innerHTML = cats.map(c => `<option>${c}</option>`).join("");
-  categorySelect.onchange = renderMenu;
+  tabsDiv.innerHTML = cats.map(c =>
+    `<button onclick="setCategory('${c}')">${c}</button>`
+  ).join("");
 }
 
-// RENDER MENU
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll(".tabs button").forEach(btn => {
+  btn.classList.remove("active");
+  if (btn.innerText === cat) btn.classList.add("active");
+});
+  renderMenu();
+}
+
+// MENU UI
 function renderMenu() {
-  const cat = categorySelect.value;
-  menuDiv.innerHTML = "";
+  menuDiv.innerHTML = `<div class="menu-grid"></div>`;
+  const grid = menuDiv.querySelector(".menu-grid");
 
   menuItems
-    .filter(i => cat === "All" || i.category === cat)
+    .filter(i => currentCategory === "All" || i.category === currentCategory)
     .forEach(item => {
-      menuDiv.innerHTML += `
-        <div class="item">
-          <div>
-            <div class="name">${item.name}</div>
+      grid.innerHTML += `
+        <div class="card">
+          <img src="${item.img}">
+          
+          <div class="card-content">
+            <div class="card-title">${item.name}</div>
+            <div class="card-desc">${item.desc}</div>
             <div class="price">${item.price} BDT</div>
-          </div>
 
-          <div style="display:flex; align-items:center; gap:6px;">
-            <button onclick="changeQty(${item.id}, -1)">-</button>
-            <span id="qty-${item.id}">1</span>
-            <button onclick="changeQty(${item.id}, 1)">+</button>
-            <button onclick="addToCart(${item.id})">Add</button>
+            <div class="actions-row">
+              <button onclick="changeQty(${item.id}, -1)">-</button>
+              <span id="qty-${item.id}">1</span>
+              <button onclick="changeQty(${item.id}, 1)">+</button>
+              <button onclick="addToCart(${item.id})">Add</button>
+            </div>
           </div>
         </div>
       `;
     });
 }
 
-// ADD TO CART
+// ADD (with animation)
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
-  const qtyInput = document.getElementById(`qty-${id}`);
-  const qty = parseInt(document.getElementById(`qty-${id}`).innerText);
-
-  if (!qty || qty < 1) qty = 1;
+  let qty = parseInt(document.getElementById(`qty-${id}`).innerText);
 
   const existing = cart.find(i => i.id === id);
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...item, qty });
-  }
+  if (existing) existing.qty += qty;
+  else cart.push({ ...item, qty });
 
-  qtyInput.value = 1; // reset input
   renderCart();
 }
 
-// CHANGE QUANTITY
+// QTY
 function changeQty(id, delta) {
   const el = document.getElementById(`qty-${id}`);
   let qty = parseInt(el.innerText);
-  qty += delta;
-
-  if (qty < 1) qty = 1;
-
+  qty = Math.max(1, qty + delta);
   el.innerText = qty;
 }
 
-
-// RENDER CART
+// CART
 function renderCart() {
   cartDiv.innerHTML = "";
   let total = 0;
-
-  if (cart.length === 0) {
-    cartDiv.innerHTML = "<p>Your cart is empty</p>";
-    totalSpan.innerText = 0;
-    return;
-  }
+  let count = 0;
 
   cart.forEach(i => {
     total += i.price * i.qty;
+    count += i.qty;
 
     cartDiv.innerHTML += `
       <div class="cart-item">
         
-        <span>${i.name}</span>
+        <div class="cart-left">
+          <div class="cart-name">${i.name}</div>
+          <div class="cart-price">₹${i.price}</div>
+        </div>
 
-        <div style="display:flex; align-items:center; gap:8px;">
-          
-          <button onclick="updateCartQty(${i.id}, -1)">-</button>
-          
-          <span>${i.qty}</span>
-          
-          <button onclick="updateCartQty(${i.id}, 1)">+</button>
-          
-          <button class="danger" onclick="removeItem(${i.id})">Remove</button>
+        <div class="cart-right">
+          <div class="qty-box">
+            <button onclick="updateCartQty(${i.id}, -1)">-</button>
+            <span>${i.qty}</span>
+            <button onclick="updateCartQty(${i.id}, 1)">+</button>
+          </div>
 
+          <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
         </div>
 
       </div>
@@ -121,58 +125,67 @@ function renderCart() {
   });
 
   totalSpan.innerText = total;
+  summary.innerText = `🛒 ${count} items | ${total} BDT`;
 }
 
+const floatingCart = document.getElementById("floatingCart");
+const cartPanel = document.querySelector(".cart-panel");
 
-function updateCartQty(id, delta) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
+floatingCart.onclick = () => {
 
-  item.qty += delta;
+  // ONLY FOR MOBILE
+  if (window.innerWidth <= 768) {
+    cartPanel.classList.toggle("show");
 
-  // If qty becomes 0 → remove item
-  if (item.qty <= 0) {
-    cart = cart.filter(i => i.id !== id);
+    if (cartPanel.classList.contains("show")) {
+      floatingCart.innerText = "❌ Close Cart";
+    } else {
+      floatingCart.innerText = "🛒 View Cart";
+    }
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
   }
 
-  renderCart();
-}
+};
 
 
-// REMOVE ITEM
 function removeItem(id) {
   cart = cart.filter(i => i.id !== id);
   renderCart();
 }
 
-// CLEAR CART
-clearBtn.addEventListener("click", () => {
+// CLEAR
+document.getElementById("clearBtn").onclick = () => {
   cart = [];
   renderCart();
-});
+};
 
-// CONFIRM ORDER
-function confirmOrder() {
-  console.log("Confirm clicked");
+// CONFIRM
+document.getElementById("confirmBtn").onclick = () => {
+  if (cart.length === 0) return alert("Add items");
 
-  if (cart.length === 0) {
-    alert("Please add items first");
-    return;
-  }
-
-  const items = cart.map(i => `${i.name}`).join(" | ");
-  const quantities = cart.map(i => i.qty).join(", ");
-  const comments = document.getElementById("comments").value || "";
+  const itemsWithQty = cart.map(i => `${i.name}(${i.qty})`).join("|");
+  const comments = document.getElementById("comments").value;
 
   const FORM_URL = "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
   const url =
-    `${FORM_URL}?Item=${encodeURIComponent(items)}` +
-    `&Quantity=${encodeURIComponent(quantities)}` +
+    `${FORM_URL}?Item=${encodeURIComponent(itemsWithQty)}` +
     `&Comments=${encodeURIComponent(comments)}`;
 
   console.log(url); // 👈 debug URL
 
   window.open(url, "_blank");
 }
+
+floatingCart.addEventListener("click", () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+});
+
 confirmBtn.addEventListener("click", confirmOrder);
