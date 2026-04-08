@@ -4,39 +4,58 @@
   <meta charset="UTF-8">
   <title>KBBD Menu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Better font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h2>Welcome to Kontoor Brands!</h2>
-  <p>Select items and confirm your order.</p>
 
-  <h3>Menu</h3>
-
-  <div class="controls">
-    <select id="category"></select>
+  <!-- HEADER -->
+  <div class="header">
+    <h2>🍽️ Kontoor's Smart Menu</h2>
+    <div id="cartSummary">🛒 0 items | 0 BDT</div>
   </div>
 
-  <div id="menu"></div>
+  <!-- CATEGORY TABS -->
+  <div class="tabs" id="tabs"></div>
 
-  <h3>Your Order</h3>
-  <div id="cart"></div>
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
 
-  <div class="summary">
-    <div class="total-row">
-      <span>Total</span>
-      <strong><span id="total">0</span> BDT</strong>
+    <!-- MENU SECTION -->
+    <div class="menu-section">
+      <div id="menu"></div>
     </div>
-  </div>
 
-  <input id="phone" placeholder="Phone (optional)">
-  <input id="comments" placeholder="Comments (optional)">
+    <!-- CART PANEL -->
+    <div class="cart-panel">
+      <h3>🧾 Your Order</h3>
 
-  <div class="actions">
-    <button class="secondary" id="clearBtn">Clear Cart</button>
-    <button id="confirmBtn">Confirm Order</button>
+      <div id="cart"></div>
+
+      <div class="summary">
+        <span>Total:</span>
+        <strong><span id="total">0</span> BDT</strong>
+      </div>
+
+      <input id="comments" placeholder="Add special instructions...">
+
+      <div class="cart-actions">
+        <button class="secondary" id="clearBtn">Clear</button>
+        <button id="confirmBtn">Confirm Order</button>
+      </div>
+    </div>
+
   </div>
+</div>
+
+<!-- FLOATING CART (MOBILE ONLY) -->
+<div class="floating-cart" id="floatingCart">
+  🛒 View Cart
 </div>
 
 <script src="script.js"></script>
