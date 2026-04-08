@@ -1,19 +1,23 @@
-/* =========================
-   Food Menu UI Theme
+/* ========================= 
+   Food Menu UI Theme (UPDATED COLORS)
    ========================= */
 :root{
-  --bg1:#fff7ed;      /* warm peach */
-  --bg2:#f0f9ff;      /* airy blue */
+  --bg1:#f7fbfc;
+  --bg2:#eef6f8;
   --card:#ffffff;
-  --text:#0f172a;
-  --muted:#64748b;
+
+  --text:#1f2937;
+  --muted:#6b7280;
   --border:rgba(2,6,23,.08);
 
-  --primary:#ff6e35;  /* orange "food" vibe */
-  --primary2:#ff9f1c; /* golden accent */
-  --green:#22c55e;    /* success */
-  --red:#ef4444;      /* remove */
-  --blue:#3b82f6;
+  /* BRAND COLORS */
+  --primary:#56A2B8;      /* Fountain Blue */
+  --primary2:#C0A16B;     /* Twine */
+  --accent:#843534;       /* Sanguine Brown */
+
+  --green:#22c55h;
+  --red:#843534;
+  --blue:#56A2B8;
 
   --shadow: 0 18px 45px rgba(2, 6, 23, 0.12);
   --shadowSoft: 0 10px 22px rgba(2, 6, 23, 0.08);
@@ -26,238 +30,555 @@
 body{
   margin:0;
   padding:24px 14px;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: ui-sans-serif, system-ui;
   color:var(--text);
-  line-height:1.45;
 
-  /* colorful but soft background */
   background:
-    radial-gradient(1000px 650px at 15% 10%, rgba(255, 107, 53, 0.20), transparent 58%),
-    radial-gradient(900px 600px at 85% 15%, rgba(34, 197, 94, 0.16), transparent 55%),
-    radial-gradient(900px 600px at 50% 100%, rgba(59, 130, 246, 0.12), transparent 55%),
+    radial-gradient(1000px 650px at 15% 10%, rgba(86,162,184,0.25), transparent 58%),
+    radial-gradient(900px 600px at 85% 15%, rgba(192,161,107,0.25), transparent 55%),
+    radial-gradient(900px 600px at 50% 100%, rgba(132,53,52,0.15), transparent 55%),
     linear-gradient(180deg, var(--bg1), var(--bg2));
 }
 
-/* =========================
-   Container = Menu Card
-   ========================= */
+/* CONTAINER */
 .container{
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 22px;
+  max-width:760px;
+  margin:auto;
+  padding:22px;
 
-  /* slightly colourful card */
-  background: linear-gradient(180deg, #fff1e6 0%, #fffaf4 55%, #fef3c7 140%);
-  border-radius: 18px;
-
-  border: 1px solid rgba(2,6,23,.08);
-  box-shadow: 0 18px 45px rgba(2, 6, 23, 0.12);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff, #f8fbfc);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  position:relative;
 }
 
-/* subtle colourful glow (very light) */
-.container::after{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:
-    radial-gradient(600px 220px at 20% 10%, rgba(255,107,53,.18), transparent 60%),
-    radial-gradient(520px 200px at 80% 0%, rgba(34,197,94,.14), transparent 55%),
-    radial-gradient(520px 200px at 70% 100%, rgba(59,130,246,.10), transparent 55%);
-  pointer-events:none;
-}
-
-/* Decorative gradient bar */
+/* TOP GRADIENT BAR */
 .container::before{
   content:"";
   position:absolute;
   top:0; left:0; right:0;
-  height: 8px;
-  background: linear-gradient(90deg, var(--primary), var(--primary2), var(--green), var(--blue));
+  height:6px;
+  background: linear-gradient(90deg, var(--primary), var(--primary2), var(--accent));
 }
 
-/* Optional header styling if you have h1/h2 */
-.container h1{
-  margin: 10px 0 6px;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-}
-.container h2, .container p{
-  margin: 0 0 14px;
-  color: var(--muted);
-}
-
-/* =========================
-   Inputs / Select
-   ========================= */
+/* INPUTS */
 input, select{
   width:100%;
-  padding: 12px 12px;
-  margin: 8px 0 12px;
-  border-radius: var(--radiusSm);
-  border: 1px solid rgba(2,6,23,.12);
-  background: #fff;
-  font-size: 14px;
-  transition: box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+  padding:12px;
+  border-radius:var(--radiusSm);
+  border:1px solid rgba(0,0,0,0.1);
 }
 
-input:focus, select:focus{
-  outline:none;
-  border-color: rgba(255, 107, 53, 0.55);
-  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.18);
+input:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(86,162,184,0.2);
 }
 
-/* =========================
-   Buttons
-   ========================= */
+/* BUTTONS */
 button{
-  border: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 14px;
-  margin-left: 10px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
 
-  background: linear-gradient(180deg, var(--primary2), var(--primary));
-  color: #fff;
-  box-shadow: 0 10px 18px rgba(255, 107, 53, 0.22);
-  transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
-  white-space: nowrap;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color:#fff;
+
+  box-shadow:0 8px 18px rgba(86,162,184,0.3);
+  transition:.2s;
 }
 
 button:hover{
-  filter: brightness(1.03);
-  transform: translateY(-1px);
-  box-shadow: 0 14px 24px rgba(255, 107, 53, 0.26);
-}
-button:active{
-  transform: translateY(0) scale(.99);
+  transform:translateY(-2px);
 }
 
-/* Optional variants (if you add class="secondary" / "danger") */
 button.secondary{
-  background: linear-gradient(180deg, #94a3b8, #64748b);
-  box-shadow: 0 10px 18px rgba(100, 116, 139, 0.18);
-}
-button.danger{
-  background: linear-gradient(180deg, #fb7185, var(--red));
-  box-shadow: 0 10px 18px rgba(239, 68, 68, 0.18);
+  background:#e5e7eb;
+  color:#111;
 }
 
-/* =========================
-   Menu Items
-   ========================= */
+button.danger{
+  background: linear-gradient(135deg, #843534, #a94442);
+}
+
+/* ITEMS */
 .item{
-  border-bottom: none;  /* remove old divider look */
-  padding: 14px 12px;
-  margin: 10px 0;
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(255, 247, 237, 0.55));
-  border: 1px solid rgba(2,6,23,.08);
-  box-shadow: var(--shadowSoft);
+  padding:14px;
+  margin:10px 0;
+  border-radius:16px;
+
+  background: linear-gradient(180deg, #fff, #f9fafb);
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:var(--shadowSoft);
 
   display:flex;
-  justify-content: space-between;
-  align-items:center;
-  gap: 12px;
-
-  transition: transform .14s ease, box-shadow .18s ease;
-}
-.item:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 14px 26px rgba(2, 6, 23, 0.10);
+  justify-content:space-between;
 }
 
-/* If your item has text blocks */
-.item .name{
-  font-weight: 800;
-}
-.item .desc{
-  color: var(--muted);
-  font-size: 13px;
-}
-.item .price{
-  font-weight: 800;
-  color: #0f172a;
-}
-
-/* =========================
-   Cart Items
-   ========================= */
+/* CART */
 .cart-item{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin: 10px 0;
-  padding: 12px 12px;
+  padding:12px;
+  margin:10px 0;
 
-  border-radius: 16px;
+  border-radius:16px;
   background:
-    radial-gradient(600px 120px at 10% 20%, rgba(34,197,94,.10), transparent 60%),
-    radial-gradient(600px 120px at 90% 20%, rgba(255,107,53,.12), transparent 60%),
-    rgba(241,245,249,.65);
-  border: 1px solid rgba(2,6,23,.08);
+    radial-gradient(600px 120px at 10% 20%, rgba(86,162,184,.12), transparent 60%),
+    radial-gradient(600px 120px at 90% 20%, rgba(192,161,107,.12), transparent 60%),
+    rgba(241,245,249,.7);
 }
 
-/* =========================
-   Small "badge" chips (optional)
-   Use in HTML if you want:
-   <span class="chip spicy">Spicy</span>
-   ========================= */
-.chip{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  border: 1px solid rgba(2,6,23,.08);
-  background: rgba(255,255,255,.85);
-}
-.chip.spicy{ color:#b91c1c; background: rgba(239,68,68,.12); }
-.chip.veg{ color:#166534; background: rgba(34,197,94,.12); }
-.chip.new{ color:#1d4ed8; background: rgba(59,130,246,.12); }
-
-/* =========================
-   Responsive
-   ========================= */
-@media (max-width: 520px){
-  .container{ padding: 16px; border-radius: 16px; }
-  .item{ flex-direction: column; align-items: stretch; }
-  button{ width: 100%; margin-left: 0; }
-}
-/* Extra layout helpers */
-.controls { margin-bottom: 8px; position: relative; z-index: 1; }
-#menu, #cart { position: relative; z-index: 1; }
-
-.summary{
-  margin: 14px 0 10px;
-  padding: 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(2,6,23,.08);
-  position: relative;
-  z-index: 1;
+/* CARDS */
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:.2s;
 }
 
-.total-row{
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.card img{
+  height:140px;
+  width:100%;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:12px;
+}
+
+.card-title{
+  font-weight:700;
+}
+
+.card-desc{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* PRICE */
+.price{
+  color:var(--accent);
+  font-weight:800;
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:var(--primary);
+  color:white;
+  padding:4px 8px;
+  border-radius:10px;
+  font-size:12px;
+}
+
+/* TABS */
+.tabs{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size: 15px;
+  gap:8px;
 }
 
-.actions{
-  display:flex;
+.tabs button {
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: white;
+  border: none;
+  box-shadow: 0 6px 14px rgba(86,162,184,0.25);
+}
+
+.tabs button.active {
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  transform: scale(1.05);
+}
+
+/* LAYOUT */
+.layout{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+
+/* MENU GRID - RESPONSIVE */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* LARGE SCREENS (Laptop/Desktop) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1100px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .layout {
+    grid-template-columns: 3fr 1.2fr;
+  }
+}
+
+/* TABLET */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* CART PANEL */
+.cart-panel{
+  position:sticky;
+  top:10px;
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+
+/* FLOATING CART */
+.floating-cart{
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  right:10px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color:white;
+  text-align:center;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+}
+
+/* ===== RESPONSIVE CART FIX ===== */
+
+/* MOBILE */
+@media (max-width: 768px){
+
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  .cart-panel{
+    display: none; /* hidden by default on mobile */
+  }
+
+  .cart-panel.show{
+    display: block; /* shown when toggled */
+  }
+
+  .floating-cart{
+    display: block;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 769px){
+
+  .cart-panel{
+    display: block !important; /* ALWAYS visible */
+  }
+
+  .floating-cart{
+    display: none;
+  }
+}
+/* =========================
+   GLOBAL VERTICAL SPACING
+   ========================= */
+
+/* space between major sections */
+.header,
+.tabs,
+.layout,
+.summary,
+.cart-panel,
+.menu-grid {
+  margin-bottom: 18px;
+}
+
+/* spacing inside cards */
+.card-content > * {
+  margin-bottom: 8px;
+}
+
+/* spacing between items */
+.item,
+.cart-item {
+  margin-bottom: 14px;
+}
+
+/* buttons spacing */
+button {
+  margin-top: 6px;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actions-row button {
+  flex: 1;
+}
+
+/* input spacing */
+input {
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+/* tabs spacing */
+.tabs {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+/* cart section spacing */
+.cart-panel h3 {
+  margin-bottom: 12px;
+}
+
+.summary {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px){
+
+  .container {
+    padding: 18px;
+  }
+
+  .card {
+    margin-bottom: 16px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  button {
+    padding: 12px;
+  }
+}
+/* =========================
+   ADVANCED MOBILE UI FIX
+   ========================= */
+@media (max-width: 768px){
+
+  /* CONTAINER */
+  .container{
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  /* HEADER */
+  .header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  #cartSummary{
+    font-size: 13px;
+  }
+
+  /* TABS → SCROLLABLE */
+  .tabs{
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .tabs button{
+    flex-shrink: 0;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* MENU GRID */
+  .menu-grid{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card{
+    border-radius: 14px;
+  }
+
+  .card img{
+    height: 160px;
+  }
+
+  .card-content{
+    padding: 14px;
+  }
+
+  .card-title{
+    font-size: 17px;
+  }
+
+  .card-desc{
+    font-size: 14px;
+  }
+
+  /* ACTION ROW (BIG FIX) */
+  .actions-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  /* BUTTONS (THUMB FRIENDLY) */
+  button{
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  /* CART PANEL (FULL WIDTH FEEL) */
+  .cart-panel{
+    padding: 16px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .cart-item{
+    font-size: 15px;
+  }
+
+  /* INPUT */
+  input{
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* FLOATING CART */
+  .floating-cart{
+    padding: 16px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+@media (min-width: 769px) {
+  .cart-panel {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+}
+
+/* Better spacing for desktop */
+@media (min-width: 1024px) {
+  .card img {
+    height: 180px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  button {
+    padding: 10px 16px;
+  }
+}
+/* HEADER FIX */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* CART BUTTON GROUP */
+.cart-actions {
+  display: flex;
   gap: 10px;
   margin-top: 10px;
-  position: relative;
-  z-index: 1;
 }
 
-@media (max-width: 520px){
-  .actions{ flex-direction: column; }
+.cart-actions button {
+  flex: 1;
+}
+
+/* MENU SECTION */
+.menu-section {
+  width: 100%;
+}
+/* SMART CART LAYOUT */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+/* LEFT SIDE */
+.cart-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-name {
+  font-weight: 600;
+}
+
+.cart-price {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* RIGHT SIDE */
+.cart-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* QTY BOX */
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+.qty-box button {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* REMOVE BUTTON */
+.remove-btn {
+  background: transparent;
+  color: red;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+.remove-btn:hover {
+  transform: scale(1.2);
 }
