@@ -27,6 +27,7 @@ initTabs();
 renderMenu();
 renderCart();
 
+// ------------------ TABS ------------------
 function initTabs() {
   const cats = ["All", ...new Set(menuItems.map(i => i.category))];
   tabsDiv.innerHTML = cats.map(c =>
@@ -36,25 +37,27 @@ function initTabs() {
 
 function setCategory(cat) {
   currentCategory = cat;
-  document.querySelectorAll(".tabs button").forEach(btn => {
-  btn.classList.remove("active");
-  if (btn.innerText === cat) btn.classList.add("active");
-});
+
+  document.querySelectorAll("#tabs button").forEach(btn => {
+    btn.classList.remove("active");
+    if (btn.innerText === cat) btn.classList.add("active");
+  });
+
   renderMenu();
 }
 
-// MENU UI
+// ------------------ MENU ------------------
 function renderMenu() {
-  menuDiv.innerHTML = `<div class="menu-grid"></div>`;
-  const grid = menuDiv.querySelector(".menu-grid");
+  const filtered = menuItems.filter(i =>
+    currentCategory === "All" || i.category === currentCategory
+  );
 
-  menuItems
-    .filter(i => currentCategory === "All" || i.category === currentCategory)
-    .forEach(item => {
-      grid.innerHTML += `
+  menuDiv.innerHTML = `
+    <div class="menu-grid">
+      ${filtered.map(item => `
         <div class="card">
           <img src="${item.img}">
-          
+
           <div class="card-content">
             <div class="card-title">${item.name}</div>
             <div class="card-desc">${item.desc}</div>
@@ -68,23 +71,31 @@ function renderMenu() {
             </div>
           </div>
         </div>
-      `;
-    });
+      `).join("")}
+    </div>
+  `;
 }
 
-// ADD (with animation)
+// ------------------ ADD TO CART ------------------
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
   let qty = parseInt(document.getElementById(`qty-${id}`).innerText);
 
   const existing = cart.find(i => i.id === id);
-  if (existing) existing.qty += qty;
-  else cart.push({ ...item, qty });
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ ...item, qty });
+  }
 
   renderCart();
+
+  // Reset qty UI
+  document.getElementById(`qty-${id}`).innerText = 1;
 }
 
-// QTY
+// ------------------ MENU QTY ------------------
 function changeQty(id, delta) {
   const el = document.getElementById(`qty-${id}`);
   let qty = parseInt(el.innerText);
@@ -92,22 +103,41 @@ function changeQty(id, delta) {
   el.innerText = qty;
 }
 
-// CART
+// ------------------ CART QTY FIX ------------------
+function updateCartQty(id, change) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+
+  item.qty += change;
+
+  if (item.qty <= 0) {
+    cart = cart.filter(i => i.id !== id);
+  }
+
+  renderCart();
+}
+
+// ------------------ REMOVE ------------------
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  renderCart();
+}
+
+// ------------------ RENDER CART ------------------
 function renderCart() {
-  cartDiv.innerHTML = "";
   let total = 0;
   let count = 0;
 
-  cart.forEach(i => {
+  const html = cart.map(i => {
     total += i.price * i.qty;
     count += i.qty;
 
-    cartDiv.innerHTML += `
+    return `
       <div class="cart-item">
         
         <div class="cart-left">
           <div class="cart-name">${i.name}</div>
-          <div class="cart-price">₹${i.price}</div>
+          <div class="cart-price">${i.price} BDT</div>
         </div>
 
         <div class="cart-right">
@@ -122,48 +152,20 @@ function renderCart() {
 
       </div>
     `;
-  });
+  }).join("");
 
+  cartDiv.innerHTML = html;
   totalSpan.innerText = total;
   summary.innerText = `🛒 ${count} items | ${total} BDT`;
 }
 
-const floatingCart = document.getElementById("floatingCart");
-const cartPanel = document.querySelector(".cart-panel");
-
-floatingCart.onclick = () => {
-
-  // ONLY FOR MOBILE
-  if (window.innerWidth <= 768) {
-    cartPanel.classList.toggle("show");
-
-    if (cartPanel.classList.contains("show")) {
-      floatingCart.innerText = "❌ Close Cart";
-    } else {
-      floatingCart.innerText = "🛒 View Cart";
-    }
-
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-  }
-
-};
-
-
-function removeItem(id) {
-  cart = cart.filter(i => i.id !== id);
-  renderCart();
-}
-
-// CLEAR
+// ------------------ CLEAR ------------------
 document.getElementById("clearBtn").onclick = () => {
   cart = [];
   renderCart();
 };
 
-// CONFIRM
+// ------------------ CONFIRM ------------------
 document.getElementById("confirmBtn").onclick = () => {
   if (cart.length === 0) return alert("Add items");
 
@@ -176,16 +178,24 @@ document.getElementById("confirmBtn").onclick = () => {
     `${FORM_URL}?Item=${encodeURIComponent(itemsWithQty)}` +
     `&Comments=${encodeURIComponent(comments)}`;
 
-  console.log(url); // 👈 debug URL
-
   window.open(url, "_blank");
-}
+};
 
-floatingCart.addEventListener("click", () => {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-});
+// ------------------ FLOATING CART ------------------
+const floatingCart = document.getElementById("floatingCart");
+const cartPanel = document.querySelector(".cart-panel");
 
-confirmBtn.addEventListener("click", confirmOrder);
+floatingCart.onclick = () => {
+  if (window.innerWidth <= 768) {
+    cartPanel.classList.toggle("show");
+
+    floatingCart.innerText = cartPanel.classList.contains("show")
+      ? "❌ Close Cart"
+      : "🛒 View Cart";
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+};
