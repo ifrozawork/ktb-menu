@@ -1,17 +1,12 @@
-const menuItems = [
-  { id: 1, name: "Burger", category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
-  { id: 2, name: "Sandwich", category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
-  { id: 3, name: "Pizza", category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
-  { id: 4, name: "Pasta", category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
-  { id: 5, name: "Fries", category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
-  { id: 6, name: "Coffee", category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
-  { id: 7, name: "Tea", category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
-  { id: 8, name: "Cold Drink", category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
-  { id: 9, name: "Ice Cream", category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
-  { id: 10, name: "Momos", category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
-  { id: 11, name: "Fried Rice", category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
-  { id: 12, name: "Milkshake", category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
-];
+let menuItems = [];
+
+fetch("/menu.json")
+  .then(res => res.json())
+  .then(data => {
+    menuItems = data.filter(item => item.available);
+    initTabs();
+    renderMenu();
+  });
 
 let cart = [];
 let currentCategory = "All";
