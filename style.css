@@ -1,189 +1,612 @@
-const menuItems = [
-  { id: 1, name: "Burger", category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
-  { id: 2, name: "Sandwich", category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
-  { id: 3, name: "Pizza", category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
-  { id: 4, name: "Pasta", category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
-  { id: 5, name: "Fries", category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
-  { id: 6, name: "Coffee", category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
-  { id: 7, name: "Tea", category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
-  { id: 8, name: "Cold Drink", category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
-  { id: 9, name: "Ice Cream", category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
-  { id: 10, name: "Momos", category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
-  { id: 11, name: "Fried Rice", category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
-  { id: 12, name: "Milkshake", category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
-];
+/* ========================= 
+   Food Menu UI Theme (UPDATED COLORS)
+   ========================= */
+:root{
+  --bg1:#f7fbfc;
+  --bg2:#eef6f8;
+  --card:#ffffff;
 
-let cart = [];
-let currentCategory = "All";
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:rgba(2,6,23,.08);
 
-const menuDiv = document.getElementById("menu");
-const cartDiv = document.getElementById("cart");
-const tabsDiv = document.getElementById("tabs");
+  /* BRAND COLORS */
+  --primary:#56A2B8;      /* Fountain Blue */
+  --primary2:#C0A16B;     /* Twine */
+  --accent:#843534;       /* Sanguine Brown */
 
-// INIT
-initTabs();
-renderMenu();
-renderCart();
+  --green:#22c55h;
+  --red:#843534;
+  --blue:#56A2B8;
 
-// ------------------ TABS ------------------
-function initTabs() {
-  const cats = ["All", ...new Set(menuItems.map(i => i.category))];
-  tabsDiv.innerHTML = cats.map(c =>
-    `<button onclick="setCategory('${c}')">${c}</button>`
-  ).join("");
+  --shadow: 0 18px 45px rgba(2, 6, 23, 0.12);
+  --shadowSoft: 0 10px 22px rgba(2, 6, 23, 0.08);
+  --radius: 18px;
+  --radiusSm: 12px;
 }
 
-function setCategory(cat) {
-  currentCategory = cat;
+*{ box-sizing:border-box; }
 
-  document.querySelectorAll("#tabs button").forEach(btn => {
-    btn.classList.remove("active");
-    if (btn.innerText === cat) btn.classList.add("active");
-  });
+body{
+  margin:0;
+  padding:24px 14px;
+  font-family: ui-sans-serif, system-ui;
+  color:var(--text);
 
-  renderMenu();
+  background:
+    radial-gradient(1000px 650px at 15% 10%, rgba(86,162,184,0.25), transparent 58%),
+    radial-gradient(900px 600px at 85% 15%, rgba(192,161,107,0.25), transparent 55%),
+    radial-gradient(900px 600px at 50% 100%, rgba(132,53,52,0.15), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
 }
 
-// ------------------ MENU ------------------
-function renderMenu() {
-  const filtered = menuItems.filter(i =>
-    currentCategory === "All" || i.category === currentCategory
-  );
+/* CONTAINER */
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:22px;
 
-  menuDiv.innerHTML = `
-    <div class="menu-grid">
-      ${filtered.map(item => `
-        <div class="card">
-          <img src="${item.img}">
-
-          <div class="card-content">
-            <div class="card-title">${item.name}</div>
-            <div class="card-desc">${item.desc}</div>
-            
-            <div class="actions-row">
-              
-              <!-- FIXED QTY GROUP -->
-              <div class="qty-control">
-                <button onclick="changeQty(${item.id}, -1)">-</button>
-                <span id="qty-${item.id}">1</span>
-                <button onclick="changeQty(${item.id}, 1)">+</button>
-              </div>
-
-              <button onclick="addToCart(${item.id})">Add</button>
-
-            </div>
-          </div>
-        </div>
-      `).join("")}
-    </div>
-  `;
+  background: linear-gradient(180deg, #ffffff, #f8fbfc);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  position:relative;
 }
 
-// ------------------ ADD ------------------
-function addToCart(id) {
-  const item = menuItems.find(i => i.id === id);
-  let qty = parseInt(document.getElementById(`qty-${id}`).innerText);
+/* TOP GRADIENT BAR */
+.container::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:6px;
+  background: linear-gradient(90deg, var(--primary), var(--primary2), var(--accent));
+}
 
-  const existing = cart.find(i => i.id === id);
+/* INPUTS */
+input, select{
+  width:100%;
+  padding:12px;
+  border-radius:var(--radiusSm);
+  border:1px solid rgba(0,0,0,0.1);
+}
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...item, qty });
+input:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(86,162,184,0.2);
+}
+
+/* BUTTONS */
+button{
+  padding:10px 14px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color:#fff;
+
+  box-shadow:0 8px 18px rgba(86,162,184,0.3);
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+button.secondary{
+  background:#e5e7eb;
+  color:#111;
+}
+
+button.danger{
+  background: linear-gradient(135deg, #843534, #a94442);
+}
+
+/* ITEMS */
+.item{
+  padding:14px;
+  margin:10px 0;
+  border-radius:16px;
+
+  background: linear-gradient(180deg, #fff, #f9fafb);
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:var(--shadowSoft);
+
+  display:flex;
+  justify-content:space-between;
+}
+
+/* CART */
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  padding:12px;
+  margin:10px 0;
+
+  border-radius:16px;
+  background:
+    radial-gradient(600px 120px at 10% 20%, rgba(86,162,184,.12), transparent 60%),
+    radial-gradient(600px 120px at 90% 20%, rgba(192,161,107,.12), transparent 60%),
+    rgba(241,245,249,.7);
+}
+
+/* CARDS */
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.card img{
+  height:140px;
+  width:100%;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:12px;
+}
+
+.card-title{
+  font-weight:700;
+}
+
+.card-desc{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* PRICE */
+.price{
+  color:var(--accent);
+  font-weight:800;
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:var(--primary);
+  color:white;
+  padding:4px 8px;
+  border-radius:10px;
+  font-size:12px;
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  gap:8px;
+}
+
+.tabs button {
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: white;
+  border: none;
+  box-shadow: 0 6px 14px rgba(86,162,184,0.25);
+}
+
+.tabs button.active {
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  transform: scale(1.05);
+}
+
+/* LAYOUT */
+.layout{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+
+/* MENU GRID - RESPONSIVE */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* LARGE SCREENS (Laptop/Desktop) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1100px;
   }
 
-  renderCart();
-  document.getElementById(`qty-${id}`).innerText = 1;
-}
-
-// ------------------ MENU QTY ------------------
-function changeQty(id, delta) {
-  const el = document.getElementById(`qty-${id}`);
-  let qty = parseInt(el.innerText);
-  qty = Math.max(1, qty + delta);
-  el.innerText = qty;
-}
-
-// ------------------ CART QTY ------------------
-function updateCartQty(id, change) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-
-  item.qty += change;
-
-  if (item.qty <= 0) {
-    cart = cart.filter(i => i.id !== id);
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  renderCart();
-}
-
-// ------------------ REMOVE ------------------
-function removeItem(id) {
-  cart = cart.filter(i => i.id !== id);
-  renderCart();
-}
-
-// ------------------ RENDER CART ------------------
-function renderCart() {
-  const html = cart.map(i => `
-    <div class="cart-item">
-      <div class="cart-left">
-        <div class="cart-name">${i.name}</div>
-      </div>
-
-      <div class="cart-right">
-        <div class="qty-box">
-          <button onclick="updateCartQty(${i.id}, -1)">-</button>
-          <span>${i.qty}</span>
-          <button onclick="updateCartQty(${i.id}, 1)">+</button>
-        </div>
-
-        <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
-      </div>
-    </div>
-  `).join("");
-
-  cartDiv.innerHTML = html;
-}
-
-// ------------------ CLEAR ------------------
-document.getElementById("clearBtn").onclick = () => {
-  cart = [];
-  renderCart();
-};
-
-// ------------------ CONFIRM ------------------
-document.getElementById("confirmBtn").onclick = () => {
-  if (cart.length === 0) return alert("Add items");
-
-  const itemsWithQty = cart.map(i => `${i.name}(${i.qty})`).join("|");
-  const comments = document.getElementById("comments").value;
-
-  const FORM_URL = "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
-
-  const url =
-    `${FORM_URL}?Item=${encodeURIComponent(itemsWithQty)}` +
-    `&Comments=${encodeURIComponent(comments)}`;
-
-  window.open(url, "_blank");
-};
-
-// ------------------ FLOATING CART ------------------
-const floatingCart = document.getElementById("floatingCart");
-const cartPanel = document.querySelector(".cart-panel");
-
-floatingCart.onclick = () => {
-  if (window.innerWidth <= 768) {
-    cartPanel.classList.toggle("show");
-
-    floatingCart.innerText = cartPanel.classList.contains("show")
-      ? "❌ Close Cart"
-      : "🛒 View Cart";
-
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
+  .layout {
+    grid-template-columns: 3fr 1.2fr;
   }
-};
+}
+
+/* TABLET */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* CART PANEL */
+.cart-panel{
+  position:sticky;
+  top:10px;
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+
+/* FLOATING CART */
+.floating-cart{
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  right:10px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color:white;
+  text-align:center;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+}
+
+/* ===== RESPONSIVE CART FIX ===== */
+
+/* MOBILE */
+@media (max-width: 768px){
+
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  .cart-panel{
+    display: none; /* hidden by default on mobile */
+  }
+
+  .cart-panel.show{
+    display: block; /* shown when toggled */
+  }
+
+  .floating-cart{
+    display: block;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 769px){
+
+  .cart-panel{
+    display: block !important; /* ALWAYS visible */
+  }
+
+  .floating-cart{
+    display: none;
+  }
+}
+/* =========================
+   GLOBAL VERTICAL SPACING
+   ========================= */
+
+/* space between major sections */
+.header,
+.tabs,
+.layout,
+.summary,
+.cart-panel,
+.menu-grid {
+  margin-bottom: 18px;
+}
+
+/* spacing inside cards */
+.card-content > * {
+  margin-bottom: 8px;
+}
+
+/* spacing between items */
+.item,
+.cart-item {
+  margin-bottom: 14px;
+}
+
+/* buttons spacing */
+button {
+  margin-top: 6px;
+}
+
+/* ACTION ROW FIX */
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* QTY CONTROL GROUP */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* BUTTON SIZE FIX */
+.qty-control button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CENTER NUMBER */
+.qty-control span {
+  width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.actions-row button {
+  flex: 1;
+}
+
+/* input spacing */
+input {
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+/* tabs spacing */
+.tabs {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+/* cart section spacing */
+.cart-panel h3 {
+  margin-bottom: 12px;
+}
+
+.summary {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px){
+
+  .container {
+    padding: 18px;
+  }
+
+  .card {
+    margin-bottom: 16px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  button {
+    padding: 12px;
+  }
+}
+/* =========================
+   ADVANCED MOBILE UI FIX
+   ========================= */
+@media (max-width: 768px){
+
+  /* CONTAINER */
+  .container{
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  /* HEADER */
+  .header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  #cartSummary{
+    font-size: 13px;
+  }
+
+  /* TABS → SCROLLABLE */
+  .tabs{
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .tabs button{
+    flex-shrink: 0;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* MENU GRID */
+  .menu-grid{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card{
+    border-radius: 14px;
+  }
+
+  .card img{
+    height: 160px;
+  }
+
+  .card-content{
+    padding: 14px;
+  }
+
+  .card-title{
+    font-size: 17px;
+  }
+
+  .card-desc{
+    font-size: 14px;
+  }
+
+  /* ACTION ROW (BIG FIX) */
+  .actions-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  /* BUTTONS (THUMB FRIENDLY) */
+  button{
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  /* CART PANEL (FULL WIDTH FEEL) */
+  .cart-panel{
+    padding: 16px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .cart-item{
+    font-size: 15px;
+  }
+
+  /* INPUT */
+  input{
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* FLOATING CART */
+  .floating-cart{
+    padding: 16px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+@media (min-width: 769px) {
+  .cart-panel {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+}
+
+/* Better spacing for desktop */
+@media (min-width: 1024px) {
+  .card img {
+    height: 180px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  button {
+    padding: 10px 16px;
+  }
+}
+/* HEADER FIX */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* CART BUTTON GROUP */
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cart-actions button {
+  flex: 1;
+}
+
+/* MENU SECTION */
+.menu-section {
+  width: 100%;
+}
+/* SMART CART LAYOUT */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+/* LEFT SIDE */
+.cart-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-name {
+  font-weight: 600;
+}
+
+.cart-price {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* RIGHT SIDE */
+.cart-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* QTY BOX */
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+.qty-box button {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* REMOVE BUTTON */
+.remove-btn {
+  background: transparent;
+  color: red;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+.remove-btn:hover {
+  transform: scale(1.2);
+}
