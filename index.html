@@ -5,42 +5,28 @@
   <title>KBBD Menu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Better font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-  <!-- HEADER -->
   <div class="header">
     <h2>🍽️ Kontoor's Smart Menu</h2>
-    <div id="cartSummary">🛒 0 items | 0 BDT</div>
   </div>
 
-  <!-- CATEGORY TABS -->
   <div class="tabs" id="tabs"></div>
 
-  <!-- MAIN LAYOUT -->
   <div class="layout">
 
-    <!-- MENU SECTION -->
     <div class="menu-section">
       <div id="menu"></div>
     </div>
 
-    <!-- CART PANEL -->
     <div class="cart-panel">
       <h3>🧾 Your Order</h3>
-
       <div id="cart"></div>
-
-      <div class="summary">
-        <span>Total:</span>
-        <strong><span id="total">0</span> BDT</strong>
-      </div>
 
       <input id="comments" placeholder="Add special instructions...">
 
@@ -53,11 +39,10 @@
   </div>
 </div>
 
-<!-- FLOATING CART (MOBILE ONLY) -->
 <div class="floating-cart" id="floatingCart">
   🛒 View Cart
-</div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
