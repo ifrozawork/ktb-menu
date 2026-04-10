@@ -1,16 +1,16 @@
 const menuItems = [
-  { id: 1, name: "Burger", price: 180, category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
-  { id: 2, name: "Sandwich", price: 220, category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
-  { id: 3, name: "Pizza", price: 350, category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
-  { id: 4, name: "Pasta", price: 300, category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
-  { id: 5, name: "Fries", price: 120, category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
-  { id: 6, name: "Coffee", price: 80, category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
-  { id: 7, name: "Tea", price: 40, category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
-  { id: 8, name: "Cold Drink", price: 60, category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
-  { id: 9, name: "Ice Cream", price: 90, category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
-  { id: 10, name: "Momos", price: 150, category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
-  { id: 11, name: "Fried Rice", price: 200, category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
-  { id: 12, name: "Milkshake", price: 140, category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
+  { id: 1, name: "Burger", category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
+  { id: 2, name: "Sandwich", category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
+  { id: 3, name: "Pizza", category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
+  { id: 4, name: "Pasta", category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
+  { id: 5, name: "Fries", category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
+  { id: 6, name: "Coffee", category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
+  { id: 7, name: "Tea", category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
+  { id: 8, name: "Cold Drink", category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
+  { id: 9, name: "Ice Cream", category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
+  { id: 10, name: "Momos", category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
+  { id: 11, name: "Fried Rice", category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
+  { id: 12, name: "Milkshake", category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
 ];
 
 let cart = [];
@@ -18,9 +18,7 @@ let currentCategory = "All";
 
 const menuDiv = document.getElementById("menu");
 const cartDiv = document.getElementById("cart");
-const totalSpan = document.getElementById("total");
 const tabsDiv = document.getElementById("tabs");
-const summary = document.getElementById("cartSummary");
 
 // INIT
 initTabs();
@@ -61,13 +59,18 @@ function renderMenu() {
           <div class="card-content">
             <div class="card-title">${item.name}</div>
             <div class="card-desc">${item.desc}</div>
-            <div class="price">${item.price} BDT</div>
-
+            
             <div class="actions-row">
-              <button onclick="changeQty(${item.id}, -1)">-</button>
-              <span id="qty-${item.id}">1</span>
-              <button onclick="changeQty(${item.id}, 1)">+</button>
+              
+              <!-- FIXED QTY GROUP -->
+              <div class="qty-control">
+                <button onclick="changeQty(${item.id}, -1)">-</button>
+                <span id="qty-${item.id}">1</span>
+                <button onclick="changeQty(${item.id}, 1)">+</button>
+              </div>
+
               <button onclick="addToCart(${item.id})">Add</button>
+
             </div>
           </div>
         </div>
@@ -76,7 +79,7 @@ function renderMenu() {
   `;
 }
 
-// ------------------ ADD TO CART ------------------
+// ------------------ ADD ------------------
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
   let qty = parseInt(document.getElementById(`qty-${id}`).innerText);
@@ -90,8 +93,6 @@ function addToCart(id) {
   }
 
   renderCart();
-
-  // Reset qty UI
   document.getElementById(`qty-${id}`).innerText = 1;
 }
 
@@ -103,7 +104,7 @@ function changeQty(id, delta) {
   el.innerText = qty;
 }
 
-// ------------------ CART QTY FIX ------------------
+// ------------------ CART QTY ------------------
 function updateCartQty(id, change) {
   const item = cart.find(i => i.id === id);
   if (!item) return;
@@ -125,38 +126,25 @@ function removeItem(id) {
 
 // ------------------ RENDER CART ------------------
 function renderCart() {
-  let total = 0;
-  let count = 0;
-
-  const html = cart.map(i => {
-    total += i.price * i.qty;
-    count += i.qty;
-
-    return `
-      <div class="cart-item">
-        
-        <div class="cart-left">
-          <div class="cart-name">${i.name}</div>
-          <div class="cart-price">${i.price} BDT</div>
-        </div>
-
-        <div class="cart-right">
-          <div class="qty-box">
-            <button onclick="updateCartQty(${i.id}, -1)">-</button>
-            <span>${i.qty}</span>
-            <button onclick="updateCartQty(${i.id}, 1)">+</button>
-          </div>
-
-          <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
-        </div>
-
+  const html = cart.map(i => `
+    <div class="cart-item">
+      <div class="cart-left">
+        <div class="cart-name">${i.name}</div>
       </div>
-    `;
-  }).join("");
+
+      <div class="cart-right">
+        <div class="qty-box">
+          <button onclick="updateCartQty(${i.id}, -1)">-</button>
+          <span>${i.qty}</span>
+          <button onclick="updateCartQty(${i.id}, 1)">+</button>
+        </div>
+
+        <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
+      </div>
+    </div>
+  `).join("");
 
   cartDiv.innerHTML = html;
-  totalSpan.innerText = total;
-  summary.innerText = `🛒 ${count} items | ${total} BDT`;
 }
 
 // ------------------ CLEAR ------------------
