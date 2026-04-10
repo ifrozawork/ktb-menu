@@ -2,25 +2,25 @@
    Food Menu UI Theme (UPDATED COLORS)
    ========================= */
 :root{
-  --bg1:#f7fbfc;
-  --bg2:#eef6f8;
+  --bg1:#fff7ed;   /* soft orange background */
+  --bg2:#fffbeb;   /* light yellow */
   --card:#ffffff;
 
-  --text:#1f2937;
-  --muted:#6b7280;
-  --border:rgba(2,6,23,.08);
+  --text:#7c2d12;  /* warm brown text */
+  --muted:#9a3412;
+  --border:rgba(234,88,12,0.2);
+   
+  --primary:#f97316;     /* orange */
+  --primary2:#facc15;    /* yellow */
+  --accent:#ef4444;      /* red highlight */
 
-  /* BRAND COLORS */
-  --primary:#56A2B8;      /* Fountain Blue */
-  --primary2:#C0A16B;     /* Twine */
-  --accent:#843534;       /* Sanguine Brown */
+  --green:#22c55e;
+  --red:#ef4444;
+  --blue:#3b82f6;
 
-  --green:#22c55h;
-  --red:#843534;
-  --blue:#56A2B8;
+  --shadow: 0 18px 45px rgba(249,115,22,0.25);
+  --shadowSoft: 0 10px 22px rgba(249,115,22,0.15);
 
-  --shadow: 0 18px 45px rgba(2, 6, 23, 0.12);
-  --shadowSoft: 0 10px 22px rgba(2, 6, 23, 0.08);
   --radius: 18px;
   --radiusSm: 12px;
 }
