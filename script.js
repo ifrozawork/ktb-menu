@@ -1,189 +1,219 @@
-const menuItems = [
-  { id: 1, name: "Burger", category: "Food", desc: "Juicy grilled burger", img: "images/burger.jpg" },
-  { id: 2, name: "Sandwich", category: "Food", desc: "Veg sandwich", img: "images/sandwich.jpg" },
-  { id: 3, name: "Pizza", category: "Food", desc: "Cheesy pizza", img: "images/pizza.jpg" },
-  { id: 4, name: "Pasta", category: "Food", desc: "Creamy pasta", img: "images/pasta.jpg" },
-  { id: 5, name: "Fries", category: "Food", desc: "Crispy fries", img: "images/fries.jpg" },
-  { id: 6, name: "Coffee", category: "Drinks", desc: "Hot coffee", img: "images/coffee.jpg" },
-  { id: 7, name: "Tea", category: "Drinks", desc: "Milk tea", img: "images/tea.jpg" },
-  { id: 8, name: "Cold Drink", category: "Drinks", desc: "Soft drink", img: "images/coldrink.jpg" },
-  { id: 9, name: "Ice Cream", category: "Dessert", desc: "Vanilla scoop", img: "images/icecream.jpg" },
-  { id: 10, name: "Momos", category: "Food", desc: "Dumplings", img: "images/momos.jpg" },
-  { id: 11, name: "Fried Rice", category: "Food", desc: "Fried rice", img: "images/fried rice.jpg" },
-  { id: 12, name: "Milkshake", category: "Drinks", desc: "Chocolate shake", img: "images/milkshake.jpg" }
-];
-
+/***********************
+ * STATE
+ ***********************/
+let menuItems = [];
 let cart = [];
 let currentCategory = "All";
 
+/***********************
+ * DOM REFERENCES
+ ***********************/
 const menuDiv = document.getElementById("menu");
 const cartDiv = document.getElementById("cart");
+const totalSpan = document.getElementById("total");
 const tabsDiv = document.getElementById("tabs");
+const summary = document.getElementById("cartSummary");
+const floatingCart = document.getElementById("floatingCart");
+const cartPanel = document.querySelector(".cart-panel");
 
-// INIT
-initTabs();
-renderMenu();
-renderCart();
+/***********************
+ * LOAD MENU (JSON)
+ ***********************/
+fetch("menu.json")
+  .then(res => res.json())
+  .then(data => {
+    menuItems = data.filter(item => item.available);
+    initTabs();
+    renderMenu();
+    restoreCart();
+  })
+  .catch(err => {
+    console.error("Menu load failed:", err);
+    menuDiv.innerHTML = "<p>Menu unavailable</p>";
+  });
 
-// ------------------ TABS ------------------
+/***********************
+ * CATEGORY TABS
+ ***********************/
 function initTabs() {
-  const cats = ["All", ...new Set(menuItems.map(i => i.category))];
-  tabsDiv.innerHTML = cats.map(c =>
-    `<button onclick="setCategory('${c}')">${c}</button>`
-  ).join("");
+  const categories = ["All", ...new Set(menuItems.map(i => i.category))];
+  tabsDiv.innerHTML = categories
+    .map(
+      c => `<button onclick="setCategory('${c}')" class="${c === currentCategory ? "active" : ""}">
+              ${c}
+            </button>`
+    )
+    .join("");
 }
 
 function setCategory(cat) {
   currentCategory = cat;
-
-  document.querySelectorAll("#tabs button").forEach(btn => {
-    btn.classList.remove("active");
-    if (btn.innerText === cat) btn.classList.add("active");
-  });
-
+  document.querySelectorAll(".tabs button").forEach(btn =>
+    btn.classList.toggle("active", btn.innerText === cat)
+  );
   renderMenu();
 }
 
-// ------------------ MENU ------------------
+/***********************
+ * MENU RENDER
+ ***********************/
 function renderMenu() {
-  const filtered = menuItems.filter(i =>
-    currentCategory === "All" || i.category === currentCategory
-  );
+  const filtered =
+    currentCategory === "All"
+      ? menuItems
+      : menuItems.filter(i => i.category === currentCategory);
 
   menuDiv.innerHTML = `
     <div class="menu-grid">
-      ${filtered.map(item => `
-        <div class="card">
-          <img src="${item.img}">
+      ${filtered
+        .map(
+          item => `
+          <div class="card">
+            images/${item.image}
+            <div class="card-content">
+              <div class="card-title">${item.name}</div>
+              <div class="card-desc">${item.description || ""}</div>
+              <div class="price">${item.price} BDT</div>
 
-          <div class="card-content">
-            <div class="card-title">${item.name}</div>
-            <div class="card-desc">${item.desc}</div>
-            
-            <div class="actions-row">
-              
-              <!-- FIXED QTY GROUP -->
-              <div class="qty-control">
-                <button onclick="changeQty(${item.id}, -1)">-</button>
-                <span id="qty-${item.id}">1</span>
-                <button onclick="changeQty(${item.id}, 1)">+</button>
+              <div class="actions-row">
+                <div class="qty-box">
+                  <button onclick="changeQty(${item.id}, -1)">−</button>
+                  <span id="qty-${item.id}">1</span>
+                  <button onclick="changeQty(${item.id}, 1)">+</button>
+                </div>
+                <button onclick="addToCart(${item.id})">Add</button>
               </div>
-
-              <button onclick="addToCart(${item.id})">Add</button>
-
             </div>
           </div>
-        </div>
-      `).join("")}
-    </div>
-  `;
+        `
+        )
+        .join("")}
+    </div>`;
 }
 
-// ------------------ ADD ------------------
+/***********************
+ * QUANTITY CONTROL
+ ***********************/
+function changeQty(id, delta) {
+  const el = document.getElementById(`qty-${id}`);
+  let qty = parseInt(el.innerText, 10);
+  el.innerText = Math.max(1, qty + delta);
+}
+
+/***********************
+ * CART LOGIC
+ ***********************/
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
-  let qty = parseInt(document.getElementById(`qty-${id}`).innerText);
+  const qty = parseInt(document.getElementById(`qty-${id}`).innerText, 10);
 
   const existing = cart.find(i => i.id === id);
-
   if (existing) {
     existing.qty += qty;
   } else {
     cart.push({ ...item, qty });
   }
 
-  renderCart();
   document.getElementById(`qty-${id}`).innerText = 1;
+  renderCart();
 }
 
-// ------------------ MENU QTY ------------------
-function changeQty(id, delta) {
-  const el = document.getElementById(`qty-${id}`);
-  let qty = parseInt(el.innerText);
-  qty = Math.max(1, qty + delta);
-  el.innerText = qty;
+function renderCart() {
+  let total = 0;
+  let count = 0;
+
+  cartDiv.innerHTML = cart
+    .map(i => {
+      total += i.price * i.qty;
+      count += i.qty;
+      return `
+        <div class="cart-item">
+          <div class="cart-left">
+            <div class="cart-name">${i.name}</div>
+            <div class="cart-price">${i.price} BDT × ${i.qty}</div>
+          </div>
+          <div class="cart-right">
+            <button onclick="updateCartQty(${i.id}, -1)">−</button>
+            <strong>${i.qty}</strong>
+            <button onclick="updateCartQty(${i.id}, 1)">+</button>
+            <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  totalSpan.innerText = total;
+  summary.innerText = `🛒 ${count} items | ${total} BDT`;
+  saveCart();
 }
 
-// ------------------ CART QTY ------------------
-function updateCartQty(id, change) {
+function updateCartQty(id, delta) {
   const item = cart.find(i => i.id === id);
   if (!item) return;
 
-  item.qty += change;
-
+  item.qty += delta;
   if (item.qty <= 0) {
     cart = cart.filter(i => i.id !== id);
   }
-
   renderCart();
 }
 
-// ------------------ REMOVE ------------------
 function removeItem(id) {
   cart = cart.filter(i => i.id !== id);
   renderCart();
 }
 
-// ------------------ RENDER CART ------------------
-function renderCart() {
-  const html = cart.map(i => `
-    <div class="cart-item">
-      <div class="cart-left">
-        <div class="cart-name">${i.name}</div>
-      </div>
-
-      <div class="cart-right">
-        <div class="qty-box">
-          <button onclick="updateCartQty(${i.id}, -1)">-</button>
-          <span>${i.qty}</span>
-          <button onclick="updateCartQty(${i.id}, 1)">+</button>
-        </div>
-
-        <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
-      </div>
-    </div>
-  `).join("");
-
-  cartDiv.innerHTML = html;
+/***********************
+ * PERSIST CART
+ ***********************/
+function saveCart() {
+  localStorage.setItem("kb_cart", JSON.stringify(cart));
 }
 
-// ------------------ CLEAR ------------------
+function restoreCart() {
+  const saved = localStorage.getItem("kb_cart");
+  if (saved) {
+    cart = JSON.parse(saved);
+    renderCart();
+  }
+}
+
+/***********************
+ * CLEAR + CONFIRM
+ ***********************/
 document.getElementById("clearBtn").onclick = () => {
   cart = [];
+  saveCart();
   renderCart();
 };
 
-// ------------------ CONFIRM ------------------
 document.getElementById("confirmBtn").onclick = () => {
-  if (cart.length === 0) return alert("Add items");
+  if (!cart.length) return alert("Add items first");
 
-  const itemsWithQty = cart.map(i => `${i.name}(${i.qty})`).join("|");
+  const orderId = "KB-" + Date.now().toString().slice(-6);
+  const items = cart.map(i => `${i.name} (${i.qty})`).join("\n");
   const comments = document.getElementById("comments").value;
 
-  const FORM_URL = "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
+  const FORM_URL =
+    "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
   const url =
-    `${FORM_URL}?Item=${encodeURIComponent(itemsWithQty)}` +
+    `${FORM_URL}?OrderID=${orderId}` +
+    `&Item=${encodeURIComponent(items)}` +
     `&Comments=${encodeURIComponent(comments)}`;
 
   window.open(url, "_blank");
 };
 
-// ------------------ FLOATING CART ------------------
-const floatingCart = document.getElementById("floatingCart");
-const cartPanel = document.querySelector(".cart-panel");
-
+/***********************
+ * MOBILE CART TOGGLE
+ ***********************/
 floatingCart.onclick = () => {
   if (window.innerWidth <= 768) {
     cartPanel.classList.toggle("show");
-
     floatingCart.innerText = cartPanel.classList.contains("show")
       ? "❌ Close Cart"
       : "🛒 View Cart";
-
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
   }
 };
