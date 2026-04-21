@@ -1,9 +1,22 @@
+// ===============================
+// CONFIG
+// ===============================
 const MENU_URL = "./menu.json";
 const FORM_URL = "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
+// CATEGORY → RESTAURANT mapping
+const RESTAURANTS = {
+  "Coffee Lime": ["Drinks"],
+  "Dessert Boutique": ["Dessert"],
+  "Madchef": ["Food"]
+};
+
+// ===============================
+// STATE
+// ===============================
 let menuItems = [];
 let cart = [];
-let currentCategory = "All";
+let currentRestaurant = "All";
 
 let menuDiv;
 let cartDiv;
@@ -14,6 +27,9 @@ let commentsInput;
 let floatingCart;
 let cartPanel;
 
+// ===============================
+// INIT
+// ===============================
 document.addEventListener("DOMContentLoaded", initApp);
 
 async function initApp() {
@@ -40,11 +56,7 @@ async function initApp() {
         floatingCart.innerText = cartPanel.classList.contains("show")
           ? "❌ Close Cart"
           : "🛒 View Cart";
-
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth"
-        });
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
       }
     };
   }
@@ -53,6 +65,9 @@ async function initApp() {
   renderCart();
 }
 
+// ===============================
+// DATA LOADING
+// ===============================
 async function loadMenu() {
   try {
     const response = await fetch(`${MENU_URL}?t=${Date.now()}`, {
@@ -70,109 +85,83 @@ async function loadMenu() {
     renderMenu();
   } catch (error) {
     console.error("Menu load error:", error);
-    menuItems = [];
-    tabsDiv.innerHTML = "";
-    menuDiv.innerHTML = `
-      <div class="menu-error">
-        <p>Menu unavailable right now.</p>
-        <p>Please check that menu.json is in the correct folder and contains valid JSON.</p>
-      </div>
-    `;
+    menuDiv.innerHTML = `<p>Menu unavailable. Please check menu.json.</p>`;
   }
 }
 
+// ===============================
+// NORMALIZATION
+// ===============================
 function normalizeMenu(rawMenu) {
-  if (!Array.isArray(rawMenu)) {
-    throw new Error("menu.json must contain an array.");
-  }
-
   return rawMenu
-    .filter(item => isAvailable(item.Available ?? item.available ?? true))
+    .filter(item => isAvailable(item.Available))
     .map((item, index) => ({
       id: Number(item.id ?? index + 1),
-      name: String(item.Item ?? item.name ?? "").trim(),
-      category: String(item.Category ?? item.category ?? "Uncategorized").trim(),
-      desc: String(item.Description ?? item.desc ?? "").trim(),
-      img: normalizeImagePath(item.Image ?? item.img ?? "")
-    }))
-    .filter(item => item.name);
+      name: item.Item,
+      category: item.Category,
+      desc: item.Description,
+      img: normalizeImagePath(item.Image)
+    }));
 }
 
 function isAvailable(value) {
   if (typeof value === "boolean") return value;
   if (value == null) return true;
-
-  const normalized = String(value).trim().toLowerCase();
-  return ["true", "yes", "1", "available", "y"].includes(normalized);
+  return ["true", "yes", "1"].includes(String(value).toLowerCase());
 }
 
-function normalizeImagePath(value) {
-  const cleaned = String(value || "").trim();
-  if (!cleaned) return "";
+function normalizeImagePath(img) {
+  if (!img) return "";
+  if (img.startsWith("images/")) return `./${img}`;
+  return `./images/${img}`;
+}
 
-  // if already a full URL or path, keep it
-  if (/^(https?:\/\/|\/|\.\/|\.\.\/)/i.test(cleaned)) {
-    return cleaned;
+function getRestaurantName(category) {
+  for (const restaurant in RESTAURANTS) {
+    if (RESTAURANTS[restaurant].includes(category)) {
+      return restaurant;
+    }
   }
-
-  // if already starts with images/
-  if (cleaned.startsWith("images/")) {
-    return `./${cleaned}`;
-  }
-
-  // otherwise assume filename only
-  return `./images/${cleaned}`;
+  return "Unknown";
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-// ------------------ TABS ------------------
+// ===============================
+// TABS (RESTAURANTS)
+// ===============================
 function initTabs() {
-  const cats = ["All", ...new Set(menuItems.map(i => i.category))];
-
-  tabsDiv.innerHTML = cats.map(c =>
-    `<button class="${c === currentCategory ? "active" : ""}" onclick='setCategory(${JSON.stringify(c)})'>${escapeHtml(c)}</button>`
-  ).join("");
+  const restaurants = ["All", ...Object.keys(RESTAURANTS)];
+  tabsDiv.innerHTML = restaurants
+    .map(r => `<button onclick="setRestaurant('${r}')">${r}</button>`)
+    .join("");
 }
 
-function setCategory(cat) {
-  currentCategory = cat;
+function setRestaurant(restaurant) {
+  currentRestaurant = restaurant;
 
   document.querySelectorAll("#tabs button").forEach(btn => {
-    btn.classList.remove("active");
-    if (btn.innerText === cat) btn.classList.add("active");
+    btn.classList.toggle("active", btn.innerText === restaurant);
   });
 
   renderMenu();
 }
 
-// ------------------ MENU ------------------
+// ===============================
+// MENU RENDER
+// ===============================
 function renderMenu() {
-  const filtered = menuItems.filter(i =>
-    currentCategory === "All" || i.category === currentCategory
-  );
-
-  if (!filtered.length) {
-    menuDiv.innerHTML = `<p class="empty-state">No menu items available in this category.</p>`;
-    return;
-  }
+  const filtered = menuItems.filter(item => {
+    if (currentRestaurant === "All") return true;
+    return RESTAURANTS[currentRestaurant]?.includes(item.category);
+  });
 
   menuDiv.innerHTML = `
     <div class="menu-grid">
       ${filtered.map(item => `
         <div class="card">
-          ${item.img ? `<img src="${escapeHtml(item.img)}" alt="${escapeHtml(item.name)}" loading="lazy">` : ""}
-
+          ${item.img ? `<img src="${item.img}" />` : ""}
           <div class="card-content">
-            <div class="card-title">${escapeHtml(item.name)}</div>
-            <div class="card-desc">${escapeHtml(item.desc)}</div>
+            <div class="card-title">${item.name}</div>
+            <div class="card-desc">${item.desc}</div>
 
             <div class="actions-row">
               <div class="qty-control">
@@ -180,7 +169,6 @@ function renderMenu() {
                 <span id="qty-${item.id}">1</span>
                 <button onclick="changeQty(${item.id}, 1)">+</button>
               </div>
-
               <button onclick="addToCart(${item.id})">Add</button>
             </div>
           </div>
@@ -190,91 +178,91 @@ function renderMenu() {
   `;
 }
 
-// ------------------ ADD ------------------
+// ===============================
+// CART LOGIC
+// ===============================
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
-  if (!item) return;
-
   const qtyEl = document.getElementById(`qty-${id}`);
   const qty = parseInt(qtyEl.innerText, 10) || 1;
 
+  const restaurant = getRestaurantName(item.category);
   const existing = cart.find(i => i.id === id);
 
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ ...item, qty });
+    cart.push({ ...item, qty, restaurant });
   }
 
   renderCart();
   qtyEl.innerText = 1;
 }
 
-// ------------------ MENU QTY ------------------
 function changeQty(id, delta) {
   const el = document.getElementById(`qty-${id}`);
-  let qty = parseInt(el.innerText, 10) || 1;
-  qty = Math.max(1, qty + delta);
-  el.innerText = qty;
+  el.innerText = Math.max(1, (parseInt(el.innerText, 10) || 1) + delta);
 }
 
-// ------------------ CART QTY ------------------
-function updateCartQty(id, change) {
+function updateCartQty(id, delta) {
   const item = cart.find(i => i.id === id);
   if (!item) return;
 
-  item.qty += change;
-
+  item.qty += delta;
   if (item.qty <= 0) {
     cart = cart.filter(i => i.id !== id);
   }
-
   renderCart();
 }
 
-// ------------------ REMOVE ------------------
 function removeItem(id) {
   cart = cart.filter(i => i.id !== id);
   renderCart();
 }
 
-// ------------------ RENDER CART ------------------
+// ===============================
+// CART RENDER
+// ===============================
 function renderCart() {
   if (!cart.length) {
-    cartDiv.innerHTML = `<p class="empty-state">Your cart is empty.</p>`;
+    cartDiv.innerHTML = "<p>Your cart is empty.</p>";
     return;
   }
 
-  const html = cart.map(i => `
+  cartDiv.innerHTML = cart.map(i => `
     <div class="cart-item">
       <div class="cart-left">
-        <div class="cart-name">${escapeHtml(i.name)}</div>
+        <div class="cart-name">${i.name}</div>
+        <div class="cart-restaurant">${i.restaurant}</div>
       </div>
-
       <div class="cart-right">
         <div class="qty-box">
           <button onclick="updateCartQty(${i.id}, -1)">-</button>
           <span>${i.qty}</span>
           <button onclick="updateCartQty(${i.id}, 1)">+</button>
         </div>
-
         <button class="remove-btn" onclick="removeItem(${i.id})">❌</button>
       </div>
     </div>
   `).join("");
-
-  cartDiv.innerHTML = html;
 }
 
-// ------------------ CONFIRM ------------------
+// ===============================
+// SUBMIT TO SMARTSHEET
+// ===============================
 function submitOrder() {
-  if (cart.length === 0) return alert("Add items");
+  if (!cart.length) return alert("Add items");
 
-  const itemsWithQty = cart.map(i => `${i.name}(${i.qty})`).join("|");
-  const comments = commentsInput ? commentsInput.value : "";
+  const itemsWithQty = cart
+    .map(i => `${i.name}(${i.qty})`)
+    .join("|");
+
+  const restaurants = [...new Set(cart.map(i => i.restaurant))].join(", ");
+  const comments = commentsInput?.value || "";
 
   const url =
     `${FORM_URL}?Item=${encodeURIComponent(itemsWithQty)}` +
+    `&Restaurant=${encodeURIComponent(restaurants)}` +
     `&Comments=${encodeURIComponent(comments)}`;
 
   window.open(url, "_blank", "noopener");
