@@ -3,8 +3,85 @@
     "id": 1,
     "Item": "Burger",
     "Category": "Food",
-    "Description": "Juicy",
+    "Description": "Juicy grilled burger",
     "Image": "burger.jpg",
     "Available": "TRUE"
-  }
-]
+  },
+  {
+    "id": 2,
+    "Item": "Sandwich",
+    "Category": "Food",
+    "Description": "Veg sandwich",
+    "Image": "sandwich.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 3,
+    "Item": "Pizza",
+    "Category": "Food",
+    "Description": "Cheesy pizza",
+    "Image": "pizza.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 4,
+    "Item": "Pasta",
+    "Category": "Food",
+    "Description": "Creamy pasta",
+    "Image": "pasta.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 5,
+    "Item": "Fries",
+    "Category": "Food",
+    "Description": "Crispy fries",
+    "Image": "fries.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 6,
+    "Item": "Coffee",
+    "Category": "Drinks",
+    "Description": "Hot coffee",
+    "Image": "coffee.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 7,
+    "Item": "Tea",
+    "Category": "Drinks",
+    "Description": "Milk tea",
+    "Image": "tea.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 8,
+    "Item": "Cold Drink",
+    "Category": "Drinks",
+    "Description": "Soft drink",
+    "Image": "coldrink.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 9,
+    "Item": "Ice Cream",
+    "Category": "Dessert",
+    "Description": "Vanilla scoop",
+    "Image": "icecream.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 10,
+    "Item": "Momos",
+    "Category": "Food",
+    "Description": "Dumplings",
+    "Image": "momos.jpg",
+    "Available": "TRUE"
+  },
+  {
+    "id": 11,
+    "Item": "Fried Rice",
+    "Category": "Food",
+    "Description": "Fried rice",
+    "Image": "fried rice.jpg",
