@@ -1,98 +1,123 @@
-[
-  {
-    "id": 1,
-    "Item": "Burger",
-    "Category": "Food",
-    "Description": "Juicy grilled burger",
-    "Image": "burger.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 2,
-    "Item": "Sandwich",
-    "Category": "Food",
-    "Description": "Veg sandwich",
-    "Image": "sandwich.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 3,
-    "Item": "Pizza",
-    "Category": "Food",
-    "Description": "Cheesy pizza",
-    "Image": "pizza.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 4,
-    "Item": "Pasta",
-    "Category": "Food",
-    "Description": "Creamy pasta",
-    "Image": "pasta.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 5,
-    "Item": "Fries",
-    "Category": "Food",
-    "Description": "Crispy fries",
-    "Image": "fries.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 6,
-    "Item": "Coffee",
-    "Category": "Drinks",
-    "Description": "Hot coffee",
-    "Image": "coffee.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 7,
-    "Item": "Tea",
-    "Category": "Drinks",
-    "Description": "Milk tea",
-    "Image": "tea.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 8,
-    "Item": "Cold Drink",
-    "Category": "Drinks",
-    "Description": "Soft drink",
-    "Image": "coldrink.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 9,
-    "Item": "Ice Cream",
-    "Category": "Dessert",
-    "Description": "Vanilla scoop",
-    "Image": "icecream.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 10,
-    "Item": "Momos",
-    "Category": "Food",
-    "Description": "Dumplings",
-    "Image": "momos.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 11,
-    "Item": "Fried Rice",
-    "Category": "Food",
-    "Description": "Fried rice",
-    "Image": "fried rice.jpg",
-    "Available": "TRUE"
-  },
-  {
-    "id": 12,
-    "Item": "Milkshake",
-    "Category": "Drinks",
-    "Description": "Chocolate shake",
-    "Image": "milkshake.jpg",
-    "Available": "TRUE"
-  }
-]
+{
+  "restaurants": [
+    {
+      "name": "Al Amar",
+      "menu": [
+        {
+          "category": "Platter",
+          "items": [
+            {
+              "id": 1,
+              "name": "Al-Amar Feast of Flavors",
+              "price": 6800,
+              "desc": "Pomfret, chicken wings, grilled chicken, lamb, kafta, mandi rice",
+              "img": "images/alamar/feast.jpg"
+            },
+            {
+              "id": 2,
+              "name": "Al-Amar Mega Platter",
+              "price": 11000,
+              "desc": "Sea bass, grilled chicken, skewers, kafta, mandi rice",
+              "img": "images/alamar/mega.jpg"
+            }
+          ]
+        },
+        {
+          "category": "Cold Mezze",
+          "items": [
+            {
+              "id": 3,
+              "name": "Hummus",
+              "price": 595,
+              "desc": "Chickpeas, tahini, olive oil",
+              "img": "images/alamar/hummus.jpg"
+            },
+            {
+              "id": 4,
+              "name": "Fattoush",
+              "price": 695,
+              "desc": "Tomato, cucumber, lettuce, mint, sumac dressing",
+              "img": "images/alamar/fattoush.jpg"
+            }
+          ]
+        },
+        {
+          "category": "Hot Mezze",
+          "items": [
+            {
+              "id": 5,
+              "name": "Chicken Wings",
+              "price": 595,
+              "desc": "Fried marinated wings",
+              "img": "images/alamar/wings.jpg"
+            },
+            {
+              "id": 6,
+              "name": "Falafel",
+              "price": 495,
+              "desc": "Fried chickpea balls with tahini",
+              "img": "images/alamar/falafel.jpg"
+            }
+          ]
+        },
+        {
+          "category": "Shawarma",
+          "items": [
+            {
+              "id": 7,
+              "name": "Chicken Shawarma Sandwich",
+              "price": 450,
+              "desc": "Lebanese bread with chicken, garlic sauce",
+              "img": "images/alamar/chicken-shawarma.jpg"
+            },
+            {
+              "id": 8,
+              "name": "Beef Shawarma Sandwich",
+              "price": 650,
+              "desc": "Beef shawarma with garlic sauce",
+              "img": "images/alamar/beef-shawarma.jpg"
+            }
+          ]
+        },
+        {
+          "category": "Grill",
+          "items": [
+            {
+              "id": 9,
+              "name": "Lamb Meshwi",
+              "price": 1095,
+              "desc": "Grilled lamb skewers",
+              "img": "images/alamar/lamb-meshwi.jpg"
+            },
+            {
+              "id": 10,
+              "name": "Mixed Grill",
+              "price": 8500,
+              "desc": "Combination of chicken, lamb, kafta",
+              "img": "images/alamar/mixed-grill.jpg"
+            }
+          ]
+        },
+        {
+          "category": "Dessert",
+          "items": [
+            {
+              "id": 11,
+              "name": "Baklava",
+              "price": 495,
+              "desc": "Sweet pastry with nuts",
+              "img": "images/alamar/baklava.jpg"
+            },
+            {
+              "id": 12,
+              "name": "Kunafa",
+              "price": 600,
+              "desc": "Cheese dessert with syrup",
+              "img": "images/alamar/kunafa.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
