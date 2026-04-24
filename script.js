@@ -1,7 +1,7 @@
 // ===============================
 // CONFIG
 // ===============================
-const MENU_URL = "./final_menu.json";
+const MENU_URL = "./menu.json";
 const FORM_URL = "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
 // ===============================
