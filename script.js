@@ -18,8 +18,6 @@ let cart = [];
 
 let currentRestaurant = "All";
 
-let currentCategory = "All";
-
 
 // ===============================
 // DOM ELEMENTS
@@ -29,7 +27,6 @@ let menuDiv;
 let cartDiv;
 
 let tabsDiv;
-let categoryTabsDiv;
 
 let clearBtn;
 let confirmBtn;
@@ -45,55 +42,90 @@ let cartCount;
 // INIT
 // ===============================
 
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener(
+  "DOMContentLoaded",
+  initApp
+);
 
 
 async function initApp() {
 
-  menuDiv = document.getElementById("menu");
-  cartDiv = document.getElementById("cart");
+  // Get elements
+  menuDiv =
+    document.getElementById("menu");
 
-  tabsDiv = document.getElementById("tabs");
-  categoryTabsDiv = document.getElementById("categoryTabs");
+  cartDiv =
+    document.getElementById("cart");
 
-  clearBtn = document.getElementById("clearBtn");
-  confirmBtn = document.getElementById("confirmBtn");
+  tabsDiv =
+    document.getElementById("tabs");
 
-  commentsInput = document.getElementById("comments");
+  clearBtn =
+    document.getElementById("clearBtn");
 
-  floatingCart = document.getElementById("floatingCart");
-  cartPanel = document.getElementById("cartPanel");
-  cartCount = document.getElementById("cartCount");
+  confirmBtn =
+    document.getElementById("confirmBtn");
+
+  commentsInput =
+    document.getElementById("comments");
+
+  floatingCart =
+    document.getElementById("floatingCart");
+
+  cartPanel =
+    document.getElementById("cartPanel");
+
+  cartCount =
+    document.getElementById("cartCount");
 
 
-  clearBtn.addEventListener("click", () => {
+  // Clear cart
+  clearBtn.addEventListener(
+    "click",
+    () => {
 
-    cart = [];
+      cart = [];
 
-    renderCart();
+      renderCart();
 
-  });
-
-
-  confirmBtn.addEventListener("click", submitOrder);
+    }
+  );
 
 
+  // Proceed
+  confirmBtn.addEventListener(
+    "click",
+    submitOrder
+  );
+
+
+  // Floating cart
   if (floatingCart) {
 
-    floatingCart.addEventListener("click", () => {
+    floatingCart.addEventListener(
+      "click",
+      () => {
 
-      cartPanel?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+        if (cartPanel) {
 
-    });
+          cartPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }
+
+      }
+    );
 
   }
 
 
+  // Load menu
   await loadMenu();
 
+
+  // Initial cart
   renderCart();
 
 }
@@ -107,7 +139,9 @@ async function loadMenu() {
 
   try {
 
-    const response = await fetch(MENU_URL);
+    const response =
+      await fetch(MENU_URL);
+
 
     if (!response.ok) {
 
@@ -118,9 +152,11 @@ async function loadMenu() {
     }
 
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
 
+    // Your JSON is a FLAT ARRAY
     if (!Array.isArray(data)) {
 
       throw new Error(
@@ -130,50 +166,78 @@ async function loadMenu() {
     }
 
 
-    // Your menu.json is already flat
-    menuItems = data.map((item, index) => ({
+    // Convert JSON into our internal format
+    //
+    // The original JSON has no ID,
+    // so we create one automatically.
 
-      id: index + 1,
+    menuItems =
+      data.map((item, index) => {
 
-      restaurant:
-        item.restaurant || "Unknown Restaurant",
+        return {
 
-      category:
-        item.category || "Other",
+          id: index + 1,
 
-      name:
-        item.name || "Unnamed Item",
+          restaurant:
+            item.restaurant ||
+            "Unknown Restaurant",
 
-      description:
-        item.description || "",
+          category:
+            item.category ||
+            "Other",
 
-      price:
-        item.price || "",
+          name:
+            item.name ||
+            "Unnamed Item",
 
-      img:
-        item.img
-          ? `./${item.img}`
-          : ""
+          description:
+            item.description ||
+            "",
 
-    }));
+          price:
+            item.price ||
+            "",
+
+          img:
+            item.img
+              ? `./${item.img}`
+              : ""
+
+        };
+
+      });
 
 
+    // Create restaurant tabs
     initRestaurantTabs();
 
-    initCategoryTabs();
 
+    // Show menu
     renderMenu();
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Menu loading error:",
+      error
+    );
+
 
     menuDiv.innerHTML = `
+
       <div class="error-message">
-        <h3>⚠️ Menu unavailable</h3>
-        <p>${escapeHTML(error.message)}</p>
+
+        <h3>
+          ⚠️ Menu unavailable
+        </h3>
+
+        <p>
+          ${escapeHTML(error.message)}
+        </p>
+
       </div>
+
     `;
 
   }
@@ -188,41 +252,61 @@ async function loadMenu() {
 function initRestaurantTabs() {
 
   const restaurants = [
+
     "All",
+
     ...new Set(
-      menuItems.map(item => item.restaurant)
+      menuItems.map(
+        item => item.restaurant
+      )
     )
+
   ];
 
 
-  tabsDiv.innerHTML = restaurants
-    .map(restaurant => {
+  tabsDiv.innerHTML =
+    restaurants
+      .map(
+        restaurant => {
 
-      return `
-        <button
-          type="button"
-          class="${restaurant === currentRestaurant ? "active" : ""}"
-          data-restaurant="${escapeAttribute(restaurant)}"
-        >
-          ${escapeHTML(restaurant)}
-        </button>
-      `;
+          return `
 
-    })
-    .join("");
+            <button
+              type="button"
+              class="${
+                restaurant === currentRestaurant
+                  ? "active"
+                  : ""
+              }"
+              data-restaurant="${escapeAttribute(
+                restaurant
+              )}"
+            >
+              ${escapeHTML(restaurant)}
+            </button>
+
+          `;
+
+        }
+      )
+      .join("");
 
 
+  // Add click events
   tabsDiv
     .querySelectorAll("button")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        setRestaurant(
-          button.dataset.restaurant
-        );
+          setRestaurant(
+            button.dataset.restaurant
+          );
 
-      });
+        }
+      );
 
     });
 
@@ -233,14 +317,15 @@ function initRestaurantTabs() {
 // SET RESTAURANT
 // ===============================
 
-function setRestaurant(restaurant) {
+function setRestaurant(
+  restaurant
+) {
 
-  currentRestaurant = restaurant;
+  currentRestaurant =
+    restaurant;
 
-  // When changing restaurant,
-  // reset category to All
-  currentCategory = "All";
 
+  // Highlight active tab
 
   tabsDiv
     .querySelectorAll("button")
@@ -248,13 +333,14 @@ function setRestaurant(restaurant) {
 
       button.classList.toggle(
         "active",
-        button.dataset.restaurant === restaurant
+        button.dataset.restaurant ===
+          restaurant
       );
 
     });
 
 
-  initCategoryTabs();
+  // Re-render menu
 
   renderMenu();
 
@@ -262,124 +348,112 @@ function setRestaurant(restaurant) {
 
 
 // ===============================
-// CATEGORY TABS
+// SULTAN DINE CATEGORY LOGIC
 // ===============================
 
-function initCategoryTabs() {
+function getDisplayCategory(
+  item
+) {
 
-  if (!categoryTabsDiv) return;
+  // Only reorganize
+  // Sultan Dine.
 
+  if (
+    item.restaurant !==
+    "Sultan Dine"
+  ) {
 
-  let categories;
-
-
-  if (currentRestaurant === "All") {
-
-    categories = [
-      "All",
-      ...new Set(
-        menuItems.map(item => item.category)
-      )
-    ];
-
-  } else {
-
-    categories = [
-      "All",
-      ...new Set(
-        menuItems
-          .filter(
-            item =>
-              item.restaurant === currentRestaurant
-          )
-          .map(item => item.category)
-      )
-    ];
+    return item.category;
 
   }
 
 
-  categoryTabsDiv.innerHTML = categories
-    .map(category => {
-
-      return `
-        <button
-          type="button"
-          class="${category === currentCategory ? "active" : ""}"
-          data-category="${escapeAttribute(category)}"
-        >
-          ${escapeHTML(category)}
-        </button>
-      `;
-
-    })
-    .join("");
+  const name =
+    item.name.toLowerCase();
 
 
-  categoryTabsDiv
-    .querySelectorAll("button")
-    .forEach(button => {
+  // =========================
+  // DESSERT
+  // =========================
 
-      button.addEventListener("click", () => {
+  const dessertItems = [
 
-        setCategory(
-          button.dataset.category
-        );
+    "firni",
 
-      });
+    "jorda"
 
-    });
+  ];
+
+
+  if (
+    dessertItems.some(
+      keyword =>
+        name.includes(keyword)
+    )
+  ) {
+
+    return "Dessert";
+
+  }
+
+
+  // =========================
+  // DRINKS
+  // =========================
+
+  const drinkItems = [
+
+    "borhani",
+
+    "soft drinks",
+
+    "water",
+
+    "zafrani sorbot"
+
+  ];
+
+
+  if (
+    drinkItems.some(
+      keyword =>
+        name.includes(keyword)
+    )
+  ) {
+
+    return "Drinks";
+
+  }
+
+
+  // =========================
+  // EVERYTHING ELSE
+  // =========================
+
+  return "Main Menu";
 
 }
 
 
 // ===============================
-// SET CATEGORY
-// ===============================
-
-function setCategory(category) {
-
-  currentCategory = category;
-
-
-  categoryTabsDiv
-    .querySelectorAll("button")
-    .forEach(button => {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.category === category
-      );
-
-    });
-
-
-  renderMenu();
-
-}
-
-
-// ===============================
-// FILTER MENU
+// GET FILTERED ITEMS
 // ===============================
 
 function getFilteredItems() {
 
-  return menuItems.filter(item => {
+  return menuItems.filter(
+    item => {
 
-    const restaurantMatch =
-      currentRestaurant === "All" ||
-      item.restaurant === currentRestaurant;
+      return (
+        currentRestaurant ===
+          "All" ||
 
+        item.restaurant ===
+          currentRestaurant
+      );
 
-    const categoryMatch =
-      currentCategory === "All" ||
-      item.category === currentCategory;
-
-
-    return restaurantMatch && categoryMatch;
-
-  });
+    }
+  );
 
 }
 
@@ -394,12 +468,21 @@ function renderMenu() {
     getFilteredItems();
 
 
-  if (!filteredItems.length) {
+  // Nothing found
+  if (
+    !filteredItems.length
+  ) {
 
     menuDiv.innerHTML = `
+
       <div class="no-results">
-        <p>No items found.</p>
+
+        <p>
+          No menu items found.
+        </p>
+
       </div>
+
     `;
 
     return;
@@ -407,53 +490,128 @@ function renderMenu() {
   }
 
 
+  // Group items by category
+
   const categories = {};
 
 
-  filteredItems.forEach(item => {
+  filteredItems.forEach(
+    item => {
 
-    if (!categories[item.category]) {
+      const displayCategory =
+        getDisplayCategory(item);
 
-      categories[item.category] = [];
+
+      if (
+        !categories[
+          displayCategory
+        ]
+      ) {
+
+        categories[
+          displayCategory
+        ] = [];
+
+      }
+
+
+      categories[
+        displayCategory
+      ].push(item);
 
     }
-
-    categories[item.category].push(item);
-
-  });
+  );
 
 
-  menuDiv.innerHTML = Object.entries(categories)
-    .map(([category, items]) => {
+  // ===============================
+  // CATEGORY ORDER
+  // ===============================
 
-      return `
+  let categoryOrder =
+    Object.keys(categories);
 
-        <section class="menu-category">
 
-          ${
-            currentCategory === "All"
-              ? `
-                <h3 class="category-title">
-                  ${escapeHTML(category)}
-                </h3>
-              `
-              : ""
-          }
+  // Sultan Dine specifically:
+  //
+  // Main Menu
+  // Dessert
+  // Drinks
 
-          <div class="menu-grid">
+  if (
+    currentRestaurant ===
+    "Sultan Dine"
+  ) {
 
-            ${items
-              .map(renderMenuCard)
-              .join("")}
+    const preferredOrder = [
 
-          </div>
+      "Main Menu",
 
-        </section>
+      "Dessert",
 
-      `;
+      "Drinks"
 
-    })
-    .join("");
+    ];
+
+
+    categoryOrder =
+      preferredOrder.filter(
+        category =>
+          categories[category]
+      );
+
+  }
+
+
+  // ===============================
+  // BUILD HTML
+  // ===============================
+
+  menuDiv.innerHTML =
+    categoryOrder
+      .map(
+        category => {
+
+          const items =
+            categories[category];
+
+
+          return `
+
+            <section
+              class="menu-category"
+            >
+
+              <h3
+                class="category-title"
+              >
+                ${escapeHTML(
+                  category
+                )}
+              </h3>
+
+
+              <div
+                class="menu-grid"
+              >
+
+                ${items
+                  .map(
+                    item =>
+                      renderMenuCard(
+                        item
+                      )
+                  )
+                  .join("")}
+
+              </div>
+
+            </section>
+
+          `;
+
+        }
+      )
+      .join("");
 
 }
 
@@ -462,51 +620,75 @@ function renderMenu() {
 // MENU CARD
 // ===============================
 
-function renderMenuCard(item) {
+function renderMenuCard(
+  item
+) {
 
-  const imageHTML = item.img
-    ? `
-      <img
-        src="${escapeAttribute(item.img)}"
-        alt="${escapeAttribute(item.name)}"
-        loading="lazy"
-      >
-    `
-    : "";
+  // Optional image
 
-
-  const restaurantLabel =
-    currentRestaurant === "All"
+  const imageHTML =
+    item.img
       ? `
-        <div class="card-restaurant">
-          ${escapeHTML(item.restaurant)}
-        </div>
+
+        <img
+          src="${escapeAttribute(
+            item.img
+          )}"
+          alt="${escapeAttribute(
+            item.name
+          )}"
+          loading="lazy"
+        >
+
       `
       : "";
 
+
+  // Show restaurant name
+  // only when viewing All
+
+  const restaurantLabel =
+    currentRestaurant ===
+    "All"
+      ? `
+
+        <div
+          class="card-restaurant"
+        >
+          ${escapeHTML(
+            item.restaurant
+          )}
+        </div>
+
+      `
+      : "";
+
+
+  // Description
 
   const descriptionHTML =
     item.description
       ? `
-        <div class="card-desc">
-          ${escapeHTML(item.description)}
+
+        <div
+          class="card-desc"
+        >
+          ${escapeHTML(
+            item.description
+          )}
         </div>
+
       `
       : "";
 
 
-  const priceHTML =
-    item.price
-      ? `
-        <div class="card-price">
-          ৳ ${escapeHTML(item.price)}
-        </div>
-      `
-      : `
-        <div class="card-price unavailable">
-          Price unavailable
-        </div>
-      `;
+  // IMPORTANT:
+  //
+  // PRICE IS NOT DISPLAYED.
+  //
+  // The price still exists
+  // in menuItems for future use,
+  // but is not shown here.
 
 
   return `
@@ -515,37 +697,59 @@ function renderMenuCard(item) {
 
       ${imageHTML}
 
+
       <div class="card-content">
 
         ${restaurantLabel}
 
+
         <div class="card-title">
-          ${escapeHTML(item.name)}
+
+          ${escapeHTML(
+            item.name
+          )}
+
         </div>
+
 
         ${descriptionHTML}
 
-        ${priceHTML}
+
+        <div
+          class="actions-row"
+        >
 
 
-        <div class="actions-row">
+          <!-- PRODUCT QUANTITY -->
 
-          <div class="qty-control">
+          <div
+            class="qty-control"
+          >
 
             <button
               type="button"
-              onclick="changeQty(${item.id}, -1)"
+              onclick="changeQty(
+                ${item.id},
+                -1
+              )"
             >
               −
             </button>
 
-            <span id="qty-${item.id}">
+
+            <span
+              id="qty-${item.id}"
+            >
               1
             </span>
 
+
             <button
               type="button"
-              onclick="changeQty(${item.id}, 1)"
+              onclick="changeQty(
+                ${item.id},
+                1
+              )"
             >
               +
             </button>
@@ -553,12 +757,17 @@ function renderMenuCard(item) {
           </div>
 
 
+          <!-- ADD BUTTON -->
+
           <button
             type="button"
-            onclick="addToCart(${item.id})"
+            onclick="addToCart(
+              ${item.id}
+            )"
           >
             Add
           </button>
+
 
         </div>
 
@@ -575,21 +784,36 @@ function renderMenuCard(item) {
 // PRODUCT QUANTITY
 // ===============================
 
-function changeQty(id, delta) {
+function changeQty(
+  id,
+  delta
+) {
 
   const element =
-    document.getElementById(`qty-${id}`);
+    document.getElementById(
+      `qty-${id}`
+    );
 
 
   if (!element) return;
 
 
   const current =
-    parseInt(element.textContent, 10) || 1;
+    parseInt(
+      element.textContent,
+      10
+    ) || 1;
+
+
+  const newValue =
+    Math.max(
+      1,
+      current + delta
+    );
 
 
   element.textContent =
-    Math.max(1, current + delta);
+    newValue;
 
 }
 
@@ -598,17 +822,24 @@ function changeQty(id, delta) {
 // ADD TO CART
 // ===============================
 
-function addToCart(id) {
+function addToCart(
+  id
+) {
 
   const item =
-    menuItems.find(item => item.id === id);
+    menuItems.find(
+      menuItem =>
+        menuItem.id === id
+    );
 
 
   if (!item) return;
 
 
   const quantityElement =
-    document.getElementById(`qty-${id}`);
+    document.getElementById(
+      `qty-${id}`
+    );
 
 
   const quantity =
@@ -618,27 +849,41 @@ function addToCart(id) {
     ) || 1;
 
 
+  // Check if item
+  // already exists
+
   const existing =
-    cart.find(item => item.id === id);
+    cart.find(
+      cartItem =>
+        cartItem.id === id
+    );
 
 
   if (existing) {
 
-    existing.qty += quantity;
+    existing.qty +=
+      quantity;
 
   } else {
 
     cart.push({
+
       ...item,
+
       qty: quantity
+
     });
 
   }
 
 
+  // Reset quantity
+  // on product card
+
   if (quantityElement) {
 
-    quantityElement.textContent = "1";
+    quantityElement.textContent =
+      "1";
 
   }
 
@@ -649,13 +894,19 @@ function addToCart(id) {
 
 
 // ===============================
-// UPDATE CART QTY
+// UPDATE CART QUANTITY
 // ===============================
 
-function updateCartQty(id, delta) {
+function updateCartQty(
+  id,
+  delta
+) {
 
   const item =
-    cart.find(item => item.id === id);
+    cart.find(
+      cartItem =>
+        cartItem.id === id
+    );
 
 
   if (!item) return;
@@ -664,10 +915,18 @@ function updateCartQty(id, delta) {
   item.qty += delta;
 
 
-  if (item.qty <= 0) {
+  // Remove item if
+  // quantity reaches zero
+
+  if (
+    item.qty <= 0
+  ) {
 
     cart =
-      cart.filter(item => item.id !== id);
+      cart.filter(
+        cartItem =>
+          cartItem.id !== id
+      );
 
   }
 
@@ -678,13 +937,18 @@ function updateCartQty(id, delta) {
 
 
 // ===============================
-// REMOVE ITEM
+// REMOVE CART ITEM
 // ===============================
 
-function removeItem(id) {
+function removeItem(
+  id
+) {
 
   cart =
-    cart.filter(item => item.id !== id);
+    cart.filter(
+      item =>
+        item.id !== id
+    );
 
 
   renderCart();
@@ -693,7 +957,7 @@ function removeItem(id) {
 
 
 // ===============================
-// CART
+// RENDER CART
 // ===============================
 
 function renderCart() {
@@ -701,87 +965,122 @@ function renderCart() {
   updateCartCount();
 
 
+  // Empty cart
+
   if (!cart.length) {
 
-    cartDiv.innerHTML =
-      "<p>Your cart is empty.</p>";
+    cartDiv.innerHTML = `
+
+      <p>
+        Your cart is empty.
+      </p>
+
+    `;
 
     return;
 
   }
 
 
-  cartDiv.innerHTML = cart
-    .map(item => {
+  cartDiv.innerHTML =
+    cart
+      .map(
+        item => {
 
-      return `
+          return `
 
-        <div class="cart-item">
-
-          <div class="cart-left">
-
-            <div class="cart-name">
-              ${escapeHTML(item.name)}
-            </div>
-
-            <div class="cart-restaurant">
-              ${escapeHTML(item.restaurant)}
-            </div>
-
-            ${
-              item.price
-                ? `
-                  <div class="cart-price">
-                    ৳ ${escapeHTML(item.price)}
-                  </div>
-                `
-                : ""
-            }
-
-          </div>
-
-
-          <div class="cart-right">
-
-            <div class="qty-box">
-
-              <button
-                type="button"
-                onclick="updateCartQty(${item.id}, -1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${item.qty}
-              </span>
-
-              <button
-                type="button"
-                onclick="updateCartQty(${item.id}, 1)"
-              >
-                +
-              </button>
-
-            </div>
-
-
-            <button
-              type="button"
-              class="remove-btn"
-              onclick="removeItem(${item.id})"
+            <div
+              class="cart-item"
             >
-              ❌
-            </button>
 
-          </div>
 
-        </div>
+              <div
+                class="cart-left"
+              >
 
-      `;
+                <div
+                  class="cart-name"
+                >
+                  ${escapeHTML(
+                    item.name
+                  )}
+                </div>
 
-    })
-    .join("");
+
+                <div
+                  class="cart-restaurant"
+                >
+                  ${escapeHTML(
+                    item.restaurant
+                  )}
+                </div>
+
+              </div>
+
+
+              <div
+                class="cart-right"
+              >
+
+
+                <!-- CART QTY -->
+
+                <div
+                  class="qty-box"
+                >
+
+                  <button
+                    type="button"
+                    onclick="updateCartQty(
+                      ${item.id},
+                      -1
+                    )"
+                  >
+                    −
+                  </button>
+
+
+                  <span>
+                    ${item.qty}
+                  </span>
+
+
+                  <button
+                    type="button"
+                    onclick="updateCartQty(
+                      ${item.id},
+                      1
+                    )"
+                  >
+                    +
+                  </button>
+
+                </div>
+
+
+                <!-- REMOVE -->
+
+                <button
+                  type="button"
+                  class="remove-btn"
+                  onclick="removeItem(
+                    ${item.id}
+                  )"
+                  aria-label="Remove item"
+                >
+                  ❌
+                </button>
+
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
 
 }
 
@@ -794,14 +1093,16 @@ function updateCartCount() {
 
   const total =
     cart.reduce(
-      (sum, item) => sum + item.qty,
+      (sum, item) =>
+        sum + item.qty,
       0
     );
 
 
   if (cartCount) {
 
-    cartCount.textContent = total;
+    cartCount.textContent =
+      total;
 
   }
 
@@ -814,6 +1115,8 @@ function updateCartCount() {
 
 function submitOrder() {
 
+  // Empty cart check
+
   if (!cart.length) {
 
     alert(
@@ -825,53 +1128,109 @@ function submitOrder() {
   }
 
 
-  const items = cart
-    .map(item =>
-      `${item.name}(${item.qty})`
-    )
-    .join("|");
+  // Format items
+
+  const items =
+    cart
+      .map(
+        item =>
+          `${item.name}(${item.qty})`
+      )
+      .join("|");
 
 
-  const restaurants = [
-    ...new Set(
-      cart.map(item => item.restaurant)
-    )
-  ].join(", ");
+  // Restaurants
 
+  const restaurants =
+    [
+      ...new Set(
+        cart.map(
+          item =>
+            item.restaurant
+        )
+      )
+    ]
+      .join(", ");
+
+
+  // Comments
 
   const comments =
-    commentsInput?.value?.trim() || "";
+    commentsInput?.value?.trim() ||
+    "";
 
+
+  // Build Smartsheet form URL
 
   const url =
-    `${FORM_URL}?Item=${encodeURIComponent(items)}` +
-    `&Restaurant=${encodeURIComponent(restaurants)}` +
-    `&Comments=${encodeURIComponent(comments)}`;
+
+    `${FORM_URL}?Item=${encodeURIComponent(
+      items
+    )}` +
+
+    `&Restaurant=${encodeURIComponent(
+      restaurants
+    )}` +
+
+    `&Comments=${encodeURIComponent(
+      comments
+    )}`;
 
 
-  window.open(url, "_blank");
+  // Open form
+
+  window.open(
+    url,
+    "_blank"
+  );
 
 }
 
 
 // ===============================
-// HELPERS
+// HTML SECURITY HELPERS
 // ===============================
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-function escapeAttribute(value) {
+function escapeAttribute(
+  value
+) {
 
-  return escapeHTML(value);
+  return escapeHTML(
+    value
+  );
 
 }
