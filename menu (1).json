@@ -1,0 +1,2263 @@
+[
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Kacchi (Bashmati) Half",
+        "description": "kacchi-bashmati-half prepared with fragrant basmati rice, served with two tender and juicy pieces of mutton\u2026",
+        "price": "299-799"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Chicken Dum Biryani",
+        "description": "Flavorful Dum Biryani made with aromatic basmati rice, served with tender chicken and one perfectly\u2026",
+        "price": "199-1480"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Kacchi (Bashmati) Full",
+        "description": "Kacchi made with basmati rice",
+        "price": "499-3349"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Kacchi Platter",
+        "description": "Comes with Kacchi, Chicken Roast, Jali Kabab, Beef Rezala, Borhani, Chutney, Salad, Jorda/ Firni",
+        "price": "999-4449"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Plain Polao Platter",
+        "description": "Comes with Plain Polaw, Chicken Roast, Jali Kabab, Beef Rezala, Borhani, Chutney, Salad, Jorda/ Firni",
+        "price": "649-3099"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Plain Polao, Chicken Roast, Borhani",
+        "description": "Serves with Chicken roast & Borhani.",
+        "price": "299-1350"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Mutton Tehari",
+        "description": "Delicious Mutton Tehari made with fragrant Chinigura rice, cooked with flavorful spices, and served with\u2026",
+        "price": "250-439"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Chicken Roast",
+        "description": "Classic Chicken Roast, cooked to perfection with aromatic spices, featuring juicy, well-seasoned chicken in a\u2026",
+        "price": "150"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Beef Rezala",
+        "description": "Beef Rezala \u2014 a mildly spiced, creamy curry made with tender beef pieces slow-cooked in\u2026",
+        "price": "200"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Plain Polao",
+        "description": "Fragrant Plain Polao made with premium Chinigura rice, cooked in ghee and aromatic spices, and\u2026",
+        "price": "120"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Beef Chap",
+        "description": "Tender beef on the bone, marinated in Bengali spices and slow-cooked for rich, deep flavor.\u2026",
+        "price": "220"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Jali kabab",
+        "description": "A classic Bengali kabab made with spiced minced meat, wrapped in a soft egg-net. Rich,\u2026",
+        "price": "60"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Beef Chap with Plain Polao Combo",
+        "description": "Tender, slow-cooked beef chap in rich spices, served with fragrant polao made with premium Chinigura\u2026",
+        "price": "250"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Chutney",
+        "description": "Sweet and tangy Bengali-style chutney made with seasonal fruits and spices.",
+        "price": "25"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Firni",
+        "description": "A classic Bengali dessert, creamy, slow-cooked rice flavored with cardamom & cinnamon.",
+        "price": "70"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Jorda",
+        "description": "A rich, flavorful Bengali dessert with a vibrant orange hue from fruits, made with creamy\u2026",
+        "price": "70"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Borhani",
+        "description": "A tangy, spicy yogurt-based drink infused with mint and traditional spices. Refreshing and perfect to\u2026",
+        "price": "70"
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Soft Drinks",
+        "description": "As labeled on",
+        "price": ""
+    },
+    {
+        "restaurant": "Sultan Dine",
+        "category": "Main Menu",
+        "name": "Water",
+        "description": "Zafrani Sorbot Refreshing saffron-infused sweet drink, flavored with rose and cardamom, a perfect cool delight.",
+        "price": "90-340"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Best Deals",
+        "name": "Whole Grilled Snapper",
+        "description": "",
+        "price": "2700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Best Deals",
+        "name": "Beef Red Curry with Coconut Milk",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Best Deals",
+        "name": "Prawn Steamed With Chili and Lime",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Best Deals",
+        "name": "Glass Noodle Salad",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Cold Beef Cuts in Chili Sauce",
+        "description": "",
+        "price": "1450"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Crispy Kang Kong with Peanut Sauce",
+        "description": "",
+        "price": "1000"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Prawn on Toast with Soi 71 Special Sauce",
+        "description": "",
+        "price": "950"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Crispy Wonton",
+        "description": "",
+        "price": "800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Fried Spring Roll",
+        "description": "",
+        "price": "800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Satay",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Prawn / Fish Cake",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Appetizer",
+        "name": "Tempura",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Thai Seafood Salad",
+        "description": "",
+        "price": "1250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Tangy Minced Chicken Salad (Larb Gai)",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Fresh Green Papaya Salad ( Som Tam)",
+        "description": "",
+        "price": "800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Glass Noodle Salad",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Green Mango Salad with Crispy Fish (Imported/Seasonal)",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Grilled Sliced Chicken Salad with Chili & Lime Sauce (Chicken/Beef/Mushroom)",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Sweet & Sour Salad with Cashewnuts",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Salad",
+        "name": "Tangy Minced Salad",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Clear Vegetable Soup",
+        "description": "",
+        "price": "1000"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Chicken Corn Soup",
+        "description": "",
+        "price": "850"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Thai Soup with Coconut Milk",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Hot & Sour Soup",
+        "description": "Bangla Chinese Style",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Wonton Soup with Bean Sprouts",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Glass Noodle Soup",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Tom Yam Thai Soup",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Clear Thai Soup",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Thick Thai Soup",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Szechuan Soup with Crispy Rice",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soup",
+        "name": "Noodle Soup",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Grilled Beef with Chili Powder Sauce",
+        "description": "",
+        "price": "1700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Grilled Sliced Sirloin with Nam Tok Sauce",
+        "description": "",
+        "price": "1700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Stir Fried Beef with Curry Paste",
+        "description": "",
+        "price": "1425"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Beef Red Curry with Coconut Milk",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Beef Green Curry with Coconut Milk",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Velvet Black Pepper Beef",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Sliced Beef in Oyster Sauce",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Stir Fried Beef with Green Chili & Onion",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Stir Fried Beef with Mushroom and Ginger",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Stir Fried Beef with Garlic & Pepper",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Beef",
+        "name": "Mixed Vegetable with Beef in Thick Gravy",
+        "description": "",
+        "price": "1250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Whole Grilled Chicken",
+        "description": "",
+        "price": "2000"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Soi 71 Grilled Chicken Skewers",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Chicken Red Curry with Coconut Milk",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Chicken Green Curry with Coconut Milk",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Stir Fried Minced Chicken with Basil Leaf",
+        "description": "",
+        "price": "1350"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Stir Fried Chicken with Garlic and Pepper",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Hot, Sweet and Sour Chicken",
+        "description": "",
+        "price": "1250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Thai Fried Chicken",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Chicken & Mushroom Hormuk",
+        "description": "Capsicum, Onion, Garlic",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Chicken",
+        "name": "Stir Fried with Basil Leaf, Served with Steamed Rice & Poached Egg on Top",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Lobster Royale",
+        "description": "",
+        "price": "2500"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Crab with Chili Paste",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Crab in Yellow Curry Sauce",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Crab With Hot, Sweet & Sour Sauce",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Stir Fried Squid with Basil Leaf",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Grilled Squid",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Tom Yam Seafood Symphony",
+        "description": "",
+        "price": "1600"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Seafood",
+        "name": "Stir Fried Crab / Prawn in Chili & Lime Sauce",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Whole Steamed White Snapper With Chili & Lime Sauce",
+        "description": "",
+        "price": "2700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Whole Grilled Snapper",
+        "description": "",
+        "price": "2700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Whole Fried Snapper with Hot, Sweet & Sour Sauce",
+        "description": "",
+        "price": "2700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Whole Fried Snapper with Garlic & Pepper Sauuce",
+        "description": "",
+        "price": "2700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Boneless Sweet & Sour Pan fried Sea Fish",
+        "description": "",
+        "price": "1500"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Boneless Sliced Sea Fish with Ginger & Celery",
+        "description": "",
+        "price": "1500"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Fish",
+        "name": "Whole Fried Snapper with Sweet & Sour Sauce",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Vegetable",
+        "name": "Mushroom Khao Soi",
+        "description": "",
+        "price": "1725"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Vegetable",
+        "name": "Shiitake Mushroom Stir Fried with Oyster Sauce",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Vegetable",
+        "name": "Mixed Vegetables with Gravy",
+        "description": "",
+        "price": "1000"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Vegetable",
+        "name": "Seasonal Vegetable Pan Fried with Soy Sauce",
+        "description": "",
+        "price": "1000"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Vegetable",
+        "name": "Mixed Vegetables with Oyster Sauce",
+        "description": "",
+        "price": "900"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Duck",
+        "name": "Duck in Red Curry",
+        "description": "",
+        "price": "2200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Duck",
+        "name": "Stir Fried Duck With Basil Leaf",
+        "description": "",
+        "price": "2200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Grilled King Prawn",
+        "description": "",
+        "price": "4500"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Wok Fried Prawn With Hot, Sweet & Sour Sauce",
+        "description": "",
+        "price": "1700"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Spicy Shrimp in Chili Bean Paste",
+        "description": "",
+        "price": "1500"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Prawn Steamed With Chili and Lime",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Prawn In Green Curry",
+        "description": "",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Sweet & Sour Prawn",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Stir Fried Prawn With Chili & Onion",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Prawn",
+        "name": "Stir Fried Prawn with Garlic & Pepper",
+        "description": "",
+        "price": "1200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Fresh Lime Soda",
+        "description": "",
+        "price": "520"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Soda (Schweppes)",
+        "description": "",
+        "price": "460"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Ginger Ale (Schweppes)",
+        "description": "",
+        "price": "460"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Coke (Imported)",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Fanta (Imported)",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Sprite (Imported)",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Diet Coke (Imported)",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Sparking Water (Perrier)",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Alkaline Water",
+        "description": "",
+        "price": "65"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Drinks",
+        "name": "Milkshake",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Mango With Sticky Rice Imported",
+        "description": "",
+        "price": "1035"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Homemade Coconut Ice cream",
+        "description": "",
+        "price": "850"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Double Chocolate Delight Cake",
+        "description": "",
+        "price": "575"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Luxurious Cheese Cake",
+        "description": "",
+        "price": "575"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Brownie With Ice Cream",
+        "description": "",
+        "price": "575"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Fruit Cocktail",
+        "description": "",
+        "price": "520"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Dessert",
+        "name": "Caramel Pudding",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Tea & Coffee",
+        "name": "Thai Lemon Tea",
+        "description": "",
+        "price": "630"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Tea & Coffee",
+        "name": "Thai Ice Tea With Milk",
+        "description": "",
+        "price": "630"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Wok Fried Rice with Chicken & Basil Leaf",
+        "description": "",
+        "price": "1300"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Egg Fried Rice",
+        "description": "",
+        "price": "850"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Steamed Rice (Individual Portion)",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Soi 71 Special Tom Yam Fried Rice",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Fried Rice",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Rice",
+        "name": "Garlic Fried Rice",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Noodles",
+        "name": "Stir Fried Noodles",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Noodles",
+        "name": "Pad Thai Noodles",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Noodles",
+        "name": "Spicy Stir Fried Noodles With Basil Leaf",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Noodles",
+        "name": "Stir Fried Noodles topped with Gravy",
+        "description": "",
+        "price": "Customizable"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Lamb",
+        "name": "Regal Lamb Shank Massaman Curry Served with Steamed Rice",
+        "description": "",
+        "price": "2200"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soi 71 Select Sets",
+        "name": "Lotus Set",
+        "description": "The Lotus set, inspired by the sacred lotus flower, this set menu reflects purity, enlightenment, and harmony. The Lotus Set is a curated balance of traditional Thai tastes and contemporary refinement, designed to uplift the senses and nourish the s",
+        "price": "4250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soi 71 Select Sets",
+        "name": "Orchid Set",
+        "description": "The Orchid Set celebrates the vibrant beauty and resilience of Thailand\u2019s national flower. This curated experience brings together bold flavors, artistic presentations, and a touch of tropical allure, mirroring the elegance and charm of the orchid.",
+        "price": "4250"
+    },
+    {
+        "restaurant": "Soi 71",
+        "category": "Soi 71 Select Sets",
+        "name": "Jasmine Set",
+        "description": "The Jasmine Set is a celebration of Thai elegance and heritage, the Jasmine Set embodies the purity and sophistication of Thailand and Bangladesh\u2019s iconic jasmine flower. This curated menu celebrates aromatic flavors, delicate textures, and refined",
+        "price": "3000"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Al-Amar feast of flavors",
+        "description": "1 pomfret, 4 chicken wings, spicy half grilled chicken, 1 lamb meshwi, 1 laham meshwi, 1 lamb kafta, 1 chicken kafta, mandi rice with special garlic sauce",
+        "price": "6800"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Al-Amar mega platter",
+        "description": "600 gm grilled sea bass, 1 spicy whole grilled chicken, 1 shish taouk, 1 skewer chicken tikka, 1 skewer lamb meshwi, 1 skewer lahem meshwi, 1 skewer lamb kafta, 1skewer chicken kafta, 8 piece arayes kafta, mandi rice , served with al-amar special garlic sauce",
+        "price": "11000"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Al-Amar ultimate platter",
+        "description": "600 gm grilled sea bass, 1 dory fish , 6 piece grilled jambo prawn, 1 spicy whole grilled chicken, 1 shish taouk, 1 skewer chicken tikka, 1 skewer lamb miswee, 1 skewer laham miswee, 1 skewer lamb kafta, 1 skewer chicken kafta, 8 piece aryes kafta, mandi rice and served with al-amar special garlic sauce",
+        "price": "15000"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Al Amar Mixed grill",
+        "description": "2 skewers chicken kafta, 2 skewers lamb kafta, 2 skewers lamb miswee, 2 skewers laham miswee, 2 skewers shish taouk, 2 skewers chicken tikka, 8 piece aryes kafta, 2 grilled jambo prawn, 4 piece grilled chicken wings , served with 6 piece pita bread and 3 types of sauce",
+        "price": "8500"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Lamb lovers\u2019 Feast",
+        "description": "6 piece jambo prawn, 6 piece mandi lamb, mandi rice with special mandi sauce",
+        "price": "8500"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Platter",
+        "name": "Whole lamb mandi",
+        "description": "Whole lamb (8kg) with mandi rice.",
+        "price": "24000"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Set Menu",
+        "name": "Set Menu 01 (Gulshan 2)",
+        "description": "Biriyani rice, spicy quarter grilled chicken, shish taouk, fried dory fish, cream chicken, garlic sauce",
+        "price": "795"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Set Menu",
+        "name": "SET MENU 02 (Gulshan 2)",
+        "description": "Mandi rice, spicy quarter grilled chicken, lamb kafta, fried dory fish, grilled wing, cream chicken, garlic sauce ( no bread )",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Set Menu",
+        "name": "SET MENU 03 (Dhanmondi)",
+        "description": "\u2022 SPICY QUARTER GRILL CHICKEN \u2022 MANDI RICE \u2022 CREAMY CHICKEN \u2022 CHICKEN ARAYES KAFTA-2 \u2022 SPICY GARLIC SAUCE",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Set Menu",
+        "name": "SET MENU 04 (Dhanmondi)",
+        "description": "\u2022 CHICKEN TIKKA \u2022 SPICY GRILL CHICKEN WINGS-1 \u2022 CREAMY CHICKEN \u2022 MANDI RICE \u2022 FRIED DORY FISH SPICY GARLIC SAUCE",
+        "price": "645"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Set Menu",
+        "name": "SET MENU 05 (Dhanmondi)",
+        "description": "\u2022 MANDI RICE \u2022 CREAMY CHICKEN \u2022 GRILL DRUM STICK-1 \u2022 SHISH TAOUK-1 \u2022 FRIED PRAWN-1 \u2022 SPICY GARLIC SAUCE",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "HUMMUS",
+        "description": "Mashed chickpeas mixed with sesame seed paste and a dash of lemon juice topped with olive oil, served with bread.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "HUMMUS BEIRUT",
+        "description": "Mashed chickpeas mixed with sesame seed paste and a dash of lemon juice topped with olive oil and spring onion, tomato, mashed garlic served with bread.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "MOTABBAL",
+        "description": "Grilled eggplant, sesame seed paste, lemon juice topped with olive oil served with bread.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "BABA-GANOUSH",
+        "description": "Grilled eggplant with spring onion, fresh coriander, mashed garlic, lemon juice topped with grenadine sauce, served with bread.",
+        "price": "550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "LABNEH",
+        "description": "Lebanese cream cheese made of strained yogurt, topped with olive oil, served with bread.",
+        "price": "585"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "CALAMARI SALAD",
+        "description": "Fresh calamari with lemon, olive oil, dressing mixed with mayo sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "FATTOUSH",
+        "description": "A refreshing mixture of tomato, cucumber, lettuce, capsicum, mint leaves and spring onion, served with special sumac dressing.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "CHEF\u2019S SPECIAL SALAD",
+        "description": "Fresh green vegetable with chicken breast and our special sauces.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "CHICKEN PASTA SALAD",
+        "description": "Fusilli, chicken, spring onion and dressing with special cocktail sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "CRAB STICK SALAD",
+        "description": "Crab stick, tomato, cucumber, onion, spring onion, olive oil, mayonnaise and oregano.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "OLIVE SALAD",
+        "description": "Fresh green vegetable with olive and mozzarella cheese.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "MEZZE PLATTER",
+        "description": "Hummus mutabbal, baba ganoush, lebneh, fattoush salad.",
+        "price": "2595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "Tabbouleh salad",
+        "description": "Parsley,tomato,lemon juice,olive oil,bulgur,onion,other spices.",
+        "price": "850"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "Beetroot moutabbal",
+        "description": "Beetroot,tahini,olive oil,labneh,other sauces.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "Muhammara",
+        "description": "Walnut,tahini,olive oil,tomato paste,red capsicum,other spices.",
+        "price": "1400"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COLD MEZZE",
+        "name": "Moussaka",
+        "description": "Eggplant,check peas,tomato paste,red capsicum, oil,garlic,other spices.",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CREAMY DORI FISH",
+        "description": "Dori fish with onion, garlic, pepper, cream and special spices.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "FRENCH FRIES (EXTRA LARGE)",
+        "description": "Fried potato chips.",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "HUMMUS BIL LAHME",
+        "description": "Mashed chickpeas mixed with tahini and topped with sauteed beef cubes, served with bread.",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "BATATA HARRA",
+        "description": "Fried potato cubes topped with chili powder, garlic, coriander and lemon, served with bread.",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "FALAFEL (5 PCS.)",
+        "description": "Fried beans and chickpeas paste served with tahina sauce and condiments.",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CHICKEN WINGS (5 PCS.)",
+        "description": "Fried marinated chicken wings mixed with egg and flour, served with french fries.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "DRUMSTICK (3 PCS.)",
+        "description": "Fried marinated chicken drumstick, mixed with egg and flour, served with french fries.",
+        "price": "550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CORIANDER WINGS (5 PCS.)",
+        "description": "Chicken wings, onion, mashed garlic, fresh coriander marinated with spices.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CORIANDER PRAWN (5 PCS.)",
+        "description": "Prawn, onion, mashed garlic, fresh coriander marinated with spices.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "FRIED DORY FISH",
+        "description": "Dory fish mixed with egg and flour served with french fries and cocktail sauce.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CHICKEN LIVER",
+        "description": "Fried marinated chicken liver mixed with our special species.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "FRIED CALAMARI",
+        "description": "Fried marinated calamari mixed with egg and flour, served with cocktail sauce.",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "CHEESE ROLLS (6 PCS.)",
+        "description": "Fried pastry stuffed with our homemade Lebanese cheese.",
+        "price": "595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Spinach fatayer",
+        "description": "Spinach,onion,cheese,flour,other spices.",
+        "price": "550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Lamb sambousek",
+        "description": "Lamb meat,onion,labneh,flour,oil,other spices.",
+        "price": "850"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Kibbeh",
+        "description": "Bulgur,beef meat,lamb meat,onion,oil,other spices.",
+        "price": "1450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Fasolia",
+        "description": "Red bean,tomato paste, red capsicum,beef meat,onion, garlic,other spices.",
+        "price": "1650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Lamb Okra",
+        "description": "Okra,lamb meat,tomato paste,onion,other spices.",
+        "price": "1650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Arabian chicken curry",
+        "description": "Drumstick, cooking cream, milk powder,capsicum, thai chilli,other spices.",
+        "price": "1450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Sheikh El mahshi",
+        "description": "Eggplant,lamb meat, cheese,tomato paste,capsicum,onion, garlic,other spices.",
+        "price": "1650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Lamb cherry kebab",
+        "description": "Lamb meat, cherry sauce, butter,lemon,pomegranate sauce,other spices.",
+        "price": "1650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Beef kafta",
+        "description": "Minced beef meat,onion,parsley,other spices.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Deep fried crab",
+        "description": "Crab,other spices.",
+        "price": "1250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Mixed pastry",
+        "description": "",
+        "price": "2250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "Kiremitte lavash kebab",
+        "description": "Lamb meat,cheese,capsicum,other spices.",
+        "price": "1295"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT MEZZE",
+        "name": "SAMKE HARRA FISH",
+        "description": "Koral fish,tomato past,onion,garlic, capsicam,other spices.",
+        "price": "2250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SOUP",
+        "name": "CHICKEN CREAM SOUP",
+        "description": "Rich homemade cream of chicken.",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SOUP",
+        "name": "MUSHROOM CREAM SOUP",
+        "description": "Rich homemade cream of mushroom",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SOUP",
+        "name": "SHRIMP CREAM SOUP",
+        "description": "Rich homemade cream of shrimp",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SOUP",
+        "name": "LENTIL SOUP",
+        "description": "Rich homemade lentil soup.",
+        "price": "300"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Shawarma",
+        "name": "CHICKEN SHAWARMA PLATTERS",
+        "description": "Chicken Shawarma served with garlic sauce, french fries and condiments.",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Shawarma",
+        "name": "CHICKEN SHAWARMA SANDWICH",
+        "description": "Lebanese bread sandwich filled with chicken shawarma, pickles, parsley, onion, tomato and garlic sauce.",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Shawarma",
+        "name": "BEEF SHAWARMA SANDWICH",
+        "description": "Lebanese bread sandwich filled with BEEF shawarma, pickles, parsley onion, tomato and garlic sauce.",
+        "price": "650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Shawarma",
+        "name": "FALAFEL SANDWICH",
+        "description": "Lebanese bread sandwich filled with falafel, hummus, pickles, parsley, onion, tomato and tahini sauce.",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "LAHEM MESHWI (2 SKEWERS)",
+        "description": "Grilled beef tenderloin skewers marinated with our special spices.",
+        "price": "1095"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "LAMB MESHWI (2 SKEWERS)",
+        "description": "Grilled lamb skewers marinated with our special spices.",
+        "price": "1095"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "LAMB CUTLETS (4 PCS, IMPORTED)",
+        "description": "Grilled lamb cutlets marinated with special seven spices and olive oil sauce.",
+        "price": "2900"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "SHISH TAOUK (2 SKEWERS)",
+        "description": "Grilled Boneless Chicken Breast skewers marinated with garlic and our special spices.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "CHICKEN TIKKA (2 SKEWERS)",
+        "description": "Grilled Boneless Chicken Breast skewers marinated with garlic, ginger, yogurt and our special spices.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "LAMB KAFTA (3 SKEWERS)",
+        "description": "Grilled Minced lamb meat skewers mixed with spices, parsley and onions.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "LAMB KAFTA WITH MANDI RICE",
+        "description": "Two skewers Lamb kafta served with mandi rice and special sauce.",
+        "price": "995"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "CHICKEN KAFTA WITH MANDI RICE",
+        "description": "Two skewers chicken kafta served with mandi rice and special sauce.",
+        "price": "850"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "SPICY GRILLED CHICKEN WINGS (5 PCS.)",
+        "description": "Grilled chicken wings marinated with our homemade special spices served with french fries and special sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "KAFTA INTABLI (3 SKEWERS)",
+        "description": "Grilled minced lamb skewers mixed with green capsicum, tomato, onions and our special spices.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "KAFTA KHASH-KHASH (3 SKEWERS)",
+        "description": "Grilled minced lamb skewers served on a bed of spicy tomato sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "CHICKEN KAFTA (3 SKEWERS)",
+        "description": "Grilled minced chicken skewers mixed with spices, capsicum and onions.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "WHOLE GRILLED CHICKEN",
+        "description": "Whole boneless grilled chicken marinated in our homemade garlic lemon sauce.",
+        "price": "1595"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "HALF GRILLED CHICKEN",
+        "description": "Half boneless grilled chicken marinated in our homemade garlic lemon sauce.",
+        "price": "795"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "QUARTER GRILLED CHICKEN",
+        "description": "Quarter boneless grilled chicken marinated in our homemade garlic lemon sauce.",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "SPICY WHOLE GRILLED CHICKEN",
+        "description": "Whole grilled chicken marinated in our homemade garlic lemon sauce.",
+        "price": "1550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "SPICY HALF GRILLED CHICKEN",
+        "description": "Half grilled chicken marinated in our homemade garlic lemon sauce.",
+        "price": "795"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "SPICY QUARTER GRILLED CHICKEN",
+        "description": "Quarter grilled chicken marinated in our homemade garlie lemon sauce.",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "STANDARD MIXED GRILL",
+        "description": "A platter consisting of one lahem meshwi skewer, one shish taouk skewer, one chicken tikka skewer, one chicken kafta and one lamb kafta served with Lebanese bread.",
+        "price": "2800"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "From The Grill",
+        "name": "AL-AMAR MIXED GRILL",
+        "description": "A platter consisting of two lahem meshwi skewer, two grilled lamb skewer, two shish taouk skewers and four mixed kafta skewers, two skewer chicken tikka and 4 pcs arayes, 2 jumbo prawns and 2 chicken wings served with Lebanese bread.",
+        "price": "8500"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "GRILLED SEA FOOD",
+        "name": "FRIED PRAWN (5 PCS.)",
+        "description": "Fried marinated prawn mixed with egg and flour, served with french fries and cocktail sauce.",
+        "price": "895"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "GRILLED SEA FOOD",
+        "name": "FRIED POMFRET",
+        "description": "Fried marinated pomfret mixed with egg and flour, served with cocktail sauce.",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "GRILLED SEA FOOD",
+        "name": "GRILLED JUMBO PRAWN (5 PCS.)",
+        "description": "Grilled jumbo prawn served with cocktail sauce.",
+        "price": "2950"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "GRILLED SEA FOOD",
+        "name": "GRILLED SEA BASS (600 gm)",
+        "description": "Fresh sea bass, char grilled in traditional way served with coriander sauce.",
+        "price": "1850"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Manoushe",
+        "name": "LAHM BI AJEEN",
+        "description": "Marinated minced beef cooked with spices and tomatoes the traditional way.",
+        "price": "650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Manoushe",
+        "name": "ARAYES KAFTA",
+        "description": "Grilled pita bread with marinated minced lamb meat.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Manoushe",
+        "name": "LEBANESE BREAD",
+        "description": "LEBANESE BREAD Per Piece",
+        "price": "50"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Manoushe",
+        "name": "Cheeese Manoushe",
+        "description": "Lebanese cheese topped.",
+        "price": "650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Rice",
+        "name": "KABSA RICE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Rice",
+        "name": "BIRYANI RICE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Rice",
+        "name": "MANDI RICE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Rice",
+        "name": "Oriental rice",
+        "description": "Basmati rice.",
+        "price": "550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Rice",
+        "name": "Vermicelli rice",
+        "description": "Basmati rice,vermicelli,other spices.",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "LAMB KABSA",
+        "description": "Steamed marinated lamb served with fragrant basmati rice cooked with tomato and spices, served with our special sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "GRILLED CHICKEN KABSA",
+        "description": "Grilled chicken served with fragrant basmati rice cooked with tomato and spices, served with our special sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "MANDI RICE WITH LAMB",
+        "description": "Steamed marinated lamb served with fragrant basmati rice cooked with ginger and our special sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "MANDI RICE WITH CHICKEN KAFTA",
+        "description": "Steamed marinated chicken served with fragrant basmati rice cooked with ginger and our special sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "BIRYANI RICE WITH LAMB",
+        "description": "Steamed marinated lamb served with fragrant basmati rice cooked with biryani spices and our special sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "BIRYANI RICE WITH GRILLED CHICKEN",
+        "description": "Grilled chicken served with fragrant basmati rice cooked with biryani spices and our special sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "VERMICELLI RICE WITH LAMB",
+        "description": "Steamed marinated lamb served with fragrant basmati rice cooked with vermicelli and our special sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "MANDI RICE WITH SPICY GRILLED CHICKEN",
+        "description": "Quarter grilled chicken marinated with our homemade garlic sauce served with fragrant basmati rice cooked with our special spices.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "VERMICELLI RICE WITH CHICKEN",
+        "description": "Steamed marinated quarter chicken served with fragrant basmati rice cooked with vermicelli and our special sauce.",
+        "price": "695"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "BEEF STROGANOFF",
+        "description": "Beef tenderloin julian made from our own traditional way served with mashed potato and special sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "MUKALKAL",
+        "description": "Imported lamb, capsicum, carrot, onion cooked with our special spices served with 2 pcs Lebanese pita bread.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "OKDAH LAMB",
+        "description": "Imported lamb, capsicum, carrot, tomato, cauliflower, potato cooked with our special spices & sauce.",
+        "price": "1150"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "WHOLE LAMB MANDI",
+        "description": "Whole lamb (8kg) with mandi rice.",
+        "price": "24000"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "WHOLE LEG MANDI",
+        "description": "Whole lamb leg (2kg) with mandi rice.",
+        "price": "7050"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "WHOLE CHICKEN MANDI",
+        "description": "Whole grilled chicken with mandi rice.",
+        "price": "2800"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "OKDAH CHICKEN",
+        "description": "Chicken breast, capsicum, carrot, tomato, cauliflower, potato cooked with our special spices & sauce.",
+        "price": "850"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "ORIENTAL DISH",
+        "name": "Oriental rice with chicken",
+        "description": "Marinade chicken,basmati rice,minced lamb,special sauce.",
+        "price": "1050"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "LAVA CAKE WITH ICE CREAM",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "BAKLAVA",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "BROWNIE CHEESE CAKE",
+        "description": "",
+        "price": "550"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "CREAM CARAMEL",
+        "description": "",
+        "price": "400"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "OMALI",
+        "description": "",
+        "price": "750"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "BANANA SPLIT",
+        "description": "",
+        "price": "650"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "KUNAFA",
+        "description": "",
+        "price": "600"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DESSERTS",
+        "name": "OMALI Small",
+        "description": "OMALI",
+        "price": "500"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Mexican Summer",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Coco Bliss",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Orange Margarita",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Passion fruit Martini",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Pink Lady",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "New York Sour",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Ginger Shrubs",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Strawberry Martini",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Sangria Family Pack",
+        "description": "",
+        "price": "1800"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Bloody Marry",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Bad reputation",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Pina Colada",
+        "description": "",
+        "price": "450"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Orange Shrubs",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "Mocktail",
+        "name": "Basil Shrubs",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED LATTE",
+        "description": "",
+        "price": "240"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED VANILLA LATTE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED HAZELNUT LATTE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED CARAMEL LATTE",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED MOCHA",
+        "description": "",
+        "price": "300"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED CAPPUCCINO",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED CHOCOLATE",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED HONEY LEMON",
+        "description": "",
+        "price": "195"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED CARAMEL MACCHIATO",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED LEMON TEA",
+        "description": "",
+        "price": "220"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "ICED BLACK COFFEE",
+        "description": "",
+        "price": "180"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "COKE FLOAT",
+        "description": "",
+        "price": "295"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "SPRITE FLOAT",
+        "description": "",
+        "price": "295"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "SOFT DRINKS (IMPORTED)",
+        "description": "",
+        "price": "350"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "WATER (SMALL)",
+        "description": "",
+        "price": "20"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "WATER (LARGE)",
+        "description": "",
+        "price": "35"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "SOUR LABANG",
+        "description": "",
+        "price": "295"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "SWEET LABANG",
+        "description": "",
+        "price": "295"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "LEMONADE",
+        "description": "",
+        "price": "225"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "LEMON MINT",
+        "description": "",
+        "price": "225"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "Water 650 ML",
+        "description": "",
+        "price": "65"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "Orange Juice",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "DRINKS (COLD)",
+        "name": "Seasonal Fruit Juice",
+        "description": "",
+        "price": "495"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "VANILLA SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "CHOCOLATE SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "CHOCOLATE BANANA SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "VANILLA BANANA SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "CARAMEL BANANA SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "FORESTA NERA",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "OREO SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "VANILLA LEMONADE SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "COFFEE CHOCOLATE SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "KIT KAT SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "STRAWBERRY SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "MANGO SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "CHERRY MILK SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "SHAKES",
+        "name": "VANILLA LEMON MINT SHAKE",
+        "description": "",
+        "price": "395"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "APPLE LEMONADE",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "APPLE MINT",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "PASSION FRUIT",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "PEACH MOJITO",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "LYCHEE",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "VIRGIN MOJITO",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "BARBICAN",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "COOLER DRINKS",
+        "name": "KIWI MOJITO",
+        "description": "",
+        "price": "385"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "COFFEE LATTE",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "VANILLA LATTE",
+        "description": "",
+        "price": "300"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "HAZELNUT LATTE",
+        "description": "",
+        "price": "300"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "MOCHA",
+        "description": "",
+        "price": "310"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "CAPPUCCINO",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "ESPRESSO",
+        "description": "",
+        "price": "170"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "HOT CHOCOLATE",
+        "description": "",
+        "price": "285"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "HOT HONEY LEMON",
+        "description": "",
+        "price": "250"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "CARAMEL MACCHIATO",
+        "description": "",
+        "price": "300"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "HOT LEMON TEA",
+        "description": "",
+        "price": "195"
+    },
+    {
+        "restaurant": "Al Amar",
+        "category": "HOT DRINKS",
+        "name": "AMERICANO",
+        "description": "",
+        "price": "185"
+    }
+]
