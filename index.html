@@ -1,68 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KBBD Menu</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>KBBD Menu</title>
 
-<link rel="icon" type="image/jpeg" href="KBBD.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-  rel="stylesheet"
-/>
+  <link rel="icon" type="image/jpeg" href="KBBD.jpg">
 
-<link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="header">
-    <h2>🍽️ Kontoor Smart Menu</h2>
-  </div>
-
-  <div class="tabs" id="tabs"></div>
-
-  <div class="layout">
-
-    <div class="menu-section">
-      <div id="menu"></div>
+    <div class="header">
+      <h2>🍽️ Kontoor's Smart Menu</h2>
     </div>
 
-    <div class="cart-panel">
+    <!-- Restaurant tabs -->
+    <div class="tabs" id="tabs"></div>
 
-      <h3>🧾 Your Order</h3>
+    <div class="layout">
 
-      <div id="cart"></div>
+      <!-- MENU -->
+      <div class="menu-section">
+        <div id="menu">
+          <p>Loading menu...</p>
+        </div>
+      </div>
 
-      <input
-        id="comments"
-        placeholder="Add special instructions..."
-      >
+      <!-- CART -->
+      <div class="cart-panel" id="cartPanel">
 
-      <div class="cart-actions">
-        <button
-          class="secondary"
-          id="clearBtn"
+        <h3>🧾 Your Order</h3>
+
+        <div id="cart">
+          <p>Your cart is empty.</p>
+        </div>
+
+        <input
+          id="comments"
+          type="text"
+          placeholder="Add special instructions..."
         >
-          Clear Cart
-        </button>
 
-        <button id="confirmBtn">
-          Proceed
-        </button>
+        <div class="cart-actions">
+          <button class="secondary" id="clearBtn">
+            Clear Cart
+          </button>
+
+          <button id="confirmBtn">
+            Proceed
+          </button>
+        </div>
+
       </div>
 
     </div>
 
   </div>
 
-</div>
+  <!-- MOBILE FLOATING CART -->
+  <div class="floating-cart" id="floatingCart">
+    🛒 View Cart
+    <span id="cartCount">0</span>
+  </div>
 
-<div class="floating-cart" id="floatingCart">
-  🛒 View Cart
-</div>
+  <script src="script.js"></script>
 
-<script src="script.js"></
+</body>
+</html>
