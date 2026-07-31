@@ -4,31 +4,29 @@
 
 :root {
 
-  --bg1: #fff7ed;
-  --bg2: #fffbeb;
+  --orange: #f97316;
+  --orange-dark: #ea580c;
+  --orange-light: #fff7ed;
+
+  --background: #fffaf5;
 
   --card: #ffffff;
 
   --text: #7c2d12;
   --muted: #9a3412;
 
-  --border: rgba(234, 88, 12, 0.18);
+  --border: #fed7aa;
 
-  --primary: #f97316;
-  --primary2: #facc15;
-  --accent: #ef4444;
+  --grey: #f3f4f6;
+  --grey-dark: #6b7280;
 
-  --green: #22c55e;
-  --red: #ef4444;
+  --red: #dc2626;
 
   --shadow:
-    0 18px 45px rgba(249, 115, 22, 0.20);
+    0 8px 24px rgba(234, 88, 12, 0.12);
 
-  --shadow-soft:
-    0 8px 22px rgba(249, 115, 22, 0.10);
-
-  --radius: 18px;
-  --radius-sm: 12px;
+  --radius: 16px;
+  --radius-sm: 10px;
 
 }
 
@@ -49,8 +47,6 @@ html {
   min-height: 100%;
 
   overflow-x: hidden;
-
-  scroll-behavior: smooth;
 }
 
 
@@ -73,33 +69,7 @@ body {
 
   color: var(--text);
 
-  background:
-    radial-gradient(
-      1000px 650px
-      at 15% 10%,
-      rgba(86, 162, 184, 0.18),
-      transparent 58%
-    ),
-
-    radial-gradient(
-      900px 600px
-      at 85% 15%,
-      rgba(192, 161, 107, 0.18),
-      transparent 55%
-    ),
-
-    radial-gradient(
-      900px 600px
-      at 50% 100%,
-      rgba(132, 53, 52, 0.12),
-      transparent 55%
-    ),
-
-    linear-gradient(
-      180deg,
-      var(--bg1),
-      var(--bg2)
-    );
+  background: var(--background);
 }
 
 
@@ -110,7 +80,6 @@ body.cart-open {
 
 img {
   display: block;
-
   max-width: 100%;
 }
 
@@ -138,12 +107,11 @@ input {
 
   position: relative;
 
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff,
-      #f8fbfc
-    );
+  background: #ffffff;
+
+  border:
+    1px solid
+    var(--border);
 
   border-radius: var(--radius);
 
@@ -151,8 +119,6 @@ input {
 
 }
 
-
-/* Top gradient bar */
 
 .container::before {
 
@@ -164,7 +130,7 @@ input {
   left: 0;
   right: 0;
 
-  height: 6px;
+  height: 5px;
 
   border-radius:
     var(--radius)
@@ -172,13 +138,7 @@ input {
     0
     0;
 
-  background:
-    linear-gradient(
-      90deg,
-      var(--primary),
-      var(--primary2),
-      var(--accent)
-    );
+  background: var(--orange);
 
 }
 
@@ -205,6 +165,8 @@ input {
 .header h2 {
 
   margin: 0;
+
+  color: var(--orange-dark);
 
   font-size: clamp(
     20px,
@@ -257,20 +219,17 @@ input {
 
   flex: 0 0 auto;
 
-  border: none;
-
   padding: 10px 16px;
 
-  border-radius: 14px;
+  border:
+    1px solid
+    var(--orange);
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary),
-      var(--primary2)
-    );
+  border-radius: 12px;
 
-  color: #ffffff;
+  background: var(--orange-light);
+
+  color: var(--orange-dark);
 
   font-weight: 600;
 
@@ -278,37 +237,26 @@ input {
 
   cursor: pointer;
 
-  box-shadow:
-    0 6px 14px
-    rgba(86, 162, 184, 0.20);
-
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    opacity 0.18s ease;
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
 
 }
 
 
 .tabs button:hover {
 
-  transform:
-    translateY(-1px);
+  background: #ffedd5;
 
 }
 
 
 .tabs button.active {
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--accent),
-      var(--primary)
-    );
+  background: var(--orange);
 
-  transform:
-    scale(1.03);
+  color: #ffffff;
 
 }
 
@@ -358,13 +306,15 @@ input {
 
   padding-bottom: 9px;
 
+  color: var(--orange-dark);
+
   font-size: 22px;
 
   line-height: 1.2;
 
   border-bottom:
     2px solid
-    rgba(124, 45, 18, 0.10);
+    var(--border);
 
 }
 
@@ -395,26 +345,19 @@ input {
 
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff,
-      #fffdfb
-    );
+  background: var(--card);
 
   border:
     1px solid
-    rgba(0, 0, 0, 0.06);
+    var(--border);
 
-  border-radius: 16px;
+  border-radius: var(--radius);
 
-  box-shadow:
-    0 8px 20px
-    rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow);
 
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 
 }
 
@@ -426,7 +369,7 @@ input {
 
   box-shadow:
     0 12px 28px
-    rgba(0, 0, 0, 0.10);
+    rgba(234, 88, 12, 0.16);
 
 }
 
@@ -453,7 +396,7 @@ input {
 
   margin-bottom: 6px;
 
-  color: #8b5e4a;
+  color: var(--muted);
 
   font-size: 12px;
 
@@ -463,6 +406,8 @@ input {
 
 
 .card-title {
+
+  color: var(--text);
 
   font-weight: 700;
 
@@ -507,8 +452,6 @@ input {
 
 .qty-control {
 
-  flex: 0 0 auto;
-
   display: flex;
 
   align-items: center;
@@ -519,7 +462,7 @@ input {
     5px
     7px;
 
-  background: #f1f5f9;
+  background: var(--orange-light);
 
   border-radius: 10px;
 
@@ -538,17 +481,15 @@ input {
   align-items: center;
   justify-content: center;
 
-  border: none;
+  border:
+    1px solid
+    var(--border);
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   background: #ffffff;
 
-  color: var(--text);
-
-  box-shadow:
-    0 2px 6px
-    rgba(0, 0, 0, 0.08);
+  color: var(--orange-dark);
 
   cursor: pointer;
 
@@ -561,12 +502,12 @@ input {
 
   text-align: center;
 
+  color: var(--text);
+
   font-weight: 700;
 
 }
 
-
-/* Add button */
 
 .actions-row > button {
 
@@ -576,14 +517,9 @@ input {
 
   border: none;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary),
-      var(--primary2)
-    );
+  background: var(--orange);
 
   color: #ffffff;
 
@@ -594,38 +530,15 @@ input {
 }
 
 
-/* =========================================================
-   GENERAL BUTTON
-========================================================= */
+.actions-row > button:hover {
 
-button {
-
-  -webkit-tap-highlight-color:
-    transparent;
-
-  touch-action: manipulation;
-
-}
-
-
-button:hover {
-
-  transform:
-    translateY(-1px);
-
-}
-
-
-button:active {
-
-  transform:
-    scale(0.98);
+  background: var(--orange-dark);
 
 }
 
 
 /* =========================================================
-   CART - DESKTOP
+   CART DESKTOP
 ========================================================= */
 
 .cart-panel {
@@ -644,18 +557,14 @@ button:active {
 
   border:
     1px solid
-    rgba(0, 0, 0, 0.06);
+    var(--border);
 
-  border-radius: 16px;
+  border-radius: var(--radius);
 
-  box-shadow:
-    0 8px 25px
-    rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
 
 }
 
-
-/* Cart header */
 
 .cart-header {
 
@@ -676,12 +585,12 @@ button:active {
 
   margin: 0;
 
+  color: var(--orange-dark);
+
   font-size: 19px;
 
 }
 
-
-/* Close button */
 
 .mobile-cart-close {
 
@@ -693,13 +602,6 @@ button:active {
 /* =========================================================
    CART ITEMS
 ========================================================= */
-
-#cart {
-
-  width: 100%;
-
-}
-
 
 .cart-item {
 
@@ -717,14 +619,13 @@ button:active {
 
   padding: 11px;
 
-  border-radius: 14px;
+  border:
+    1px solid
+    var(--border);
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(241, 245, 249, 0.9),
-      rgba(255, 247, 237, 0.9)
-    );
+  border-radius: 12px;
+
+  background: var(--orange-light);
 
 }
 
@@ -739,6 +640,8 @@ button:active {
 
 
 .cart-name {
+
+  color: var(--text);
 
   font-size: 14px;
 
@@ -755,7 +658,7 @@ button:active {
 
   margin-top: 3px;
 
-  color: #8b5e4a;
+  color: var(--muted);
 
   font-size: 11px;
 
@@ -764,13 +667,13 @@ button:active {
 
 .cart-right {
 
-  flex: 0 0 auto;
-
   display: flex;
 
   align-items: center;
 
   gap: 7px;
+
+  flex-shrink: 0;
 
 }
 
@@ -787,7 +690,7 @@ button:active {
     4px
     6px;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   background: #ffffff;
 
@@ -801,13 +704,15 @@ button:active {
 
   padding: 0;
 
-  border: none;
+  border:
+    1px solid
+    var(--border);
 
-  border-radius: 8px;
+  border-radius: 7px;
 
-  background: #f1f5f9;
+  background: var(--orange-light);
 
-  color: var(--text);
+  color: var(--orange-dark);
 
   cursor: pointer;
 
@@ -844,7 +749,7 @@ button:active {
 
 
 /* =========================================================
-   CART INPUT
+   INPUT
 ========================================================= */
 
 #comments {
@@ -855,14 +760,15 @@ button:active {
 
   margin-top: 8px;
 
-  padding: 11px 12px;
+  padding:
+    11px
+    12px;
 
   border:
     1px solid
-    rgba(0, 0, 0, 0.10);
+    var(--border);
 
-  border-radius:
-    var(--radius-sm);
+  border-radius: 10px;
 
   outline: none;
 
@@ -872,11 +778,11 @@ button:active {
 #comments:focus {
 
   border-color:
-    var(--primary);
+    var(--orange);
 
   box-shadow:
     0 0 0 3px
-    rgba(249, 115, 22, 0.12);
+    rgba(249, 115, 22, 0.10);
 
 }
 
@@ -906,7 +812,7 @@ button:active {
 
   border: none;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   font-weight: 700;
 
@@ -917,25 +823,29 @@ button:active {
 
 .cart-actions button:not(.secondary) {
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary),
-      var(--primary2)
-    );
+  background: var(--orange);
 
   color: #ffffff;
 
 }
 
 
+.cart-actions button:not(.secondary):hover {
+
+  background: var(--orange-dark);
+
+}
+
+
 button.secondary {
 
-  background: #e5e7eb;
+  background: #f3f4f6;
 
   color: #374151;
 
-  box-shadow: none;
+  border:
+    1px solid
+    #e5e7eb;
 
 }
 
@@ -973,16 +883,13 @@ button.secondary {
 
   gap: 9px;
 
-  border: none;
+  border:
+    1px solid
+    var(--orange-dark);
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary),
-      var(--accent)
-    );
+  background: var(--orange);
 
   color: #ffffff;
 
@@ -992,7 +899,7 @@ button.secondary {
 
   box-shadow:
     0 8px 24px
-    rgba(0, 0, 0, 0.22);
+    rgba(234, 88, 12, 0.25);
 
 }
 
@@ -1011,35 +918,11 @@ button.secondary {
 
   border-radius: 50%;
 
-  background:
-    rgba(255, 255, 255, 0.22);
+  background: #ffffff;
+
+  color: var(--orange-dark);
 
   font-size: 12px;
-
-}
-
-
-/* =========================================================
-   LOADING / ERRORS
-========================================================= */
-
-.loading,
-.no-results,
-.error-message {
-
-  padding: 20px;
-
-  text-align: center;
-
-}
-
-
-.error-message {
-
-  border-radius: 14px;
-
-  background:
-    rgba(239, 68, 68, 0.08);
 
 }
 
@@ -1048,7 +931,9 @@ button.secondary {
    TABLET
 ========================================================= */
 
-@media (max-width: 1023px) and (min-width: 769px) {
+@media
+  (max-width: 1023px)
+  and (min-width: 769px) {
 
   .container {
 
@@ -1101,8 +986,7 @@ button.secondary {
 
   body {
 
-    padding-bottom:
-      90px;
+    padding-bottom: 90px;
 
   }
 
@@ -1119,24 +1003,6 @@ button.secondary {
 
     border-radius: 14px;
 
-    box-shadow:
-      0 10px 28px
-      rgba(249, 115, 22, 0.14);
-
-  }
-
-
-  .container::before {
-
-    height: 4px;
-
-  }
-
-
-  .header {
-
-    margin-bottom: 12px;
-
   }
 
 
@@ -1147,13 +1013,9 @@ button.secondary {
   }
 
 
-  /* Horizontal restaurant tabs */
-
   .tabs {
 
     margin-bottom: 16px;
-
-    padding-bottom: 7px;
 
   }
 
@@ -1171,8 +1033,6 @@ button.secondary {
   }
 
 
-  /* One-column layout */
-
   .layout {
 
     display: block;
@@ -1181,17 +1041,6 @@ button.secondary {
 
   }
 
-
-  .menu-section {
-
-    width: 100%;
-
-    min-width: 0;
-
-  }
-
-
-  /* Menu */
 
   .menu-grid {
 
@@ -1213,19 +1062,6 @@ button.secondary {
   .category-title {
 
     font-size: 20px;
-
-    margin-bottom: 13px;
-
-  }
-
-
-  /* Cards */
-
-  .card {
-
-    width: 100%;
-
-    border-radius: 14px;
 
   }
 
@@ -1270,8 +1106,6 @@ button.secondary {
   }
 
 
-  /* Bigger touch targets */
-
   .qty-control button {
 
     width: 38px;
@@ -1287,9 +1121,9 @@ button.secondary {
   }
 
 
-  /* ---------------------------------------------------------
-     MOBILE CART
-  --------------------------------------------------------- */
+  /* =========================================
+     MOBILE CART DRAWER
+  ========================================= */
 
   .cart-panel {
 
@@ -1311,12 +1145,6 @@ button.secondary {
         720px
       );
 
-    max-height:
-      calc(
-        100dvh -
-        20px
-      );
-
     margin: 0;
 
     padding: 16px;
@@ -1335,7 +1163,7 @@ button.secondary {
 
     border:
       1px solid
-      rgba(0, 0, 0, 0.06);
+      var(--border);
 
     border-bottom: none;
 
@@ -1347,11 +1175,9 @@ button.secondary {
 
     box-shadow:
       0 -12px 35px
-      rgba(0, 0, 0, 0.25);
+      rgba(234, 88, 12, 0.18);
 
     background: #ffffff;
-
-    /* CLOSED */
 
     visibility: hidden;
 
@@ -1368,21 +1194,16 @@ button.secondary {
 
     transition:
       transform
-      0.25s
-      ease,
+      0.25s ease,
 
       opacity
-      0.20s
-      ease,
+      0.20s ease,
 
       visibility
-      0.25s
-      ease;
+      0.25s ease;
 
   }
 
-
-  /* OPEN */
 
   .cart-panel.open {
 
@@ -1402,8 +1223,6 @@ button.secondary {
   }
 
 
-  /* Cart header */
-
   .cart-header {
 
     position: sticky;
@@ -1421,23 +1240,7 @@ button.secondary {
       14px
       16px;
 
-    background:
-      rgba(
-        255,
-        255,
-        255,
-        0.97
-      );
-
-    backdrop-filter:
-      blur(8px);
-
-  }
-
-
-  .cart-header h3 {
-
-    font-size: 19px;
+    background: #ffffff;
 
   }
 
@@ -1454,13 +1257,15 @@ button.secondary {
 
     padding: 0;
 
-    border: none;
+    border:
+      1px solid
+      var(--border);
 
     border-radius: 50%;
 
-    background: #f1f5f9;
+    background: var(--orange-light);
 
-    color: #374151;
+    color: var(--orange-dark);
 
     font-size: 28px;
 
@@ -1471,8 +1276,6 @@ button.secondary {
   }
 
 
-  /* Cart items */
-
   .cart-item {
 
     align-items: flex-start;
@@ -1481,45 +1284,6 @@ button.secondary {
 
   }
 
-
-  .cart-name {
-
-    font-size: 14px;
-
-  }
-
-
-  .cart-right {
-
-    gap: 5px;
-
-  }
-
-
-  .qty-box {
-
-    gap: 3px;
-
-  }
-
-
-  .qty-box button {
-
-    width: 32px;
-    height: 32px;
-
-  }
-
-
-  .remove-btn {
-
-    width: 32px;
-    height: 32px;
-
-  }
-
-
-  /* Cart buttons */
 
   .cart-actions {
 
@@ -1542,21 +1306,10 @@ button.secondary {
         env(safe-area-inset-bottom)
       );
 
-    background:
-      rgba(
-        255,
-        255,
-        255,
-        0.97
-      );
-
-    backdrop-filter:
-      blur(8px);
+    background: #ffffff;
 
   }
 
-
-  /* Floating cart */
 
   .floating-cart {
 
@@ -1626,8 +1379,7 @@ button.secondary {
 
   .cart-panel {
 
-    height:
-      92dvh;
+    height: 92dvh;
 
   }
 
