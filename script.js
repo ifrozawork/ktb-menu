@@ -98,29 +98,57 @@ async function initApp() {
     submitOrder
   );
 
+// ===============================
+// MOBILE CART
+// ===============================
 
+const closeCartBtn =
+  document.getElementById(
+    "closeCartBtn"
+  ); 
   // Floating cart
-  if (floatingCart) {
+  if (floatingCart) {  floatingCart.addEventListener(
+    "click",
+    () => {
 
-    floatingCart.addEventListener(
-      "click",
-      () => {
+      if (!cartPanel) return;
 
-        if (cartPanel) {
+      cartPanel.classList.add(
+        "open"
+      );
 
-          cartPanel.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+      document.body.classList.add(
+        "cart-open"
+      );
 
-        }
-
-      }
-    );
+    }
+  );
 
   }
 
+if (closeCartBtn) {
 
+  closeCartBtn.addEventListener(
+    "click",
+    closeCart
+  );
+
+}
+
+
+function closeCart() {
+
+  if (!cartPanel) return;
+
+  cartPanel.classList.remove(
+    "open"
+  );
+
+  document.body.classList.remove(
+    "cart-open"
+  );
+
+}
   // Load menu
   await loadMenu();
 
