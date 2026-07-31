@@ -7,7 +7,10 @@
 
   <title>KBBD Menu</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
   <link
     rel="icon"
@@ -33,62 +36,64 @@
   <div class="container">
 
     <!-- HEADER -->
-    <div class="header">
+    <header class="header">
 
       <h2>
         🍽️ Kontoor's Smart Menu
       </h2>
 
-    </div>
+    </header>
 
 
     <!-- RESTAURANT TABS -->
-    <div
+    <nav
       class="tabs"
       id="tabs"
-    ></div>
+      aria-label="Restaurants"
+    ></nav>
 
 
-    <!-- MAIN LAYOUT -->
-    <div class="layout">
+    <!-- MAIN CONTENT -->
+    <main class="layout">
 
 
       <!-- MENU -->
-      <div class="menu-section">
+      <section class="menu-section">
 
         <div id="menu">
 
-          <p>
+          <p class="loading">
             Loading menu...
           </p>
 
         </div>
 
-      </div>
+      </section>
 
 
       <!-- CART -->
-      <div
-  class="cart-panel"
-  id="cartPanel"
->
+      <aside
+        class="cart-panel"
+        id="cartPanel"
+        aria-label="Your order"
+      >
 
-  <div class="cart-header">
+        <div class="cart-header">
 
-    <h3>
-      🧾 Your Order
-    </h3>
+          <h3>
+            🧾 Your Order
+          </h3>
 
-    <button
-      type="button"
-      class="mobile-cart-close"
-      id="closeCartBtn"
-      aria-label="Close cart"
-    >
-      ×
-    </button>
+          <button
+            type="button"
+            class="mobile-cart-close"
+            id="closeCartBtn"
+            aria-label="Close cart"
+          >
+            ×
+          </button>
 
-  </div>
+        </div>
 
 
         <div id="cart">
@@ -104,6 +109,7 @@
           id="comments"
           type="text"
           placeholder="Add special instructions..."
+          autocomplete="off"
         >
 
 
@@ -127,26 +133,33 @@
 
         </div>
 
-      </div>
+      </aside>
 
-    </div>
+    </main>
 
   </div>
 
 
-  <!-- MOBILE FLOATING CART -->
-  <div
+  <!-- MOBILE CART BUTTON -->
+  <button
     class="floating-cart"
     id="floatingCart"
+    type="button"
+    aria-label="Open cart"
   >
 
-    🛒 View Cart
+    <span>
+      🛒 View Cart
+    </span>
 
-    <span id="cartCount">
+    <span
+      class="cart-count"
+      id="cartCount"
+    >
       0
     </span>
 
-  </div>
+  </button>
 
 
   <script src="script.js"></script>
