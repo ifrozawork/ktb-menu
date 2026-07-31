@@ -19,36 +19,39 @@ let tabsDiv;
 let clearBtn;
 let confirmBtn;
 let commentsInput;
-let floatingCart;
-let cartPanel;
 
 // ===============================
 // INIT
 // ===============================
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener(
+  "DOMContentLoaded",
+  initApp
+);
 
 async function initApp() {
+
   menuDiv = document.getElementById("menu");
   cartDiv = document.getElementById("cart");
   tabsDiv = document.getElementById("tabs");
-  clearBtn = document.getElementById("clearBtn");
-  confirmBtn = document.getElementById("confirmBtn");
-  commentsInput = document.getElementById("comments");
-  floatingCart = document.getElementById("floatingCart");
-  cartPanel = document.querySelector(".cart-panel");
 
-  if (clearBtn) {
-    clearBtn.onclick = () => {
-      cart = [];
-      renderCart();
-    };
-  }
+  clearBtn =
+    document.getElementById("clearBtn");
 
-  if (confirmBtn) {
-    confirmBtn.onclick = submitOrder;
-  }
+  confirmBtn =
+    document.getElementById("confirmBtn");
+
+  commentsInput =
+    document.getElementById("comments");
+
+  clearBtn.onclick = () => {
+    cart = [];
+    renderCart();
+  };
+
+  confirmBtn.onclick = submitOrder;
 
   await loadMenu();
+
   renderCart();
 }
 
@@ -56,67 +59,88 @@ async function initApp() {
 // LOAD MENU
 // ===============================
 async function loadMenu() {
+
   try {
+
     const res = await fetch(MENU_URL);
+
+    if (!res.ok) {
+      throw new Error(
+        `HTTP ${res.status}`
+      );
+    }
+
     const data = await res.json();
 
-    menuItems = data.map((item, index) => ({
-      ...item,
-      id: index + 1
-    }));
+    menuItems = data.map(
+      (item, index) => ({
+        ...item,
+        id: index + 1
+      })
+    );
 
     initTabs();
+
     renderMenu();
+
   } catch (err) {
+
     console.error(err);
-    menuDiv.innerHTML = "<p>Menu unavailable</p>";
+
+    menuDiv.innerHTML =
+      "<p>Menu unavailable</p>";
   }
 }
 
 // ===============================
-// RESTAURANT TABS
+// TABS
 // ===============================
 function initTabs() {
+
   const restaurants = [
-    ...new Set(menuItems.map(item => item.restaurant))
+    ...new Set(
+      menuItems.map(
+        item => item.restaurant
+      )
+    )
   ];
 
-  const names = ["All", ...restaurants];
+  const names = [
+    "All",
+    ...restaurants
+  ];
 
   tabsDiv.innerHTML = names
     .map(
-      r => `
-      <button onclick="setRestaurant('${r}')">
-        ${r}
-      </button>
-    `
+      r =>
+        `<button onclick="setRestaurant('${r}')">${r}</button>`
     )
     .join("");
-
-  const firstButton = tabsDiv.querySelector("button");
-
-  if (firstButton) {
-    firstButton.classList.add("active");
-  }
 }
 
 function setRestaurant(r) {
+
   currentRestaurant = r;
 
-  document.querySelectorAll("#tabs button").forEach(btn => {
-    btn.classList.toggle(
-      "active",
-      btn.innerText === r
-    );
-  });
+  document
+    .querySelectorAll("#tabs button")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "active",
+        btn.innerText === r
+      );
+
+    });
 
   renderMenu();
 }
 
 // ===============================
-// MENU RENDER
+// MENU
 // ===============================
 function renderMenu() {
+
   const filtered = menuItems.filter(
     item =>
       currentRestaurant === "All" ||
@@ -125,71 +149,73 @@ function renderMenu() {
 
   menuDiv.innerHTML = `
     <div class="menu-grid">
-      ${filtered
-        .map(
-          item => `
-          <div class="card">
 
-            <div class="card-content">
+      ${filtered.map(item => `
 
-              <div class="card-title">
-                ${item.name}
-              </div>
+        <div class="card">
 
-              <div class="card-desc">
-                ${item.category}
-              </div>
+          <div class="card-content">
 
-              ${
-                item.description
-                  ? `
-                <div style="
-                  font-size:12px;
-                  color:#666;
-                  margin:8px 0;
-                ">
-                  ${item.description}
-                </div>
-              `
-                  : ""
-              }
+            <div class="card-title">
+              ${item.name}
+            </div>
 
-              <div style="
-                font-weight:bold;
-                color:#0c6b58;
-                margin-bottom:10px;
-              ">
-                ৳ ${item.price}
-              </div>
+            <div class="card-desc">
+              ${item.category}
+            </div>
 
-              <div class="actions-row">
+            <div style="
+              margin-top:8px;
+              font-size:12px;
+              color:#666;
+            ">
+              ${item.description || ""}
+            </div>
 
-                <div class="qty-control">
-                  <button onclick="changeQty(${item.id}, -1)">
-                    -
-                  </button>
+            <div style="
+              font-weight:bold;
+              margin-top:8px;
+              margin-bottom:10px;
+            ">
+              ৳ ${item.price}
+            </div>
 
-                  <span id="qty-${item.id}">
-                    1
-                  </span>
+            <div class="actions-row">
 
-                  <button onclick="changeQty(${item.id}, 1)">
-                    +
-                  </button>
-                </div>
+              <div class="qty-control">
 
-                <button onclick="addToCart(${item.id})">
-                  Add
+                <button
+                  onclick="changeQty(${item.id},-1)"
+                >
+                  -
+                </button>
+
+                <span id="qty-${item.id}">
+                  1
+                </span>
+
+                <button
+                  onclick="changeQty(${item.id},1)"
+                >
+                  +
                 </button>
 
               </div>
 
+              <button
+                onclick="addToCart(${item.id})"
+              >
+                Add
+              </button>
+
             </div>
 
           </div>
-        `
-        )
-        .join("")}
+
+        </div>
+
+      `).join("")}
+
     </div>
   `;
 }
@@ -198,43 +224,46 @@ function renderMenu() {
 // CART
 // ===============================
 function addToCart(id) {
+
   const item = menuItems.find(
     i => i.id === id
   );
 
-  if (!item) return;
-
   const qtyEl =
-    document.getElementById(`qty-${id}`);
+    document.getElementById(
+      `qty-${id}`
+    );
 
   const qty =
-    parseInt(qtyEl?.innerText || "1");
+    parseInt(qtyEl.innerText) || 1;
 
-  const existing = cart.find(
-    i => i.id === id
-  );
+  const existing =
+    cart.find(i => i.id === id);
 
   if (existing) {
+
     existing.qty += qty;
+
   } else {
+
     cart.push({
       ...item,
       qty
     });
+
   }
 
   renderCart();
 
-  if (qtyEl) {
-    qtyEl.innerText = 1;
-  }
+  qtyEl.innerText = 1;
 }
 
 function changeQty(id, delta) {
-  const el =
-    document.getElementById(`qty-${id}`);
 
-  if (!el) return;
+  const el =
+    document.getElementById(
+      `qty-${id}`
+    );
 
   el.innerText = Math.max(
     1,
@@ -243,44 +272,48 @@ function changeQty(id, delta) {
 }
 
 function updateCartQty(id, delta) {
-  const item = cart.find(
-    i => i.id === id
-  );
+
+  const item =
+    cart.find(i => i.id === id);
 
   if (!item) return;
 
   item.qty += delta;
 
   if (item.qty <= 0) {
-    cart = cart.filter(
-      i => i.id !== id
-    );
+
+    cart =
+      cart.filter(i => i.id !== id);
+
   }
 
   renderCart();
 }
 
 function removeItem(id) {
-  cart = cart.filter(
-    i => i.id !== id
-  );
+
+  cart =
+    cart.filter(i => i.id !== id);
 
   renderCart();
 }
 
 // ===============================
-// CART RENDER
+// CART DISPLAY
 // ===============================
 function renderCart() {
+
   if (!cart.length) {
+
     cartDiv.innerHTML =
       "<p>Your cart is empty.</p>";
+
     return;
   }
 
   cartDiv.innerHTML = cart
-    .map(
-      i => `
+    .map(i => `
+
       <div class="cart-item">
 
         <div class="cart-left">
@@ -300,7 +333,7 @@ function renderCart() {
           <div class="qty-box">
 
             <button
-              onclick="updateCartQty(${i.id}, -1)"
+              onclick="updateCartQty(${i.id},-1)"
             >
               -
             </button>
@@ -310,7 +343,7 @@ function renderCart() {
             </span>
 
             <button
-              onclick="updateCartQty(${i.id}, 1)"
+              onclick="updateCartQty(${i.id},1)"
             >
               +
             </button>
@@ -327,37 +360,45 @@ function renderCart() {
         </div>
 
       </div>
-    `
-    )
+
+    `)
     .join("");
 }
 
 // ===============================
-// SUBMIT ORDER
+// SUBMIT
 // ===============================
 function submitOrder() {
+
   if (!cart.length) {
-    alert("Please add items first");
+
+    alert("Add items first");
+
     return;
   }
 
   const items = cart
-    .map(i => `${i.name} x ${i.qty}`)
+    .map(
+      i => `${i.name} x ${i.qty}`
+    )
     .join(", ");
 
-  const restaurants = [
-    ...new Set(
+  const restaurants =
+    [...new Set(
       cart.map(i => i.restaurant)
-    )
-  ].join(", ");
+    )]
+    .join(", ");
 
   const comments =
-    commentsInput?.value || "";
+    commentsInput.value || "";
 
   const url =
-    `${FORM_URL}?Item=${encodeURIComponent(items)}` +
-    `&Restaurant=${encodeURIComponent(restaurants)}` +
-    `&Comments=${encodeURIComponent(comments)}`;
+    `${FORM_URL}?Item=${encodeURIComponent(items)}`
+    + `&Restaurant=${encodeURIComponent(restaurants)}`
+    + `&Comments=${encodeURIComponent(comments)}`;
 
-  window.open(url, "_blank");
+  window.open(
+    url,
+    "_blank"
+  );
 }
