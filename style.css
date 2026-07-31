@@ -610,3 +610,154 @@ body{
 .remove-btn:hover {
   transform: scale(1.2);
 }
+/* =================================
+   RESTAURANT NAVIGATION
+================================= */
+
+.restaurant-tabs {
+  margin-bottom: 8px;
+}
+
+
+/* =================================
+   CATEGORY NAVIGATION
+================================= */
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 4px 2px 10px;
+
+  scrollbar-width: thin;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 20;
+
+  background: #fff;
+}
+
+
+/* Category buttons */
+
+.category-tabs button {
+  flex: 0 0 auto;
+
+  border: 1px solid #ddd;
+
+  background: #f7f7f7;
+
+  color: #444;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.category-tabs button:hover {
+  transform: translateY(-1px);
+}
+
+
+.category-tabs button.active {
+  background: #111;
+
+  color: #fff;
+
+  border-color: #111;
+}
+
+
+/* =================================
+   CATEGORY HEADINGS
+================================= */
+
+.menu-category {
+  margin-bottom: 28px;
+}
+
+
+.category-title {
+  margin: 0 0 14px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+
+/* =================================
+   CARD DETAILS
+================================= */
+
+.card-restaurant {
+  font-size: 12px;
+
+  color: #777;
+
+  margin-bottom: 5px;
+}
+
+
+.card-price {
+  font-size: 15px;
+
+  font-weight: 700;
+
+  margin-top: 8px;
+}
+
+
+.card-price.unavailable {
+  color: #999;
+
+  font-weight: 500;
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 768px) {
+
+  .category-tabs {
+    margin-bottom: 14px;
+
+    padding-bottom: 8px;
+  }
+
+
+  .category-tabs button {
+    padding: 7px 12px;
+
+    font-size: 12px;
+  }
+
+
+  .category-title {
+    font-size: 18px;
+  }
+
+}
