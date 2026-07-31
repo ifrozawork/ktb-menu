@@ -1,17 +1,25 @@
 // ===============================
 // CONFIG
 // ===============================
-const MENU_URL = "./menu (1).json";
+
+const MENU_URL = "./menu.json";
 
 const FORM_URL =
   "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
+
 // ===============================
 // STATE
 // ===============================
+
 let menuItems = [];
 let cart = [];
 let currentRestaurant = "All";
+
+
+// ===============================
+// DOM ELEMENTS
+// ===============================
 
 let menuDiv;
 let cartDiv;
@@ -19,14 +27,17 @@ let tabsDiv;
 let clearBtn;
 let confirmBtn;
 let commentsInput;
+let floatingCart;
+let cartPanel;
+let cartCount;
+
 
 // ===============================
 // INIT
 // ===============================
-document.addEventListener(
-  "DOMContentLoaded",
-  initApp
-);
+
+document.addEventListener("DOMContentLoaded", initApp);
+
 
 async function initApp() {
 
@@ -34,325 +45,549 @@ async function initApp() {
   cartDiv = document.getElementById("cart");
   tabsDiv = document.getElementById("tabs");
 
-  clearBtn =
-    document.getElementById("clearBtn");
+  clearBtn = document.getElementById("clearBtn");
+  confirmBtn = document.getElementById("confirmBtn");
 
-  confirmBtn =
-    document.getElementById("confirmBtn");
+  commentsInput = document.getElementById("comments");
 
-  commentsInput =
-    document.getElementById("comments");
+  floatingCart = document.getElementById("floatingCart");
+  cartPanel = document.getElementById("cartPanel");
+  cartCount = document.getElementById("cartCount");
 
-  clearBtn.onclick = () => {
+
+  // Clear cart
+  clearBtn.addEventListener("click", () => {
+
     cart = [];
-    renderCart();
-  };
 
-  confirmBtn.onclick = submitOrder;
+    renderCart();
+
+  });
+
+
+  // Submit order
+  confirmBtn.addEventListener("click", submitOrder);
+
+
+  // Floating cart
+  floatingCart.addEventListener("click", () => {
+
+    cartPanel.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  });
+
 
   await loadMenu();
 
   renderCart();
+
 }
+
 
 // ===============================
 // LOAD MENU
 // ===============================
+
 async function loadMenu() {
 
   try {
 
-    const res = await fetch(MENU_URL);
+    const response = await fetch(MENU_URL);
 
-    if (!res.ok) {
+    if (!response.ok) {
       throw new Error(
-        `HTTP ${res.status}`
+        `Menu could not be loaded. HTTP ${response.status}`
       );
     }
 
-    const data = await res.json();
 
-    menuItems = data.map(
-      (item, index) => ({
-        ...item,
-        id: index + 1
-      })
-    );
+    const data = await response.json();
+
+
+    // Your JSON is already a flat array
+    if (!Array.isArray(data)) {
+
+      throw new Error(
+        "menu.json must contain an array of menu items."
+      );
+
+    }
+
+
+    // Generate IDs because your JSON does not contain IDs
+    menuItems = data.map((item, index) => ({
+
+      id: index + 1,
+
+      restaurant: item.restaurant || "Unknown Restaurant",
+
+      category: item.category || "Other",
+
+      name: item.name || "Unnamed Item",
+
+      description: item.description || "",
+
+      price: item.price || "",
+
+      img: item.img
+        ? `./${item.img}`
+        : ""
+
+    }));
+
 
     initTabs();
 
     renderMenu();
 
-  } catch (err) {
 
-    console.error(err);
+  } catch (error) {
 
-    menuDiv.innerHTML =
-      "<p>Menu unavailable</p>";
+    console.error("Menu loading error:", error);
+
+    menuDiv.innerHTML = `
+      <div class="error-message">
+        <h3>⚠️ Menu unavailable</h3>
+        <p>${escapeHTML(error.message)}</p>
+      </div>
+    `;
+
   }
+
 }
 
+
 // ===============================
-// TABS
+// RESTAURANT TABS
 // ===============================
+
 function initTabs() {
 
   const restaurants = [
-    ...new Set(
-      menuItems.map(
-        item => item.restaurant
-      )
-    )
-  ];
-
-  const names = [
     "All",
-    ...restaurants
+    ...new Set(
+      menuItems.map(item => item.restaurant)
+    )
   ];
 
-  tabsDiv.innerHTML = names
-    .map(
-      r =>
-        `<button onclick="setRestaurant('${r}')">${r}</button>`
-    )
+
+  tabsDiv.innerHTML = restaurants
+    .map((restaurant, index) => {
+
+      return `
+        <button
+          class="${index === 0 ? "active" : ""}"
+          data-restaurant="${escapeAttribute(restaurant)}"
+        >
+          ${escapeHTML(restaurant)}
+        </button>
+      `;
+
+    })
     .join("");
+
+
+  // Add click events
+  tabsDiv
+    .querySelectorAll("button")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        setRestaurant(
+          button.dataset.restaurant
+        );
+
+      });
+
+    });
+
 }
 
-function setRestaurant(r) {
 
-  currentRestaurant = r;
+// ===============================
+// CHANGE RESTAURANT
+// ===============================
 
-  document
-    .querySelectorAll("#tabs button")
-    .forEach(btn => {
+function setRestaurant(restaurant) {
 
-      btn.classList.toggle(
+  currentRestaurant = restaurant;
+
+
+  tabsDiv
+    .querySelectorAll("button")
+    .forEach(button => {
+
+      button.classList.toggle(
         "active",
-        btn.innerText === r
+        button.dataset.restaurant === restaurant
       );
 
     });
 
+
   renderMenu();
+
 }
 
+
 // ===============================
-// MENU
+// MENU RENDER
 // ===============================
+
 function renderMenu() {
 
-  const filtered = menuItems.filter(
-    item =>
-      currentRestaurant === "All" ||
-      item.restaurant === currentRestaurant
+  let filteredItems = menuItems.filter(item =>
+
+    currentRestaurant === "All" ||
+    item.restaurant === currentRestaurant
+
   );
 
-  menuDiv.innerHTML = `
-    <div class="menu-grid">
 
-      ${filtered.map(item => `
+  if (!filteredItems.length) {
 
-        <div class="card">
-
-          <div class="card-content">
-
-            <div class="card-title">
-              ${item.name}
-            </div>
-
-            <div class="card-desc">
-              ${item.category}
-            </div>
-
-            <div style="
-              margin-top:8px;
-              font-size:12px;
-              color:#666;
-            ">
-              ${item.description || ""}
-            </div>
-
-            <div style="
-              font-weight:bold;
-              margin-top:8px;
-              margin-bottom:10px;
-            ">
-              ৳ ${item.price}
-            </div>
-
-            <div class="actions-row">
-
-              <div class="qty-control">
-
-                <button
-                  onclick="changeQty(${item.id},-1)"
-                >
-                  -
-                </button>
-
-                <span id="qty-${item.id}">
-                  1
-                </span>
-
-                <button
-                  onclick="changeQty(${item.id},1)"
-                >
-                  +
-                </button>
-
-              </div>
-
-              <button
-                onclick="addToCart(${item.id})"
-              >
-                Add
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      `).join("")}
-
-    </div>
-  `;
-}
-
-// ===============================
-// CART
-// ===============================
-function addToCart(id) {
-
-  const item = menuItems.find(
-    i => i.id === id
-  );
-
-  const qtyEl =
-    document.getElementById(
-      `qty-${id}`
-    );
-
-  const qty =
-    parseInt(qtyEl.innerText) || 1;
-
-  const existing =
-    cart.find(i => i.id === id);
-
-  if (existing) {
-
-    existing.qty += qty;
-
-  } else {
-
-    cart.push({
-      ...item,
-      qty
-    });
-
-  }
-
-  renderCart();
-
-  qtyEl.innerText = 1;
-}
-
-function changeQty(id, delta) {
-
-  const el =
-    document.getElementById(
-      `qty-${id}`
-    );
-
-  el.innerText = Math.max(
-    1,
-    parseInt(el.innerText) + delta
-  );
-}
-
-function updateCartQty(id, delta) {
-
-  const item =
-    cart.find(i => i.id === id);
-
-  if (!item) return;
-
-  item.qty += delta;
-
-  if (item.qty <= 0) {
-
-    cart =
-      cart.filter(i => i.id !== id);
-
-  }
-
-  renderCart();
-}
-
-function removeItem(id) {
-
-  cart =
-    cart.filter(i => i.id !== id);
-
-  renderCart();
-}
-
-// ===============================
-// CART DISPLAY
-// ===============================
-function renderCart() {
-
-  if (!cart.length) {
-
-    cartDiv.innerHTML =
-      "<p>Your cart is empty.</p>";
+    menuDiv.innerHTML = `
+      <p>No menu items available.</p>
+    `;
 
     return;
   }
 
-  cartDiv.innerHTML = cart
-    .map(i => `
 
-      <div class="cart-item">
+  // Group items by category
+  const categories = {};
 
-        <div class="cart-left">
 
-          <div class="cart-name">
-            ${i.name}
+  filteredItems.forEach(item => {
+
+    if (!categories[item.category]) {
+      categories[item.category] = [];
+    }
+
+    categories[item.category].push(item);
+
+  });
+
+
+  menuDiv.innerHTML = Object.entries(categories)
+    .map(([category, items]) => {
+
+      return `
+        <section class="menu-category">
+
+          <h3 class="category-title">
+            ${escapeHTML(category)}
+          </h3>
+
+          <div class="menu-grid">
+
+            ${items.map(renderMenuCard).join("")}
+
           </div>
 
-          <div class="cart-restaurant">
-            ${i.restaurant}
-          </div>
+        </section>
+      `;
 
+    })
+    .join("");
+
+}
+
+
+// ===============================
+// MENU CARD
+// ===============================
+
+function renderMenuCard(item) {
+
+  const priceText = item.price
+    ? `৳ ${escapeHTML(item.price)}`
+    : "Price unavailable";
+
+
+  const imageHTML = item.img
+    ? `
+      <img
+        src="${escapeAttribute(item.img)}"
+        alt="${escapeAttribute(item.name)}"
+        loading="lazy"
+      >
+    `
+    : "";
+
+
+  return `
+    <div class="card">
+
+      ${imageHTML}
+
+      <div class="card-content">
+
+        <div class="card-title">
+          ${escapeHTML(item.name)}
         </div>
 
-        <div class="cart-right">
+        ${
+          item.description
+            ? `
+              <div class="card-desc">
+                ${escapeHTML(item.description)}
+              </div>
+            `
+            : ""
+        }
 
-          <div class="qty-box">
+        <div class="card-price">
+          ${priceText}
+        </div>
+
+
+        <div class="actions-row">
+
+          <div class="qty-control">
 
             <button
-              onclick="updateCartQty(${i.id},-1)"
+              type="button"
+              onclick="changeQty(${item.id}, -1)"
             >
               -
             </button>
 
-            <span>
-              ${i.qty}
+            <span id="qty-${item.id}">
+              1
             </span>
 
             <button
-              onclick="updateCartQty(${i.id},1)"
+              type="button"
+              onclick="changeQty(${item.id}, 1)"
             >
               +
             </button>
 
           </div>
 
+
           <button
+            type="button"
+            onclick="addToCart(${item.id})"
+          >
+            Add
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+// ===============================
+// PRODUCT QUANTITY
+// ===============================
+
+function changeQty(id, delta) {
+
+  const element =
+    document.getElementById(`qty-${id}`);
+
+
+  if (!element) return;
+
+
+  const current =
+    parseInt(element.textContent, 10) || 1;
+
+
+  const newValue =
+    Math.max(1, current + delta);
+
+
+  element.textContent = newValue;
+
+}
+
+
+// ===============================
+// ADD TO CART
+// ===============================
+
+function addToCart(id) {
+
+  const item =
+    menuItems.find(item => item.id === id);
+
+
+  if (!item) return;
+
+
+  const qtyElement =
+    document.getElementById(`qty-${id}`);
+
+
+  const quantity =
+    parseInt(
+      qtyElement?.textContent,
+      10
+    ) || 1;
+
+
+  const existing =
+    cart.find(item => item.id === id);
+
+
+  if (existing) {
+
+    existing.qty += quantity;
+
+  } else {
+
+    cart.push({
+
+      ...item,
+
+      qty: quantity
+
+    });
+
+  }
+
+
+  // Reset product quantity
+  if (qtyElement) {
+    qtyElement.textContent = "1";
+  }
+
+
+  renderCart();
+
+}
+
+
+// ===============================
+// UPDATE CART QUANTITY
+// ===============================
+
+function updateCartQty(id, delta) {
+
+  const item =
+    cart.find(item => item.id === id);
+
+
+  if (!item) return;
+
+
+  item.qty += delta;
+
+
+  if (item.qty <= 0) {
+
+    cart =
+      cart.filter(item => item.id !== id);
+
+  }
+
+
+  renderCart();
+
+}
+
+
+// ===============================
+// REMOVE ITEM
+// ===============================
+
+function removeItem(id) {
+
+  cart =
+    cart.filter(item => item.id !== id);
+
+
+  renderCart();
+
+}
+
+
+// ===============================
+// CART RENDER
+// ===============================
+
+function renderCart() {
+
+  updateCartCount();
+
+
+  if (!cart.length) {
+
+    cartDiv.innerHTML = `
+      <p>Your cart is empty.</p>
+    `;
+
+    return;
+
+  }
+
+
+  cartDiv.innerHTML = cart.map(item => {
+
+    return `
+      <div class="cart-item">
+
+        <div class="cart-left">
+
+          <div class="cart-name">
+            ${escapeHTML(item.name)}
+          </div>
+
+          <div class="cart-restaurant">
+            ${escapeHTML(item.restaurant)}
+          </div>
+
+          <div class="cart-price">
+            ${item.price
+              ? `৳ ${escapeHTML(item.price)}`
+              : "Price unavailable"
+            }
+          </div>
+
+        </div>
+
+
+        <div class="cart-right">
+
+          <div class="qty-box">
+
+            <button
+              type="button"
+              onclick="updateCartQty(${item.id}, -1)"
+            >
+              -
+            </button>
+
+            <span>
+              ${item.qty}
+            </span>
+
+            <button
+              type="button"
+              onclick="updateCartQty(${item.id}, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <button
+            type="button"
             class="remove-btn"
-            onclick="removeItem(${i.id})"
+            onclick="removeItem(${item.id})"
+            aria-label="Remove item"
           >
             ❌
           </button>
@@ -360,45 +595,95 @@ function renderCart() {
         </div>
 
       </div>
+    `;
 
-    `)
-    .join("");
+  }).join("");
+
 }
 
+
 // ===============================
-// SUBMIT
+// CART COUNT
 // ===============================
+
+function updateCartCount() {
+
+  const totalItems =
+    cart.reduce(
+      (total, item) => total + item.qty,
+      0
+    );
+
+
+  if (cartCount) {
+    cartCount.textContent = totalItems;
+  }
+
+}
+
+
+// ===============================
+// SUBMIT ORDER
+// ===============================
+
 function submitOrder() {
 
   if (!cart.length) {
 
-    alert("Add items first");
+    alert("Please add at least one item to your order.");
 
     return;
+
   }
 
-  const items = cart
-    .map(
-      i => `${i.name} x ${i.qty}`
-    )
-    .join(", ");
 
-  const restaurants =
-    [...new Set(
-      cart.map(i => i.restaurant)
-    )]
-    .join(", ");
+  const items = cart
+    .map(item =>
+      `${item.name}(${item.qty})`
+    )
+    .join("|");
+
+
+  const restaurants = [
+    ...new Set(
+      cart.map(item => item.restaurant)
+    )
+  ].join(", ");
+
 
   const comments =
-    commentsInput.value || "";
+    commentsInput?.value?.trim() || "";
+
 
   const url =
-    `${FORM_URL}?Item=${encodeURIComponent(items)}`
-    + `&Restaurant=${encodeURIComponent(restaurants)}`
-    + `&Comments=${encodeURIComponent(comments)}`;
+    `${FORM_URL}?Item=${encodeURIComponent(items)}` +
+    `&Restaurant=${encodeURIComponent(restaurants)}` +
+    `&Comments=${encodeURIComponent(comments)}`;
 
-  window.open(
-    url,
-    "_blank"
-  );
+
+  window.open(url, "_blank");
+
+}
+
+
+// ===============================
+// SECURITY / HTML HELPERS
+// ===============================
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeAttribute(value) {
+
+  return escapeHTML(value);
+
 }
