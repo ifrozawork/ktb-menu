@@ -1,6 +1,6 @@
-// ===============================
+// =========================================================
 // CONFIG
-// ===============================
+// =========================================================
 
 const MENU_URL = "./menu (1).json";
 
@@ -8,9 +8,9 @@ const FORM_URL =
   "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
 
 
-// ===============================
+// =========================================================
 // STATE
-// ===============================
+// =========================================================
 
 let menuItems = [];
 
@@ -19,28 +19,34 @@ let cart = [];
 let currentRestaurant = "All";
 
 
-// ===============================
+// =========================================================
 // DOM ELEMENTS
-// ===============================
+// =========================================================
 
 let menuDiv;
+
 let cartDiv;
 
 let tabsDiv;
 
 let clearBtn;
+
 let confirmBtn;
 
 let commentsInput;
 
 let floatingCart;
+
 let cartPanel;
+
 let cartCount;
 
+let closeCartBtn;
 
-// ===============================
+
+// =========================================================
 // INIT
-// ===============================
+// =========================================================
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -50,7 +56,10 @@ document.addEventListener(
 
 async function initApp() {
 
-  // Get elements
+  // -------------------------
+  // Get DOM elements
+  // -------------------------
+
   menuDiv =
     document.getElementById("menu");
 
@@ -78,97 +87,194 @@ async function initApp() {
   cartCount =
     document.getElementById("cartCount");
 
-
-  // Clear cart
-  clearBtn.addEventListener(
-    "click",
-    () => {
-
-      cart = [];
-
-      renderCart();
-
-    }
-  );
+  closeCartBtn =
+    document.getElementById("closeCartBtn");
 
 
-  // Proceed
-  confirmBtn.addEventListener(
-    "click",
-    submitOrder
-  );
+  // -------------------------
+  // Button events
+  // -------------------------
 
-// ===============================
-// MOBILE CART
-// ===============================
+  if (clearBtn) {
 
-const closeCartBtn =
-  document.getElementById(
-    "closeCartBtn"
-  ); 
-  // Floating cart
-  if (floatingCart) {  floatingCart.addEventListener(
-    "click",
-    () => {
-
-      if (!cartPanel) return;
-
-      cartPanel.classList.add(
-        "open"
-      );
-
-      document.body.classList.add(
-        "cart-open"
-      );
-
-    }
-  );
+    clearBtn.addEventListener(
+      "click",
+      clearCart
+    );
 
   }
 
-if (closeCartBtn) {
 
-  closeCartBtn.addEventListener(
-    "click",
-    closeCart
+  if (confirmBtn) {
+
+    confirmBtn.addEventListener(
+      "click",
+      submitOrder
+    );
+
+  }
+
+
+  // -------------------------
+  // Mobile cart
+  // -------------------------
+
+  if (floatingCart) {
+
+    floatingCart.addEventListener(
+      "click",
+      openCart
+    );
+
+  }
+
+
+  if (closeCartBtn) {
+
+    closeCartBtn.addEventListener(
+      "click",
+      closeCart
+    );
+
+  }
+
+
+  // -------------------------
+  // Escape key closes cart
+  // -------------------------
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeCart();
+
+      }
+
+    }
+  );
+
+
+  // -------------------------
+  // Load menu
+  // -------------------------
+
+  await loadMenu();
+
+
+  // -------------------------
+  // Initial cart
+  // -------------------------
+
+  renderCart();
+
+}
+
+
+// =========================================================
+// CART OPEN / CLOSE
+// =========================================================
+
+function openCart(event) {
+
+  if (event) {
+
+    event.preventDefault();
+
+  }
+
+
+  if (!cartPanel) {
+
+    return;
+
+  }
+
+
+  cartPanel.classList.add(
+    "open"
+  );
+
+
+  document.body.classList.add(
+    "cart-open"
+  );
+
+
+  // Prevent accidental page
+  // scrolling when drawer opens
+
+  setTimeout(
+    () => {
+
+      const firstButton =
+        cartPanel.querySelector(
+          ".mobile-cart-close"
+        );
+
+      if (
+        firstButton &&
+        window.innerWidth <= 768
+      ) {
+
+        firstButton.focus();
+
+      }
+
+    },
+    50
   );
 
 }
 
 
-function closeCart() {
+function closeCart(event) {
 
-  if (!cartPanel) return;
+  if (event) {
+
+    event.preventDefault();
+
+  }
+
+
+  if (!cartPanel) {
+
+    return;
+
+  }
+
 
   cartPanel.classList.remove(
     "open"
   );
+
 
   document.body.classList.remove(
     "cart-open"
   );
 
 }
-  // Load menu
-  await loadMenu();
 
 
-  // Initial cart
-  renderCart();
-
-}
-
-
-// ===============================
+// =========================================================
 // LOAD MENU
-// ===============================
+// =========================================================
 
 async function loadMenu() {
 
   try {
 
     const response =
-      await fetch(MENU_URL);
+      await fetch(
+        MENU_URL,
+        {
+          cache: "no-store"
+        }
+      );
 
 
     if (!response.ok) {
@@ -184,7 +290,9 @@ async function loadMenu() {
       await response.json();
 
 
-    // Your JSON is a FLAT ARRAY
+    // The menu file must
+    // contain a flat array.
+
     if (!Array.isArray(data)) {
 
       throw new Error(
@@ -194,57 +302,67 @@ async function loadMenu() {
     }
 
 
-    // Convert JSON into our internal format
-    //
-    // The original JSON has no ID,
-    // so we create one automatically.
+    // -------------------------
+    // Convert menu data
+    // -------------------------
 
     menuItems =
-      data.map((item, index) => {
+      data.map(
+        (item, index) => {
 
-        return {
+          return {
 
-          id: index + 1,
+            id:
+              index + 1,
 
-          restaurant:
-            item.restaurant ||
-            "Unknown Restaurant",
+            restaurant:
+              item.restaurant ||
+              "Unknown Restaurant",
 
-          category:
-            item.category ||
-            "Other",
+            category:
+              item.category ||
+              "Other",
 
-          name:
-            item.name ||
-            "Unnamed Item",
+            name:
+              item.name ||
+              "Unnamed Item",
 
-          description:
-            item.description ||
-            "",
+            description:
+              item.description ||
+              "",
 
-          price:
-            item.price ||
-            "",
+            price:
+              item.price ||
+              "",
 
-          img:
-            item.img
-              ? `./${item.img}`
-              : ""
+            img:
+              item.img
+                ? `./${item.img}`
+                : ""
 
-        };
+          };
 
-      });
+        }
+      );
 
 
+    // -------------------------
     // Create restaurant tabs
+    // -------------------------
+
     initRestaurantTabs();
 
 
-    // Show menu
+    // -------------------------
+    // Render menu
+    // -------------------------
+
     renderMenu();
 
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(
       "Menu loading error:",
@@ -252,32 +370,45 @@ async function loadMenu() {
     );
 
 
-    menuDiv.innerHTML = `
+    if (menuDiv) {
 
-      <div class="error-message">
+      menuDiv.innerHTML = `
 
-        <h3>
-          ⚠️ Menu unavailable
-        </h3>
+        <div class="error-message">
 
-        <p>
-          ${escapeHTML(error.message)}
-        </p>
+          <h3>
+            ⚠️ Menu unavailable
+          </h3>
 
-      </div>
+          <p>
+            ${escapeHTML(
+              error.message
+            )}
+          </p>
 
-    `;
+        </div>
+
+      `;
+
+    }
 
   }
 
 }
 
 
-// ===============================
+// =========================================================
 // RESTAURANT TABS
-// ===============================
+// =========================================================
 
 function initRestaurantTabs() {
+
+  if (!tabsDiv) {
+
+    return;
+
+  }
+
 
   const restaurants = [
 
@@ -285,7 +416,8 @@ function initRestaurantTabs() {
 
     ...new Set(
       menuItems.map(
-        item => item.restaurant
+        item =>
+          item.restaurant
       )
     )
 
@@ -293,6 +425,7 @@ function initRestaurantTabs() {
 
 
   tabsDiv.innerHTML =
+
     restaurants
       .map(
         restaurant => {
@@ -301,16 +434,23 @@ function initRestaurantTabs() {
 
             <button
               type="button"
+
               class="${
-                restaurant === currentRestaurant
+                restaurant ===
+                currentRestaurant
                   ? "active"
                   : ""
               }"
+
               data-restaurant="${escapeAttribute(
                 restaurant
               )}"
             >
-              ${escapeHTML(restaurant)}
+
+              ${escapeHTML(
+                restaurant
+              )}
+
             </button>
 
           `;
@@ -320,30 +460,36 @@ function initRestaurantTabs() {
       .join("");
 
 
+  // -------------------------
   // Add click events
+  // -------------------------
+
   tabsDiv
     .querySelectorAll("button")
-    .forEach(button => {
+    .forEach(
+      button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-          setRestaurant(
-            button.dataset.restaurant
-          );
+            setRestaurant(
+              button.dataset
+                .restaurant
+            );
 
-        }
-      );
+          }
+        );
 
-    });
+      }
+    );
 
 }
 
 
-// ===============================
+// =========================================================
 // SET RESTAURANT
-// ===============================
+// =========================================================
 
 function setRestaurant(
   restaurant
@@ -353,31 +499,66 @@ function setRestaurant(
     restaurant;
 
 
-  // Highlight active tab
+  // -------------------------
+  // Active tab
+  // -------------------------
 
-  tabsDiv
-    .querySelectorAll("button")
-    .forEach(button => {
+  if (tabsDiv) {
 
-      button.classList.toggle(
-        "active",
-        button.dataset.restaurant ===
-          restaurant
+    tabsDiv
+      .querySelectorAll(
+        "button"
+      )
+      .forEach(
+        button => {
+
+          button.classList.toggle(
+            "active",
+
+            button.dataset
+              .restaurant ===
+              restaurant
+          );
+
+        }
       );
+
+  }
+
+
+  // -------------------------
+  // Render
+  // -------------------------
+
+  renderMenu();
+
+
+  // -------------------------
+  // On mobile, scroll menu
+  // to top after changing
+  // restaurant.
+  // -------------------------
+
+  if (
+    window.innerWidth <= 768
+  ) {
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: "smooth"
 
     });
 
-
-  // Re-render menu
-
-  renderMenu();
+  }
 
 }
 
 
-// ===============================
+// =========================================================
 // SULTAN DINE CATEGORY LOGIC
-// ===============================
+// =========================================================
 
 function getDisplayCategory(
   item
@@ -397,12 +578,13 @@ function getDisplayCategory(
 
 
   const name =
-    item.name.toLowerCase();
+    item.name
+      .toLowerCase();
 
 
-  // =========================
-  // DESSERT
-  // =========================
+  // -------------------------
+  // Dessert
+  // -------------------------
 
   const dessertItems = [
 
@@ -416,7 +598,9 @@ function getDisplayCategory(
   if (
     dessertItems.some(
       keyword =>
-        name.includes(keyword)
+        name.includes(
+          keyword
+        )
     )
   ) {
 
@@ -425,9 +609,9 @@ function getDisplayCategory(
   }
 
 
-  // =========================
-  // DRINKS
-  // =========================
+  // -------------------------
+  // Drinks
+  // -------------------------
 
   const drinkItems = [
 
@@ -445,7 +629,9 @@ function getDisplayCategory(
   if (
     drinkItems.some(
       keyword =>
-        name.includes(keyword)
+        name.includes(
+          keyword
+        )
     )
   ) {
 
@@ -454,30 +640,37 @@ function getDisplayCategory(
   }
 
 
-  // =========================
-  // EVERYTHING ELSE
-  // =========================
+  // -------------------------
+  // Main menu
+  // -------------------------
 
   return "Main Menu";
 
 }
 
 
-// ===============================
-// GET FILTERED ITEMS
-// ===============================
+// =========================================================
+// FILTER MENU
+// =========================================================
 
 function getFilteredItems() {
 
   return menuItems.filter(
     item => {
 
-      return (
+      if (
         currentRestaurant ===
-          "All" ||
+        "All"
+      ) {
 
+        return true;
+
+      }
+
+
+      return (
         item.restaurant ===
-          currentRestaurant
+        currentRestaurant
       );
 
     }
@@ -486,17 +679,27 @@ function getFilteredItems() {
 }
 
 
-// ===============================
-// MENU RENDER
-// ===============================
+// =========================================================
+// RENDER MENU
+// =========================================================
 
 function renderMenu() {
+
+  if (!menuDiv) {
+
+    return;
+
+  }
+
 
   const filteredItems =
     getFilteredItems();
 
 
-  // Nothing found
+  // -------------------------
+  // Empty state
+  // -------------------------
+
   if (
     !filteredItems.length
   ) {
@@ -518,7 +721,9 @@ function renderMenu() {
   }
 
 
-  // Group items by category
+  // -------------------------
+  // Group by category
+  // -------------------------
 
   const categories = {};
 
@@ -526,44 +731,42 @@ function renderMenu() {
   filteredItems.forEach(
     item => {
 
-      const displayCategory =
-        getDisplayCategory(item);
+      const category =
+        getDisplayCategory(
+          item
+        );
 
 
       if (
         !categories[
-          displayCategory
+          category
         ]
       ) {
 
         categories[
-          displayCategory
+          category
         ] = [];
 
       }
 
 
       categories[
-        displayCategory
+        category
       ].push(item);
 
     }
   );
 
 
-  // ===============================
-  // CATEGORY ORDER
-  // ===============================
+  // -------------------------
+  // Category order
+  // -------------------------
 
   let categoryOrder =
-    Object.keys(categories);
+    Object.keys(
+      categories
+    );
 
-
-  // Sultan Dine specifically:
-  //
-  // Main Menu
-  // Dessert
-  // Drinks
 
   if (
     currentRestaurant ===
@@ -584,23 +787,28 @@ function renderMenu() {
     categoryOrder =
       preferredOrder.filter(
         category =>
-          categories[category]
+          categories[
+            category
+          ]
       );
 
   }
 
 
-  // ===============================
-  // BUILD HTML
-  // ===============================
+  // -------------------------
+  // Build menu
+  // -------------------------
 
   menuDiv.innerHTML =
+
     categoryOrder
       .map(
         category => {
 
           const items =
-            categories[category];
+            categories[
+              category
+            ];
 
 
           return `
@@ -612,9 +820,11 @@ function renderMenu() {
               <h3
                 class="category-title"
               >
+
                 ${escapeHTML(
                   category
                 )}
+
               </h3>
 
 
@@ -644,15 +854,17 @@ function renderMenu() {
 }
 
 
-// ===============================
+// =========================================================
 // MENU CARD
-// ===============================
+// =========================================================
 
 function renderMenuCard(
   item
 ) {
 
-  // Optional image
+  // -------------------------
+  // Image
+  // -------------------------
 
   const imageHTML =
     item.img
@@ -662,9 +874,11 @@ function renderMenuCard(
           src="${escapeAttribute(
             item.img
           )}"
+
           alt="${escapeAttribute(
             item.name
           )}"
+
           loading="lazy"
         >
 
@@ -672,66 +886,84 @@ function renderMenuCard(
       : "";
 
 
-  // Show restaurant name
-  // only when viewing All
+  // -------------------------
+  // Restaurant name
+  // -------------------------
 
   const restaurantLabel =
+
     currentRestaurant ===
     "All"
+
       ? `
 
         <div
           class="card-restaurant"
         >
+
           ${escapeHTML(
             item.restaurant
           )}
+
         </div>
 
       `
+
       : "";
 
 
+  // -------------------------
   // Description
+  // -------------------------
 
   const descriptionHTML =
+
     item.description
+
       ? `
 
         <div
           class="card-desc"
         >
+
           ${escapeHTML(
             item.description
           )}
+
         </div>
 
       `
+
       : "";
 
 
   // IMPORTANT:
   //
-  // PRICE IS NOT DISPLAYED.
-  //
-  // The price still exists
-  // in menuItems for future use,
-  // but is not shown here.
+  // Price is deliberately
+  // NOT displayed.
 
 
   return `
 
-    <div class="card">
+    <article
+      class="card"
+    >
+
 
       ${imageHTML}
 
 
-      <div class="card-content">
+      <div
+        class="card-content"
+      >
+
 
         ${restaurantLabel}
 
 
-        <div class="card-title">
+        <div
+          class="card-title"
+        >
 
           ${escapeHTML(
             item.name
@@ -748,7 +980,7 @@ function renderMenuCard(
         >
 
 
-          <!-- PRODUCT QUANTITY -->
+          <!-- Quantity -->
 
           <div
             class="qty-control"
@@ -756,6 +988,9 @@ function renderMenuCard(
 
             <button
               type="button"
+
+              aria-label="Decrease quantity"
+
               onclick="changeQty(
                 ${item.id},
                 -1
@@ -774,6 +1009,9 @@ function renderMenuCard(
 
             <button
               type="button"
+
+              aria-label="Increase quantity"
+
               onclick="changeQty(
                 ${item.id},
                 1
@@ -785,10 +1023,11 @@ function renderMenuCard(
           </div>
 
 
-          <!-- ADD BUTTON -->
+          <!-- Add -->
 
           <button
             type="button"
+
             onclick="addToCart(
               ${item.id}
             )"
@@ -799,18 +1038,19 @@ function renderMenuCard(
 
         </div>
 
+
       </div>
 
-    </div>
+    </article>
 
   `;
 
 }
 
 
-// ===============================
+// =========================================================
 // PRODUCT QUANTITY
-// ===============================
+// =========================================================
 
 function changeQty(
   id,
@@ -823,7 +1063,11 @@ function changeQty(
     );
 
 
-  if (!element) return;
+  if (!element) {
+
+    return;
+
+  }
 
 
   const current =
@@ -833,22 +1077,18 @@ function changeQty(
     ) || 1;
 
 
-  const newValue =
+  element.textContent =
     Math.max(
       1,
       current + delta
     );
 
-
-  element.textContent =
-    newValue;
-
 }
 
 
-// ===============================
+// =========================================================
 // ADD TO CART
-// ===============================
+// =========================================================
 
 function addToCart(
   id
@@ -861,7 +1101,11 @@ function addToCart(
     );
 
 
-  if (!item) return;
+  if (!item) {
+
+    return;
+
+  }
 
 
   const quantityElement =
@@ -877,8 +1121,7 @@ function addToCart(
     ) || 1;
 
 
-  // Check if item
-  // already exists
+  // Existing item?
 
   const existing =
     cart.find(
@@ -892,21 +1135,23 @@ function addToCart(
     existing.qty +=
       quantity;
 
-  } else {
+  }
+
+  else {
 
     cart.push({
 
       ...item,
 
-      qty: quantity
+      qty:
+        quantity
 
     });
 
   }
 
 
-  // Reset quantity
-  // on product card
+  // Reset product quantity
 
   if (quantityElement) {
 
@@ -921,9 +1166,9 @@ function addToCart(
 }
 
 
-// ===============================
+// =========================================================
 // UPDATE CART QUANTITY
-// ===============================
+// =========================================================
 
 function updateCartQty(
   id,
@@ -937,14 +1182,18 @@ function updateCartQty(
     );
 
 
-  if (!item) return;
+  if (!item) {
+
+    return;
+
+  }
 
 
-  item.qty += delta;
+  item.qty +=
+    delta;
 
 
-  // Remove item if
-  // quantity reaches zero
+  // Remove at zero
 
   if (
     item.qty <= 0
@@ -964,9 +1213,9 @@ function updateCartQty(
 }
 
 
-// ===============================
+// =========================================================
 // REMOVE CART ITEM
-// ===============================
+// =========================================================
 
 function removeItem(
   id
@@ -984,16 +1233,49 @@ function removeItem(
 }
 
 
-// ===============================
+// =========================================================
+// CLEAR CART
+// =========================================================
+
+function clearCart() {
+
+  cart = [];
+
+
+  if (
+    commentsInput
+  ) {
+
+    commentsInput.value =
+      "";
+
+  }
+
+
+  renderCart();
+
+}
+
+
+// =========================================================
 // RENDER CART
-// ===============================
+// =========================================================
 
 function renderCart() {
 
   updateCartCount();
 
 
-  // Empty cart
+  if (!cartDiv) {
+
+    return;
+
+  }
+
+
+  // -------------------------
+  // Empty
+  // -------------------------
 
   if (!cart.length) {
 
@@ -1010,7 +1292,12 @@ function renderCart() {
   }
 
 
+  // -------------------------
+  // Items
+  // -------------------------
+
   cartDiv.innerHTML =
+
     cart
       .map(
         item => {
@@ -1029,18 +1316,22 @@ function renderCart() {
                 <div
                   class="cart-name"
                 >
+
                   ${escapeHTML(
                     item.name
                   )}
+
                 </div>
 
 
                 <div
                   class="cart-restaurant"
                 >
+
                   ${escapeHTML(
                     item.restaurant
                   )}
+
                 </div>
 
               </div>
@@ -1051,7 +1342,7 @@ function renderCart() {
               >
 
 
-                <!-- CART QTY -->
+                <!-- Quantity -->
 
                 <div
                   class="qty-box"
@@ -1059,6 +1350,9 @@ function renderCart() {
 
                   <button
                     type="button"
+
+                    aria-label="Decrease quantity"
+
                     onclick="updateCartQty(
                       ${item.id},
                       -1
@@ -1075,6 +1369,9 @@ function renderCart() {
 
                   <button
                     type="button"
+
+                    aria-label="Increase quantity"
+
                     onclick="updateCartQty(
                       ${item.id},
                       1
@@ -1086,17 +1383,22 @@ function renderCart() {
                 </div>
 
 
-                <!-- REMOVE -->
+                <!-- Remove -->
 
                 <button
                   type="button"
+
                   class="remove-btn"
+
+                  aria-label="Remove item"
+
                   onclick="removeItem(
                     ${item.id}
                   )"
-                  aria-label="Remove item"
                 >
+
                   ❌
+
                 </button>
 
 
@@ -1113,9 +1415,9 @@ function renderCart() {
 }
 
 
-// ===============================
+// =========================================================
 // CART COUNT
-// ===============================
+// =========================================================
 
 function updateCartCount() {
 
@@ -1137,13 +1439,15 @@ function updateCartCount() {
 }
 
 
-// ===============================
+// =========================================================
 // SUBMIT ORDER
-// ===============================
+// =========================================================
 
 function submitOrder() {
 
-  // Empty cart check
+  // -------------------------
+  // Empty cart
+  // -------------------------
 
   if (!cart.length) {
 
@@ -1156,7 +1460,9 @@ function submitOrder() {
   }
 
 
-  // Format items
+  // -------------------------
+  // Items
+  // -------------------------
 
   const items =
     cart
@@ -1167,7 +1473,9 @@ function submitOrder() {
       .join("|");
 
 
+  // -------------------------
   // Restaurants
+  // -------------------------
 
   const restaurants =
     [
@@ -1177,18 +1485,22 @@ function submitOrder() {
             item.restaurant
         )
       )
-    ]
-      .join(", ");
+
+    ].join(", ");
 
 
+  // -------------------------
   // Comments
+  // -------------------------
 
   const comments =
     commentsInput?.value?.trim() ||
     "";
 
 
-  // Build Smartsheet form URL
+  // -------------------------
+  // Smartsheet URL
+  // -------------------------
 
   const url =
 
@@ -1205,7 +1517,9 @@ function submitOrder() {
     )}`;
 
 
+  // -------------------------
   // Open form
+  // -------------------------
 
   window.open(
     url,
@@ -1215,15 +1529,17 @@ function submitOrder() {
 }
 
 
-// ===============================
+// =========================================================
 // HTML SECURITY HELPERS
-// ===============================
+// =========================================================
 
 function escapeHTML(
   value
 ) {
 
-  return String(value)
+  return String(
+    value
+  )
 
     .replace(
       /&/g,
