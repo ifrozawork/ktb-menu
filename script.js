@@ -2,7 +2,7 @@
 // CONFIG
 // ===============================
 
-const MENU_URL = "./menu.json";
+const MENU_URL = "./menu (1).json";
 
 const FORM_URL =
   "https://app.smartsheet.com/b/form/019d520b436a708a860cb9b2a4894e49";
@@ -13,8 +13,12 @@ const FORM_URL =
 // ===============================
 
 let menuItems = [];
+
 let cart = [];
+
 let currentRestaurant = "All";
+
+let currentCategory = "All";
 
 
 // ===============================
@@ -23,10 +27,15 @@ let currentRestaurant = "All";
 
 let menuDiv;
 let cartDiv;
+
 let tabsDiv;
+let categoryTabsDiv;
+
 let clearBtn;
 let confirmBtn;
+
 let commentsInput;
+
 let floatingCart;
 let cartPanel;
 let cartCount;
@@ -43,7 +52,9 @@ async function initApp() {
 
   menuDiv = document.getElementById("menu");
   cartDiv = document.getElementById("cart");
+
   tabsDiv = document.getElementById("tabs");
+  categoryTabsDiv = document.getElementById("categoryTabs");
 
   clearBtn = document.getElementById("clearBtn");
   confirmBtn = document.getElementById("confirmBtn");
@@ -55,7 +66,6 @@ async function initApp() {
   cartCount = document.getElementById("cartCount");
 
 
-  // Clear cart
   clearBtn.addEventListener("click", () => {
 
     cart = [];
@@ -65,19 +75,21 @@ async function initApp() {
   });
 
 
-  // Submit order
   confirmBtn.addEventListener("click", submitOrder);
 
 
-  // Floating cart
-  floatingCart.addEventListener("click", () => {
+  if (floatingCart) {
 
-    cartPanel.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+    floatingCart.addEventListener("click", () => {
+
+      cartPanel?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
     });
 
-  });
+  }
 
 
   await loadMenu();
@@ -98,55 +110,64 @@ async function loadMenu() {
     const response = await fetch(MENU_URL);
 
     if (!response.ok) {
+
       throw new Error(
         `Menu could not be loaded. HTTP ${response.status}`
       );
+
     }
 
 
     const data = await response.json();
 
 
-    // Your JSON is already a flat array
     if (!Array.isArray(data)) {
 
       throw new Error(
-        "menu.json must contain an array of menu items."
+        "menu.json must contain a JSON array."
       );
 
     }
 
 
-    // Generate IDs because your JSON does not contain IDs
+    // Your menu.json is already flat
     menuItems = data.map((item, index) => ({
 
       id: index + 1,
 
-      restaurant: item.restaurant || "Unknown Restaurant",
+      restaurant:
+        item.restaurant || "Unknown Restaurant",
 
-      category: item.category || "Other",
+      category:
+        item.category || "Other",
 
-      name: item.name || "Unnamed Item",
+      name:
+        item.name || "Unnamed Item",
 
-      description: item.description || "",
+      description:
+        item.description || "",
 
-      price: item.price || "",
+      price:
+        item.price || "",
 
-      img: item.img
-        ? `./${item.img}`
-        : ""
+      img:
+        item.img
+          ? `./${item.img}`
+          : ""
 
     }));
 
 
-    initTabs();
+    initRestaurantTabs();
+
+    initCategoryTabs();
 
     renderMenu();
 
 
   } catch (error) {
 
-    console.error("Menu loading error:", error);
+    console.error(error);
 
     menuDiv.innerHTML = `
       <div class="error-message">
@@ -164,7 +185,7 @@ async function loadMenu() {
 // RESTAURANT TABS
 // ===============================
 
-function initTabs() {
+function initRestaurantTabs() {
 
   const restaurants = [
     "All",
@@ -175,11 +196,12 @@ function initTabs() {
 
 
   tabsDiv.innerHTML = restaurants
-    .map((restaurant, index) => {
+    .map(restaurant => {
 
       return `
         <button
-          class="${index === 0 ? "active" : ""}"
+          type="button"
+          class="${restaurant === currentRestaurant ? "active" : ""}"
           data-restaurant="${escapeAttribute(restaurant)}"
         >
           ${escapeHTML(restaurant)}
@@ -190,7 +212,6 @@ function initTabs() {
     .join("");
 
 
-  // Add click events
   tabsDiv
     .querySelectorAll("button")
     .forEach(button => {
@@ -209,12 +230,16 @@ function initTabs() {
 
 
 // ===============================
-// CHANGE RESTAURANT
+// SET RESTAURANT
 // ===============================
 
 function setRestaurant(restaurant) {
 
   currentRestaurant = restaurant;
+
+  // When changing restaurant,
+  // reset category to All
+  currentCategory = "All";
 
 
   tabsDiv
@@ -229,7 +254,132 @@ function setRestaurant(restaurant) {
     });
 
 
+  initCategoryTabs();
+
   renderMenu();
+
+}
+
+
+// ===============================
+// CATEGORY TABS
+// ===============================
+
+function initCategoryTabs() {
+
+  if (!categoryTabsDiv) return;
+
+
+  let categories;
+
+
+  if (currentRestaurant === "All") {
+
+    categories = [
+      "All",
+      ...new Set(
+        menuItems.map(item => item.category)
+      )
+    ];
+
+  } else {
+
+    categories = [
+      "All",
+      ...new Set(
+        menuItems
+          .filter(
+            item =>
+              item.restaurant === currentRestaurant
+          )
+          .map(item => item.category)
+      )
+    ];
+
+  }
+
+
+  categoryTabsDiv.innerHTML = categories
+    .map(category => {
+
+      return `
+        <button
+          type="button"
+          class="${category === currentCategory ? "active" : ""}"
+          data-category="${escapeAttribute(category)}"
+        >
+          ${escapeHTML(category)}
+        </button>
+      `;
+
+    })
+    .join("");
+
+
+  categoryTabsDiv
+    .querySelectorAll("button")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        setCategory(
+          button.dataset.category
+        );
+
+      });
+
+    });
+
+}
+
+
+// ===============================
+// SET CATEGORY
+// ===============================
+
+function setCategory(category) {
+
+  currentCategory = category;
+
+
+  categoryTabsDiv
+    .querySelectorAll("button")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.category === category
+      );
+
+    });
+
+
+  renderMenu();
+
+}
+
+
+// ===============================
+// FILTER MENU
+// ===============================
+
+function getFilteredItems() {
+
+  return menuItems.filter(item => {
+
+    const restaurantMatch =
+      currentRestaurant === "All" ||
+      item.restaurant === currentRestaurant;
+
+
+    const categoryMatch =
+      currentCategory === "All" ||
+      item.category === currentCategory;
+
+
+    return restaurantMatch && categoryMatch;
+
+  });
 
 }
 
@@ -240,32 +390,32 @@ function setRestaurant(restaurant) {
 
 function renderMenu() {
 
-  let filteredItems = menuItems.filter(item =>
-
-    currentRestaurant === "All" ||
-    item.restaurant === currentRestaurant
-
-  );
+  const filteredItems =
+    getFilteredItems();
 
 
   if (!filteredItems.length) {
 
     menuDiv.innerHTML = `
-      <p>No menu items available.</p>
+      <div class="no-results">
+        <p>No items found.</p>
+      </div>
     `;
 
     return;
+
   }
 
 
-  // Group items by category
   const categories = {};
 
 
   filteredItems.forEach(item => {
 
     if (!categories[item.category]) {
+
       categories[item.category] = [];
+
     }
 
     categories[item.category].push(item);
@@ -277,19 +427,29 @@ function renderMenu() {
     .map(([category, items]) => {
 
       return `
+
         <section class="menu-category">
 
-          <h3 class="category-title">
-            ${escapeHTML(category)}
-          </h3>
+          ${
+            currentCategory === "All"
+              ? `
+                <h3 class="category-title">
+                  ${escapeHTML(category)}
+                </h3>
+              `
+              : ""
+          }
 
           <div class="menu-grid">
 
-            ${items.map(renderMenuCard).join("")}
+            ${items
+              .map(renderMenuCard)
+              .join("")}
 
           </div>
 
         </section>
+
       `;
 
     })
@@ -304,11 +464,6 @@ function renderMenu() {
 
 function renderMenuCard(item) {
 
-  const priceText = item.price
-    ? `৳ ${escapeHTML(item.price)}`
-    : "Price unavailable";
-
-
   const imageHTML = item.img
     ? `
       <img
@@ -320,30 +475,57 @@ function renderMenuCard(item) {
     : "";
 
 
+  const restaurantLabel =
+    currentRestaurant === "All"
+      ? `
+        <div class="card-restaurant">
+          ${escapeHTML(item.restaurant)}
+        </div>
+      `
+      : "";
+
+
+  const descriptionHTML =
+    item.description
+      ? `
+        <div class="card-desc">
+          ${escapeHTML(item.description)}
+        </div>
+      `
+      : "";
+
+
+  const priceHTML =
+    item.price
+      ? `
+        <div class="card-price">
+          ৳ ${escapeHTML(item.price)}
+        </div>
+      `
+      : `
+        <div class="card-price unavailable">
+          Price unavailable
+        </div>
+      `;
+
+
   return `
+
     <div class="card">
 
       ${imageHTML}
 
       <div class="card-content">
 
+        ${restaurantLabel}
+
         <div class="card-title">
           ${escapeHTML(item.name)}
         </div>
 
-        ${
-          item.description
-            ? `
-              <div class="card-desc">
-                ${escapeHTML(item.description)}
-              </div>
-            `
-            : ""
-        }
+        ${descriptionHTML}
 
-        <div class="card-price">
-          ${priceText}
-        </div>
+        ${priceHTML}
 
 
         <div class="actions-row">
@@ -354,7 +536,7 @@ function renderMenuCard(item) {
               type="button"
               onclick="changeQty(${item.id}, -1)"
             >
-              -
+              −
             </button>
 
             <span id="qty-${item.id}">
@@ -383,7 +565,9 @@ function renderMenuCard(item) {
       </div>
 
     </div>
+
   `;
+
 }
 
 
@@ -404,11 +588,8 @@ function changeQty(id, delta) {
     parseInt(element.textContent, 10) || 1;
 
 
-  const newValue =
+  element.textContent =
     Math.max(1, current + delta);
-
-
-  element.textContent = newValue;
 
 }
 
@@ -426,13 +607,13 @@ function addToCart(id) {
   if (!item) return;
 
 
-  const qtyElement =
+  const quantityElement =
     document.getElementById(`qty-${id}`);
 
 
   const quantity =
     parseInt(
-      qtyElement?.textContent,
+      quantityElement?.textContent,
       10
     ) || 1;
 
@@ -448,19 +629,17 @@ function addToCart(id) {
   } else {
 
     cart.push({
-
       ...item,
-
       qty: quantity
-
     });
 
   }
 
 
-  // Reset product quantity
-  if (qtyElement) {
-    qtyElement.textContent = "1";
+  if (quantityElement) {
+
+    quantityElement.textContent = "1";
+
   }
 
 
@@ -470,7 +649,7 @@ function addToCart(id) {
 
 
 // ===============================
-// UPDATE CART QUANTITY
+// UPDATE CART QTY
 // ===============================
 
 function updateCartQty(id, delta) {
@@ -514,7 +693,7 @@ function removeItem(id) {
 
 
 // ===============================
-// CART RENDER
+// CART
 // ===============================
 
 function renderCart() {
@@ -524,80 +703,85 @@ function renderCart() {
 
   if (!cart.length) {
 
-    cartDiv.innerHTML = `
-      <p>Your cart is empty.</p>
-    `;
+    cartDiv.innerHTML =
+      "<p>Your cart is empty.</p>";
 
     return;
 
   }
 
 
-  cartDiv.innerHTML = cart.map(item => {
+  cartDiv.innerHTML = cart
+    .map(item => {
 
-    return `
-      <div class="cart-item">
+      return `
 
-        <div class="cart-left">
+        <div class="cart-item">
 
-          <div class="cart-name">
-            ${escapeHTML(item.name)}
-          </div>
+          <div class="cart-left">
 
-          <div class="cart-restaurant">
-            ${escapeHTML(item.restaurant)}
-          </div>
+            <div class="cart-name">
+              ${escapeHTML(item.name)}
+            </div>
 
-          <div class="cart-price">
-            ${item.price
-              ? `৳ ${escapeHTML(item.price)}`
-              : "Price unavailable"
+            <div class="cart-restaurant">
+              ${escapeHTML(item.restaurant)}
+            </div>
+
+            ${
+              item.price
+                ? `
+                  <div class="cart-price">
+                    ৳ ${escapeHTML(item.price)}
+                  </div>
+                `
+                : ""
             }
-          </div>
-
-        </div>
-
-
-        <div class="cart-right">
-
-          <div class="qty-box">
-
-            <button
-              type="button"
-              onclick="updateCartQty(${item.id}, -1)"
-            >
-              -
-            </button>
-
-            <span>
-              ${item.qty}
-            </span>
-
-            <button
-              type="button"
-              onclick="updateCartQty(${item.id}, 1)"
-            >
-              +
-            </button>
 
           </div>
 
 
-          <button
-            type="button"
-            class="remove-btn"
-            onclick="removeItem(${item.id})"
-            aria-label="Remove item"
-          >
-            ❌
-          </button>
+          <div class="cart-right">
+
+            <div class="qty-box">
+
+              <button
+                type="button"
+                onclick="updateCartQty(${item.id}, -1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.qty}
+              </span>
+
+              <button
+                type="button"
+                onclick="updateCartQty(${item.id}, 1)"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="remove-btn"
+              onclick="removeItem(${item.id})"
+            >
+              ❌
+            </button>
+
+          </div>
 
         </div>
 
-      </div>
-    `;
+      `;
 
-  }).join("");
+    })
+    .join("");
 
 }
 
@@ -608,15 +792,17 @@ function renderCart() {
 
 function updateCartCount() {
 
-  const totalItems =
+  const total =
     cart.reduce(
-      (total, item) => total + item.qty,
+      (sum, item) => sum + item.qty,
       0
     );
 
 
   if (cartCount) {
-    cartCount.textContent = totalItems;
+
+    cartCount.textContent = total;
+
   }
 
 }
@@ -630,7 +816,9 @@ function submitOrder() {
 
   if (!cart.length) {
 
-    alert("Please add at least one item to your order.");
+    alert(
+      "Please add at least one item to your order."
+    );
 
     return;
 
@@ -667,7 +855,7 @@ function submitOrder() {
 
 
 // ===============================
-// SECURITY / HTML HELPERS
+// HELPERS
 // ===============================
 
 function escapeHTML(value) {
